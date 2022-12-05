@@ -19,7 +19,7 @@ allprojects {
         mavenCentral()
     }
     dependencies {
-        testImplementation("org.testng:testng:7.5")
+        testImplementation("org.testng:testng:7.6.1")
     }
     tasks.getByName<Test>("test") {
         useTestNG()
@@ -39,8 +39,8 @@ allprojects {
 dependencies {
     implementation(project(":pdgenannotations"))
     implementation("net.sf.barcode4j:barcode4j:2.1")
-
-
+    implementation("org.ow2.asm:asm:9.4")
+    implementation("joda-time:joda-time:2.12.2")
 }
 
 publishing {

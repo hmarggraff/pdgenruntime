@@ -5,62 +5,34 @@ package org.pdgen.data;
 import java.io.ObjectStreamException;
 
 
-public class DefaultRealLiteral extends AbstractJoriaLiteral
-{
-	static final long serialVersionUID = -1L;
-	static DefaultRealLiteral instance = new DefaultRealLiteral();
+public class DefaultRealLiteral extends AbstractJoriaLiteral {
+    static final long serialVersionUID = -1L;
+    static DefaultRealLiteral instance = new DefaultRealLiteral();
 
-	/**
-	 * ----------------------------------------------------------------------- instance
-	 */
 
-	public static DefaultRealLiteral instance()
-	{
-		return instance;
-	}
+    public static DefaultRealLiteral instance() {
+        return instance;
+    }
 
-	/**
-	 * ----------------------------------------------------------------------- getName
-	 */
+    public String getName() {
+        return "float";
+    }
 
-	public String getName()
-	{
-		return "float";
-	}
 
-	/**
-	 * ----------------------------------------------------------------------- getParamString
-	 */
+    public String getParamString() {
+        return "DefaultRealLiteral";
+    }
 
-	public String getParamString()
-	{
-		return "DefaultRealLiteral";
-	}
 
-	/**
-	 * ----------------------------------------------------------------------- isRealLiteral
-	 */
+    public boolean isRealLiteral() {
+        return true;
+    }
 
-	public boolean isRealLiteral()
-	{
-		return true;
-	}
+    public boolean isLiteral() {
+        return true;
+    }
 
-	/**
-	 * ----------------------------------------------------------------------- isLiteral
-	 */
-
-	public boolean isLiteral()
-	{
-		return true;
-	}
-
-	/**
-	 * ----------------------------------------------------------------------- readResolve
-	 */
-
-	protected Object readResolve() throws ObjectStreamException
-	{
-		return instance; //xx
-	}
+    protected Object readResolve() throws ObjectStreamException {
+        return instance; //xx
+    }
 }

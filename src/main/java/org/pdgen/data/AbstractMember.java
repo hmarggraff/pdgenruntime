@@ -7,44 +7,39 @@ package org.pdgen.data;
  * provides default implementations for getCollectionType and getClassType
  */
 
-public abstract class AbstractMember extends AbstractJoriaAccess
-{
+public abstract class AbstractMember extends AbstractJoriaAccess {
     private static final long serialVersionUID = 7L;
     protected JoriaClass definingClass;
 
-	public AbstractMember(JoriaClass definingClass, String name)
-	{
-		super(name);
-		//Trace.check(definingClass);
-		this.definingClass = definingClass;
-	}
+    public AbstractMember(JoriaClass definingClass, String name) {
+        super(name);
+        //Trace.check(definingClass);
+        this.definingClass = definingClass;
+    }
 
-	public AbstractMember(JoriaClass definingClass)
-	{
-		Trace.check(definingClass);
-		this.definingClass = definingClass;
-	}
+    public AbstractMember(JoriaClass definingClass) {
+        Trace.check(definingClass);
+        this.definingClass = definingClass;
+    }
 
-	public AbstractMember()
-	{
-	}
+    public AbstractMember() {
+    }
 
-	public boolean isRoot()
-	{
-		return false;
-	}
+    public boolean isRoot() {
+        return false;
+    }
 
-	public JoriaClass getDefiningClass()
-	{
-		return definingClass;
-	}
+    public JoriaClass getDefiningClass() {
+        return definingClass;
+    }
 
-	/**
-	 * This method may only be used for reparing data integrity. A member may not move under normal circumstances.
-	 */
-	public void reparent(JoriaClass newParent)
-	{
-		Trace.logError("reparent " + getName() + " of " + getClass());
-		definingClass = newParent;
-	}
+    /**
+     * This method may only be used for reparing data integrity. A member may not move under normal circumstances.
+     *
+     * @param newParent where the member should go
+     */
+    public void reparent(JoriaClass newParent) {
+        Trace.logError("reparent " + getName() + " of " + getClass());
+        definingClass = newParent;
+    }
 }

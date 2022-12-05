@@ -44,6 +44,7 @@ public class ExtensionFileFilter extends FileFilter
 	/**
 	 * Creates a file filter that accepts files with the given extension.
 	 * Example: new ExtensionFileFilter("jpg");
+	 * @param extension the extension to filter for
 	 *
 	 * @see #addExtension
 	 */
@@ -57,6 +58,8 @@ public class ExtensionFileFilter extends FileFilter
 	 * Example: new ExtensionFileFilter("jpg", "JPEG Image Images");
 	 * Note that the "." before the extension is not needed. If
 	 * provided, it will be ignored.
+	 * @param extension the extension to filter for
+	 * @param description descriptive line for the extension type
 	 *
 	 * @see #addExtension
 	 */
@@ -74,6 +77,7 @@ public class ExtensionFileFilter extends FileFilter
 	 * Example: new ExtensionFileFilter(String {"gif", "jpg"});
 	 * Note that the "." before the extension is not needed adn
 	 * will be ignored.
+	 * @param filters the list of extensions to be shown
 	 *
 	 * @see #addExtension
 	 */
@@ -87,6 +91,8 @@ public class ExtensionFileFilter extends FileFilter
 	 * Example: new ExtensionFileFilter(String {"gif", "jpg"}, "Gif and JPG Images");
 	 * </p><p>
 	 * Note that the "." before the extension is not needed and will be ignored.
+	 * @param filters the list of extensions to be shown
+	 * @param description descriptive line for the extension type
 	 *
 	 * @see #addExtension
 	 */
@@ -106,6 +112,7 @@ public class ExtensionFileFilter extends FileFilter
 	 * false if it shouldn't.
 	 * </p><p>
 	 * Files that begin with "." are ignored.
+	 * @param f the file to be filtered
 	 *
 	 * @see #getExtension
 	 * @see FileFilter#accept
