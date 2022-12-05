@@ -9,19 +9,16 @@ import java.util.Map;
 public class PageRelFormulaCell extends DataCellDef {
     private static final long serialVersionUID = 7L;
 
-    public PageRelFormulaCell(TemplateModel parentGrid, ComputedField axs)
-    {
+    public PageRelFormulaCell(TemplateModel parentGrid, ComputedField axs) {
         super(parentGrid, axs);
     }
 
-    public PageRelFormulaCell(PageRelFormulaCell from, TemplateModel parentGrid, Map<Object,Object> copiedReferences)
-    {
+    public PageRelFormulaCell(PageRelFormulaCell from, TemplateModel parentGrid, Map<Object, Object> copiedReferences) {
         super(from, parentGrid, copiedReferences);
     }
 
-	public CellDef duplicate(TemplateModel newContainerGrid, Map<Object,Object> copiedReferences)
-	{
-		return new PageRelFormulaCell(this, newContainerGrid, copiedReferences);
-	}
+    public CellDef duplicate(TemplateModel newContainerGrid, Map<Object, Object> copiedReferences) {
+        return new PageRelFormulaCell(this, newContainerGrid, copiedReferences);
+    }
 
 }

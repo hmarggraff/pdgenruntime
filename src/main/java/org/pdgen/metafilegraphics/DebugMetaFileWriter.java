@@ -6,58 +6,48 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
-class DebugMetaFileWriter implements MetaFileWriter
-{
-	protected PrintStream ps;
+class DebugMetaFileWriter implements MetaFileWriter {
+    protected PrintStream ps;
 
-	DebugMetaFileWriter()
-	{
-		try
-		{
-			ps = new PrintStream(new FileOutputStream("metafile.txt"));
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
+    DebugMetaFileWriter() {
+        try {
+            ps = new PrintStream(new FileOutputStream("metafile.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public void writeByte(byte b)
-	{
-		ps.print(b);
-		ps.print(' ');
+    public void writeByte(byte b) {
+        ps.print(b);
+        ps.print(' ');
 
-	}
-	public void writeCmd(byte b)
-	{
-		ps.println();
-		ps.print(b);
-		ps.print(' ');
+    }
 
-	}
+    public void writeCmd(byte b) {
+        ps.println();
+        ps.print(b);
+        ps.print(' ');
 
-	public void writeInt(int b)
-	{
-		ps.print(b);
-		ps.print(' ');
+    }
 
-	}
+    public void writeInt(int b) {
+        ps.print(b);
+        ps.print(' ');
 
-	public void writeFloat(float b)
-	{
-		ps.print(b);
-		ps.print(' ');
+    }
 
-	}
+    public void writeFloat(float b) {
+        ps.print(b);
+        ps.print(' ');
 
-	public void writeDouble(double b)
-	{
-		ps.print(b);
-		ps.print(' ');
-	}
+    }
 
-	public void close()
-	{
-		ps.close();
-	}
+    public void writeDouble(double b) {
+        ps.print(b);
+        ps.print(' ');
+    }
+
+    public void close() {
+        ps.close();
+    }
 }

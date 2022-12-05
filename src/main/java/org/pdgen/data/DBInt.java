@@ -2,14 +2,13 @@
 package org.pdgen.data;
 
 
-public interface DBInt extends DBData, java.io.Serializable
-{
+public interface DBInt extends DBData, java.io.Serializable {
 
-   /* ----------------------------------------------------------------------- getIntValue */
+    /* ----------------------------------------------------------------------- getIntValue */
 
-   long getIntValue();
+    long getIntValue();
 
-    long NULL = Long.MIN_VALUE+1;
+    long NULL = Long.MIN_VALUE + 1;
 
     char CHARNULL = '\uffff';
 }

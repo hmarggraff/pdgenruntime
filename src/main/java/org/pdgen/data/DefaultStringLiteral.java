@@ -1,54 +1,48 @@
 // This software may be used as allowed by the Gnu Affero General Public License. Details are in the file LICENSE, that must be included in the distribution of ths software.
 package org.pdgen.data;
 //MARKER The strings in this file shall not be translated
+
 import java.io.ObjectStreamException;
 
 
-public class DefaultStringLiteral extends AbstractJoriaLiteral
-{
-   static final long         serialVersionUID = -1L;
-   static DefaultStringLiteral instance = new DefaultStringLiteral();
+public class DefaultStringLiteral extends AbstractJoriaLiteral {
+    static final long serialVersionUID = -1L;
+    static DefaultStringLiteral instance = new DefaultStringLiteral();
 
-   /* ----------------------------------------------------------------------- instance */
+    /* ----------------------------------------------------------------------- instance */
 
-   public static DefaultStringLiteral instance()
-   {
-      return instance;
-   }
+    public static DefaultStringLiteral instance() {
+        return instance;
+    }
 
 
-   /* ----------------------------------------------------------------------- getName */
+    /* ----------------------------------------------------------------------- getName */
 
-   public String getName()
-   {
-      return "String";
-   }
+    public String getName() {
+        return "String";
+    }
 
-   /* ----------------------------------------------------------------------- getParamString */
+    /* ----------------------------------------------------------------------- getParamString */
 
-   public String getParamString()
-   {
-      return "DefaultStringLiteral";
-   }
+    public String getParamString() {
+        return "DefaultStringLiteral";
+    }
 
-   /* ----------------------------------------------------------------------- isRealLiteral */
+    /* ----------------------------------------------------------------------- isRealLiteral */
 
-   public boolean isStringLiteral()
-   {
-      return true;
-   }
+    public boolean isStringLiteral() {
+        return true;
+    }
 
-   /* ----------------------------------------------------------------------- isLiteral */
+    /* ----------------------------------------------------------------------- isLiteral */
 
-   public boolean isLiteral()
-   {
-      return true;
-   }
+    public boolean isLiteral() {
+        return true;
+    }
 
-   /* ----------------------------------------------------------------------- readResolve */
+    /* ----------------------------------------------------------------------- readResolve */
 
-   protected Object readResolve() throws ObjectStreamException
-   {
-      return instance();
-   }
+    protected Object readResolve() throws ObjectStreamException {
+        return instance();
+    }
 }

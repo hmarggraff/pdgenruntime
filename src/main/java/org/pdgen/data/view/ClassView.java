@@ -4,11 +4,11 @@ package org.pdgen.data.view;
 import org.pdgen.data.JoriaAccess;
 import org.pdgen.data.JoriaClass;
 
-public interface ClassView extends ImmutableView, MutableView
-{
+public interface ClassView extends ImmutableView, MutableView {
     int shiftChild(JoriaAccess f, int at);
-	int getMemberCount();
 
-	JoriaClass getPhysicalClass();
+    int getMemberCount();
+
+    JoriaClass getPhysicalClass();
 
 }

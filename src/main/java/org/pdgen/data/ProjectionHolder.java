@@ -8,48 +8,40 @@ import org.pdgen.env.Env;
 import java.util.Objects;
 
 
-public class ProjectionHolder implements Named
-{
+public class ProjectionHolder implements Named {
     protected JoriaClass base;
     protected SortedNamedVector<ClassProjection> projections;
     protected SortedNamedVector<CollectionProjection> collections; // collection views that have this class as element type
 
-    public ProjectionHolder(JoriaClass p)
-    {
+    public ProjectionHolder(JoriaClass p) {
         base = p;
     }
-    public SortedNamedVector<CollectionProjection> getCollections()
-    {
+
+    public SortedNamedVector<CollectionProjection> getCollections() {
         return collections;
     }
 
-    public SortedNamedVector<ClassProjection> getProjections()
-    {
+    public SortedNamedVector<ClassProjection> getProjections() {
         return projections;
     }
 
-    public void addClassView(ClassProjection p)
-    {
-        if (projections == null)
-        {
+    public void addClassView(ClassProjection p) {
+        if (projections == null) {
             projections = new SortedNamedVector<>();
         }
         projections.add(p);
         Env.repoChanged();
     }
 
-    public void addCollectionView(CollectionProjection p)
-    {
-        if (collections == null)
-        {
+    public void addCollectionView(CollectionProjection p) {
+        if (collections == null) {
             collections = new SortedNamedVector<>();
         }
         collections.add(p);
         Env.repoChanged();
     }
 
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (o instanceof JoriaClass)
             return base.getName().equals(((JoriaClass) o).getName());
         else
@@ -61,27 +53,22 @@ public class ProjectionHolder implements Named
         return Objects.hash(base.getName());
     }
 
-    public JoriaClass getBase()
-    {
+    public JoriaClass getBase() {
         return base;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return base.getName();
     }
 
 
-
-    public void remove(ClassProjection p)
-    {
+    public void remove(ClassProjection p) {
         if (projections != null)
             projections.remove(p);
     }
 
 
-    public String toString()
-    {
+    public String toString() {
         return base.getName();
     }
 }

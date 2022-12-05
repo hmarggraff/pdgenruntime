@@ -2,7 +2,6 @@
 package org.pdgen.data.view;
 
 //* User: hmf   Date: 04.09.2007 Time: 23:37:48
-public class DoubleHolder
-{
-	public double val;
+public class DoubleHolder {
+    public double val;
 }

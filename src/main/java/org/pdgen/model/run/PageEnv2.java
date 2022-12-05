@@ -2,25 +2,18 @@
 package org.pdgen.model.run;
 
 import org.pdgen.data.*;
+import org.pdgen.data.view.AccessPath;
+import org.pdgen.data.view.AggregateDef;
+import org.pdgen.env.*;
 import org.pdgen.model.*;
 import org.pdgen.model.cells.CellDef;
 import org.pdgen.model.cells.DeferredTotalPagesCell;
 import org.pdgen.model.cells.PagestotalCell;
 import org.pdgen.model.cells.StyledTextCellDef;
+import org.pdgen.model.run.OutputMode.LastRowState;
 import org.pdgen.model.style.*;
 import org.pdgen.styledtext.model.StyledParagraph;
 import org.pdgen.styledtext.model.StyledParagraphList;
-
-import org.pdgen.data.view.AccessPath;
-import org.pdgen.data.view.AggregateDef;
-import org.pdgen.env.Env;
-import org.pdgen.env.Res;
-import org.pdgen.env.Settings;
-import org.pdgen.model.run.OutputMode.LastRowState;
-
-import org.pdgen.env.JoriaException;
-import org.pdgen.env.JoriaUserError;
-import org.pdgen.env.JoriaUserException;
 import org.pdgen.util.Send;
 
 import javax.print.DocFlavor;
@@ -675,7 +668,7 @@ public class PageEnv2 extends AggregateCollector {
                 graphics2D.dispose();
             t0 = System.currentTimeMillis() - t0;
             if (t0 > 0)
-                System.out.println("emails = " + mails + " pdf pages = " + totalPageNos + " t= " + t0 + " ppm= " + totalPageNos * 60000 / t0);//trdone
+                System.out.println("emails = " + mails + " pdf pages = " + totalPageNos + " t= " + t0 + " ppm= " + totalPageNos * 60000L / t0);//trdone
             else
                 System.out.println("emails = " + mails + " pdf pages = " + totalPageNos + " t= " + t0 + " ppm= too fast");//trdone
             env.endReport(env.startTemplate);
@@ -820,7 +813,7 @@ public class PageEnv2 extends AggregateCollector {
                 t0 = System.currentTimeMillis() - t0;
                 pageNo--;
                 if (t0 > 0)
-                    System.out.println("pdf pages = " + pageNo + " t= " + t0 + " ppm= " + pageNo * 60000 / t0);//trdone
+                    System.out.println("pdf pages = " + pageNo + " t= " + t0 + " ppm= " + pageNo * 60000L / t0);//trdone
                 else
                     System.out.println("pdf pages = " + pageNo + " t= " + t0 + " ppm= too fast");//trdone
                 if (oldPageNo >= 0)
@@ -926,7 +919,7 @@ public class PageEnv2 extends AggregateCollector {
 //noinspection ConstantConditions
                         doOnePrintJob(pageable, printable, paf, fps, def, set, fpj);
                     t0 = System.currentTimeMillis() - t0;
-                    System.out.println("printed pages = " + atPage + " t= " + t0 + " ppm= " + atPage * 60000 / t0);//trdone
+                    System.out.println("printed pages = " + atPage + " t= " + t0 + " ppm= " + atPage * 60000L / t0);//trdone
                 } catch (PrinterException e) {
                     Env.instance().handle(e);
                 }

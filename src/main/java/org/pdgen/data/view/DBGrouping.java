@@ -3,77 +3,65 @@ package org.pdgen.data.view;
 
 import org.pdgen.data.*;
 
-
 import java.util.List;
 
-public class DBGrouping implements DBCollection
-{
+public class DBGrouping implements DBCollection {
 
-	JoriaAccess myAxs;
-	List<?> myValues;
-	JoriaType myType;
-    int myIndex=-1;
+    JoriaAccess myAxs;
+    List<?> myValues;
+    JoriaType myType;
+    int myIndex = -1;
 
-	public DBGrouping(JoriaAccess access, List<?> values, JoriaType type)
-	{
-		myAxs = access;
-		myValues = values;
-		myType = type;
-	}
+    public DBGrouping(JoriaAccess access, List<?> values, JoriaType type) {
+        myAxs = access;
+        myValues = values;
+        myType = type;
+    }
 
     public boolean next() // implizites freeItem
     {
         /*if(myIndex >= 0 && myIndex < myValues.size())
             myValues.set(myIndex, null);*/
-		myIndex++;
+        myIndex++;
         return !isNull() && myIndex < myValues.size();
 
     }
 
-    public DBObject current()
-    {
+    public DBObject current() {
         return (DBObject) myValues.get(myIndex);
     }
 
-    public boolean reset()
-    {
+    public boolean reset() {
         myIndex = -1;
         return true;
     }
 
-    public int getLength() throws JoriaDataException
-	{
-		if (myValues == null)
-		{
-			return 0;
-		}
-		return myValues.size();
-	}
+    public int getLength() throws JoriaDataException {
+        if (myValues == null) {
+            return 0;
+        }
+        return myValues.size();
+    }
 
-	public DBData pick() throws JoriaDataException
-	{
-		throw new NotYetImplementedError("Dont't pick on me");
-	}
+    public DBData pick() throws JoriaDataException {
+        throw new NotYetImplementedError("Dont't pick on me");
+    }
 
-	public JoriaAccess getAccess()
-	{
-		return myAxs;
-	}
+    public JoriaAccess getAccess() {
+        return myAxs;
+    }
 
-	public boolean isNull()
-	{
-		return myValues == null;
-	}
+    public boolean isNull() {
+        return myValues == null;
+    }
 
-	public JoriaType getActualType()
-	{
-		return myType;
-	}
+    public JoriaType getActualType() {
+        return myType;
+    }
 
-	public boolean same(DBData theOther)
-	{
-		return false;
-	}
+    public boolean same(DBData theOther) {
+        return false;
+    }
 
 
 }

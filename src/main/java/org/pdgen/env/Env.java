@@ -13,8 +13,6 @@ import org.pdgen.oql.OQLParseException;
 import org.pdgen.oql.OQLParser;
 import org.pdgen.util.ErrorHint;
 
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
@@ -43,8 +41,9 @@ public class Env {
 
     protected static Env theInstance;
 
-    public Env(Repository repository) {
+    public Env(Repository repository, String absolutePath) {
         theInstance = this;
+        currentFile = absolutePath;
         repositoryInstance = repository;
         TrueTypeFont.readAllFontFileHeaders();
     }
@@ -62,11 +61,6 @@ public class Env {
         }
     }
 
-    public void setCurrentFile(String currFile) {
-        currentFile = currFile;
-    }
-
-    //public abstract OQLParser getOQLParser(String filter, JoriaType scope, boolean inCentralRepositoryContext);
     public OQLNode parseUnparented(String filter, JoriaType scope, boolean commentOnlyAllowed) throws OQLParseException {
         return OQLParser.parse(filter, scope, commentOnlyAllowed);
     }
@@ -140,12 +134,6 @@ public class Env {
 
     public void setDefaultFileService() {
         fileService = new JoriaFileServiceFileSystem(relativeRoot);
-    }
-
-    public void registerTopLevelWindow(JComponent w) {        //nothing to do
-    }
-
-    public void deregisterTopLevelWindow(JComponent w) {        //nothing to do
     }
 
     public static Env instenv() {

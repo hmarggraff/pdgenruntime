@@ -4,8 +4,8 @@ package org.pdgen.data.view;
 import org.pdgen.data.VariableProvider;
 
 
-public interface Filtered extends VariableProvider
-{
-   Filter getFilter();
-   void setFilter(Filter newFilter);
+public interface Filtered extends VariableProvider {
+    Filter getFilter();
+
+    void setFilter(Filter newFilter);
 }

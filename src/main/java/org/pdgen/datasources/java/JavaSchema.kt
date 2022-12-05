@@ -9,8 +9,7 @@ class JavaSchema(val jarFileName: String) : JoriaSchema {
     var reflection: ReflectionDelegate = StandardReflection()
     val objectType: JavaClass
     val objectArrayType: JoriaCollection
-    val theClasses=  ArrayList<JoriaClass>()
-
+    val theClasses = ArrayList<JoriaClass>()
 
 
     init {
@@ -22,7 +21,7 @@ class JavaSchema(val jarFileName: String) : JoriaSchema {
         objectArrayType = cb.objectArrayType
         types = cb.types
         //cb.collectionWrapperClasses.forEach { types[it.value.name] = it.value }
-        types.forEach{ if (it is JoriaClass) theClasses.add(it)}
+        types.forEach { if (it is JoriaClass) theClasses.add(it) }
 
         rootsVector = SortedNamedVector(cb.roots)
     }

@@ -2,29 +2,25 @@
 package org.pdgen.data;
 
 
-public abstract class AbstractDBData implements DBData
-{
-   protected JoriaAccess myAccess;
+public abstract class AbstractDBData implements DBData {
+    protected JoriaAccess myAccess;
 
-   protected AbstractDBData(JoriaAccess axs)
-   {
-      myAccess = axs;
-   }
+    protected AbstractDBData(JoriaAccess axs) {
+        myAccess = axs;
+    }
 
-   protected AbstractDBData() // for deserialisation
-   {
-   }
+    protected AbstractDBData() // for deserialisation
+    {
+    }
 
 
-   public JoriaAccess getAccess()
-   {
-      return myAccess;
-   }
+    public JoriaAccess getAccess() {
+        return myAccess;
+    }
 
 
-   public JoriaType getActualType()
-   {
-      return myAccess.getType();
-   }
+    public JoriaType getActualType() {
+        return myAccess.getType();
+    }
 
 }

@@ -8,8 +8,7 @@ import javax.swing.*;
  * Date: Jul 12, 2006
  * Time: 1:38:42 PM
  */
-public interface RVImageBase
-{
+public interface RVImageBase {
     Icon getIcon(int i);
 
     Object getInformation(int i);

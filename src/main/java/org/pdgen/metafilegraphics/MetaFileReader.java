@@ -3,19 +3,18 @@ package org.pdgen.metafilegraphics;
 
 import java.io.IOException;
 
-public interface MetaFileReader
-{
-	byte nextCmd() throws IOException;
+public interface MetaFileReader {
+    byte nextCmd() throws IOException;
 
-	int readInt() throws IOException;
+    int readInt() throws IOException;
 
-	byte readByte() throws IOException;
+    byte readByte() throws IOException;
 
-	float readFloat() throws IOException;
+    float readFloat() throws IOException;
 
-	double readDouble() throws IOException;
+    double readDouble() throws IOException;
 
-	void close() throws IOException;
+    void close() throws IOException;
 
-	void reset();
+    void reset();
 }

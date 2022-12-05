@@ -3,11 +3,12 @@ package org.pdgen.data.view;
 
 import org.pdgen.data.JoriaAccess;
 
-public interface Rebindable
-{
-	void unbind();
-	boolean unbound();
-	boolean bindableTo(JoriaAccess newBinding, JoriaAccess newParentBinding);
+public interface Rebindable {
+    void unbind();
 
-	void rebind(JoriaAccess newBinding, JoriaAccess newParentBinding);
+    boolean unbound();
+
+    boolean bindableTo(JoriaAccess newBinding, JoriaAccess newParentBinding);
+
+    void rebind(JoriaAccess newBinding, JoriaAccess newParentBinding);
 }

@@ -6,39 +6,34 @@ package org.pdgen.data;
  * Date: Nov 24, 2004
  * Time: 2:38:17 PM
  */
-public class DBImage implements DBData
-{
+public class DBImage implements DBData {
     Object o;
     JoriaAccess axs;
-    public DBImage(Object o, JoriaAccess axs)
-    {
+
+    public DBImage(Object o, JoriaAccess axs) {
         this.o = o;
         this.axs = axs;
     }
-    public JoriaAccess getAccess()
-    {
+
+    public JoriaAccess getAccess() {
         return axs;
     }
 
-    public boolean isNull()
-    {
+    public boolean isNull() {
         return o == null;
     }
 
-    public JoriaType getActualType()
-    {
+    public JoriaType getActualType() {
         return DefaultImageLiteral.instance();
     }
 
-    public boolean same(DBData theOther)
-    {
-        if(theOther instanceof DBImage)
-            return o.equals(((DBImage)theOther).o);
+    public boolean same(DBData theOther) {
+        if (theOther instanceof DBImage)
+            return o.equals(((DBImage) theOther).o);
         return false;
     }
 
-    public Object getData()
-    {
+    public Object getData() {
         return o;
     }
 

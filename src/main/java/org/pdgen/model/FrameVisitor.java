@@ -6,7 +6,6 @@ package org.pdgen.model;
  * Date: Feb 8, 2006
  * Time: 12:46:44 PM
  */
-public interface FrameVisitor
-{
+public interface FrameVisitor {
     boolean visitFrame(TemplateBox frame);
 }

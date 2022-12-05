@@ -8,20 +8,17 @@ import org.pdgen.env.Env;
  * User: hmf at Oct 14, 2004 12:53:57 PM
  * Class is used as a marker
  */
-public class ChartStyle extends BoxStyle
-{
-	public static final String defaultChartStyleName = "*DefaultChartStyle";
+public class ChartStyle extends BoxStyle {
+    public static final String defaultChartStyleName = "*DefaultChartStyle";
     private static final long serialVersionUID = 7L;
 
-    public ChartStyle(String aName)
-	{
-		super(aName);
-	}
+    public ChartStyle(String aName) {
+        super(aName);
+    }
 
 
-	protected void storeSpecialStyle()
-	{
-	}
+    protected void storeSpecialStyle() {
+    }
 
     @Override
     public SortedNamedVector getGlobalStyleList() {

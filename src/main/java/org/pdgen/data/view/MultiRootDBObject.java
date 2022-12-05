@@ -3,28 +3,23 @@ package org.pdgen.data.view;
 
 import org.pdgen.data.AbstractDBObject;
 import org.pdgen.data.DBData;
-import org.pdgen.data.JoriaType;
 import org.pdgen.data.JoriaAccess;
+import org.pdgen.data.JoriaType;
 
-public class MultiRootDBObject extends AbstractDBObject
-{
-	public MultiRootDBObject(JoriaAccess axs)
-	{
-		super(axs);
-	}
+public class MultiRootDBObject extends AbstractDBObject {
+    public MultiRootDBObject(JoriaAccess axs) {
+        super(axs);
+    }
 
-	public boolean isNull()
-	{
-		return false;
-	}
+    public boolean isNull() {
+        return false;
+    }
 
-	public boolean same(DBData theOther)
-	{
-		return false;
-	}
+    public boolean same(DBData theOther) {
+        return false;
+    }
 
-	public boolean isAssignableTo(JoriaType t)
-	{
-		return false;
-	}
+    public boolean isAssignableTo(JoriaType t) {
+        return false;
+    }
 }

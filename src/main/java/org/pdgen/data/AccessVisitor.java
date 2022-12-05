@@ -6,9 +6,8 @@ package org.pdgen.data;
  * Date: May 23, 2007
  * Time: 11:20:23 AM
  */
-public interface AccessVisitor
-{
+public interface AccessVisitor {
     boolean visit(JoriaAccess access);
 
-	boolean stopAccessSearchOnError();
+    boolean stopAccessSearchOnError();
 }

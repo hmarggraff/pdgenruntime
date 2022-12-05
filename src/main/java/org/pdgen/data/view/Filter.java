@@ -6,77 +6,65 @@ import org.pdgen.data.NameableListener;
 import org.pdgen.data.NameableTracer;
 import org.pdgen.util.StringUtils;
 
-import java.util.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-public class Filter implements Serializable, NameableListener<Nameable>
-{
+public class Filter implements Serializable, NameableListener<Nameable> {
 
     private static final long serialVersionUID = 7L;
     protected String oqlString;
-	protected Set<RuntimeParameter> variables;
-	protected String hostFilterString;
-	protected Set<RuntimeParameter> hostVariables;
+    protected Set<RuntimeParameter> variables;
+    protected String hostFilterString;
+    protected Set<RuntimeParameter> hostVariables;
 
-	public Filter()
-	{
-	}
+    public Filter() {
+    }
 
-	public Filter(String oqlString, Set<RuntimeParameter> variables)
-	{
-		if(variables != null)
-		{
-			this.variables = new HashSet<>(variables);
-			for (RuntimeParameter pov : variables)
-			{
-					NameableTracer.registerForNameable(pov, this);
-			}
-		}
-		else
-			this.variables = new HashSet<>();
-		this.oqlString = oqlString;
-	}
+    public Filter(String oqlString, Set<RuntimeParameter> variables) {
+        if (variables != null) {
+            this.variables = new HashSet<>(variables);
+            for (RuntimeParameter pov : variables) {
+                NameableTracer.registerForNameable(pov, this);
+            }
+        } else
+            this.variables = new HashSet<>();
+        this.oqlString = oqlString;
+    }
 
-	public Filter dup()
-	{
-		Filter ret = new Filter(oqlString, variables);
-		ret.hostFilterString = hostFilterString;
+    public Filter dup() {
+        Filter ret = new Filter(oqlString, variables);
+        ret.hostFilterString = hostFilterString;
         ret.hostVariables = new HashSet<>(hostVariables);
-		return ret;
-	}
+        return ret;
+    }
 
-	public String getOqlString()
-	{
-		return oqlString;
-	}
+    public String getOqlString() {
+        return oqlString;
+    }
 
-	public void setOqlString(String newOqlString)
-	{
-		oqlString = StringUtils.trimNull(newOqlString);
-	}
+    public void setOqlString(String newOqlString) {
+        oqlString = StringUtils.trimNull(newOqlString);
+    }
 
-	public void setOqlString(String newOqlString, Set<RuntimeParameter> newVariables)
-	{
-        for (RuntimeParameter oldVariable : variables)
-        {
+    public void setOqlString(String newOqlString, Set<RuntimeParameter> newVariables) {
+        for (RuntimeParameter oldVariable : variables) {
             NameableTracer.unregisterForNameable(oldVariable, this);
         }
         oqlString = StringUtils.trimNull(newOqlString);
-		variables = newVariables;
-        for (RuntimeParameter newVariable : newVariables)
-        {
+        variables = newVariables;
+        for (RuntimeParameter newVariable : newVariables) {
             NameableTracer.registerForNameable(newVariable, this);
         }
     }
 
-    public Set<RuntimeParameter> getVariables()
-	{
-		return variables;
-	}
+    public Set<RuntimeParameter> getVariables() {
+        return variables;
+    }
 
-    public void setHostFilterString(String newHostFilterString)
-	{
-		hostFilterString = newHostFilterString;
+    public void setHostFilterString(String newHostFilterString) {
+        hostFilterString = newHostFilterString;
 /*
 		String[] names =hostFilterString.split(":");
 		for(int i = 0; i < names.length / 2; i++)
@@ -92,23 +80,19 @@ public class Filter implements Serializable, NameableListener<Nameable>
 		foundVariables.add(v);
 		hostVariables = foundVariables;
 		*/
-	}
+    }
 
-	public String getHostFilterString()
-	{
-		return hostFilterString;
-	}
+    public String getHostFilterString() {
+        return hostFilterString;
+    }
 
 
-    public Filter copy(Map<Object, Object> copiedData)
-    {
+    public Filter copy(Map<Object, Object> copiedData) {
         Filter ret = new Filter();
         ret.oqlString = oqlString;
-        if (variables != null)
-        {
+        if (variables != null) {
             ret.variables = new HashSet<>();
-            for (RuntimeParameter variable : variables)
-            {
+            for (RuntimeParameter variable : variables) {
                 NameableTracer.registerForNameable(variable, ret);
                 ret.variables.add(variable);
             }
@@ -119,23 +103,19 @@ public class Filter implements Serializable, NameableListener<Nameable>
         return ret;
     }
 
-	public void nameableWillBeRenamed(Nameable what)
-	{
-		oqlString = oqlString.replaceAll("§" + what.getName(), "\\$\\.\\*\\.");
-	}
+    public void nameableWillBeRenamed(Nameable what) {
+        oqlString = oqlString.replaceAll("§" + what.getName(), "\\$\\.\\*\\.");
+    }
 
-	public void nameableHasBeenRenamed(Nameable what)
-	{
-		oqlString = oqlString.replaceAll("\\$\\.\\*\\.", "\\§" + what.getName());
-	}
+    public void nameableHasBeenRenamed(Nameable what) {
+        oqlString = oqlString.replaceAll("\\$\\.\\*\\.", "\\§" + what.getName());
+    }
 
-	protected Object readResolve()
-	{
-		if (variables != null)
-            for (RuntimeParameter runtimeParameter : variables)
-            {
+    protected Object readResolve() {
+        if (variables != null)
+            for (RuntimeParameter runtimeParameter : variables) {
                 NameableTracer.registerForNameable(runtimeParameter, this);
             }
         return this;
-	}
+    }
 }

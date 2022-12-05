@@ -3,13 +3,11 @@ package org.pdgen.model.run;
 
 import org.pdgen.model.cells.Barcode4jCell;
 
-public class RVBarcodeString extends RVString
-{
-	Barcode4jCell src;
+public class RVBarcodeString extends RVString {
+    Barcode4jCell src;
 
-	public RVBarcodeString(final String string, float width, final Barcode4jCell src)
-	{
-		super(string, width);
-		this.src = src;
-	}
+    public RVBarcodeString(final String string, float width, final Barcode4jCell src) {
+        super(string, width);
+        this.src = src;
+    }
 }

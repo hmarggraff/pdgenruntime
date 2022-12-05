@@ -8,7 +8,6 @@ import java.util.Set;
  * Date: May 23, 2007
  * Time: 11:36:33 AM
  */
-public interface VisitableAccess extends JoriaAccess
-{
+public interface VisitableAccess extends JoriaAccess {
     boolean visitAllAccesses(AccessVisitor visitor, Set<JoriaAccess> seen);
 }

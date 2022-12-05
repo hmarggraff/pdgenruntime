@@ -2,11 +2,13 @@
 package org.pdgen.data;
 
 
-public interface DBData
-{
-   JoriaAccess getAccess();
-   boolean isNull();
-   JoriaType getActualType();
-   boolean same(DBData theOther);
+public interface DBData {
+    JoriaAccess getAccess();
+
+    boolean isNull();
+
+    JoriaType getActualType();
+
+    boolean same(DBData theOther);
 
 }

@@ -4,11 +4,14 @@ package org.pdgen.data.view;
 import org.pdgen.data.JoriaClass;
 import org.pdgen.data.JoriaType;
 
-public interface CollectionView extends MutableCollection, Filtered
-{
-	JoriaType getKeyMatchType();
-	void setElementMatchType(JoriaClass newElementMatchType);
-	void setKeyMatchType(JoriaType newKeyMatchType);
-	void setName(String newName);
-	void setElementXmlTag(String newTag);
+public interface CollectionView extends MutableCollection, Filtered {
+    JoriaType getKeyMatchType();
+
+    void setElementMatchType(JoriaClass newElementMatchType);
+
+    void setKeyMatchType(JoriaType newKeyMatchType);
+
+    void setName(String newName);
+
+    void setElementXmlTag(String newTag);
 }

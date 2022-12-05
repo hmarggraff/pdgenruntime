@@ -9,20 +9,18 @@ import org.pdgen.model.style.HorizontalAlignment;
 import javax.swing.*;
 import java.awt.*;
 
-public class GraphElTextLines extends GraphElContent
-{
+public class GraphElTextLines extends GraphElContent {
 
     private static final long serialVersionUID = 7L;
     String[] lines;
     String[][] linesParts;
-    float [][] partLengths;
-    float [][] partOffsets;
-    float [] lineWidths;
+    float[][] partLengths;
+    float[][] partOffsets;
+    float[] lineWidths;
     CellStyle style;
     float[] lineOffsets;
 
-    private GraphElTextLines(GraphElTextLines from)
-    {
+    private GraphElTextLines(GraphElTextLines from) {
         super(from);
         lines = from.lines;
         style = from.style;
@@ -33,8 +31,7 @@ public class GraphElTextLines extends GraphElContent
         lineWidths = from.lineWidths;
     }
 
-    public GraphElTextLines(String[] lines, CellStyle f, CellDef src, ImageIcon backgroundImage, String[][] lp, float[][] pl, float[] lineWidths)
-    {
+    public GraphElTextLines(String[] lines, CellStyle f, CellDef src, ImageIcon backgroundImage, String[][] lp, float[][] pl, float[] lineWidths) {
         super(f.getBackground(), src, backgroundImage);
         this.lines = lines;
         style = f;
@@ -44,32 +41,27 @@ public class GraphElTextLines extends GraphElContent
         this.lineWidths = lineWidths;
     }
 
-    public void print(JoriaPrinter pr)
-    {
+    public void print(JoriaPrinter pr) {
         pr.printGETextLines(this);
     }
 
-    public void setContentX(float xContent, float wEnvelope, float wContent, CellStyle cs, Graphics2D g, float xEnvelope)
-    {
+    public void setContentX(float xContent, float wEnvelope, float wContent, CellStyle cs, Graphics2D g, float xEnvelope) {
         this.wContent = wEnvelope; // Damit nicht nach links geclippt wird Math.min(wContent, wEnvelope);
         this.wEnvelope = wEnvelope;
         this.xContent = xContent;
         this.xEnvelope = xEnvelope;
         lineOffsets = new float[lines.length];
-        for (int i = 0; i < lines.length; i++)
-        {
+        for (int i = 0; i < lines.length; i++) {
             String s = lines[i];
             HorizontalAlignment halign = style.getAlignmentHorizontal();
-            if(halign.isBlock())
+            if (halign.isBlock())
                 halign = HorizontalAlignment.LEFT;
             lineOffsets[i] = Math.max(0, (wEnvelope - style.getWidth(s, g))) * halign.getAlign();
-            if(linesParts != null && linesParts[i] != null)
-            {
-                float delta = (wEnvelope - lineWidths[i])/(linesParts[i].length-1);
+            if (linesParts != null && linesParts[i] != null) {
+                float delta = (wEnvelope - lineWidths[i]) / (linesParts[i].length - 1);
                 float start = 0;
                 partOffsets[i] = new float[linesParts[i].length];
-                for(int j = 0; j < linesParts[i].length; j++)
-                {
+                for (int j = 0; j < linesParts[i].length; j++) {
                     partOffsets[i][j] = start;
                     start += delta + partLengths[i][j];
                 }
@@ -77,13 +69,11 @@ public class GraphElTextLines extends GraphElContent
         }
     }
 
-    public GraphElContent copy()
-    {
+    public GraphElContent copy() {
         return new GraphElTextLines(this);
     }
 
-    public String toString()
-    {
+    public String toString() {
         if (lines.length > 0)
             return lines[0] + super.toString();
         else

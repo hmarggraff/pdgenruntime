@@ -5,12 +5,12 @@ import org.pdgen.data.view.RuntimeParameter
 import org.pdgen.model.run.RunEnv
 import java.util.*
 
-open class RuntimeParameterLiteral (name:String, typ: JoriaType?): AbstractTypedJoriaAccess(name, typ), RuntimeParameter {
+open class RuntimeParameterLiteral(name: String, typ: JoriaType?) : AbstractTypedJoriaAccess(name, typ), RuntimeParameter {
     private val serialVersionUID = 7L
 
     override fun getValue(from: DBData?, asView: JoriaAccess?, env: RunEnv?): DBData? {
         val value = env!!.getRuntimeParameterValue(this)
-        return value;
+        return value
         /*
         //TODO this must done, when RuntimeParameters are received through the API
         if (value == null)
@@ -46,7 +46,8 @@ open class RuntimeParameterLiteral (name:String, typ: JoriaType?): AbstractTyped
 
          */
     }
-    constructor(name:String):this(name,null)
+
+    constructor(name: String) : this(name, null)
 
     override fun setName(newName: String?) {
         name = newName
@@ -59,9 +60,11 @@ open class RuntimeParameterLiteral (name:String, typ: JoriaType?): AbstractTyped
 
     override fun collectVariables(runtimeParameterSet: MutableSet<RuntimeParameter>, seen: MutableSet<Any>?) {
         runtimeParameterSet.add(this)
-     }
+    }
+
     override fun getOqlEvaluator(): Any? = null
-    override fun collectI18nKeys2(localizables: HashMap<String, MutableList<I18nKeyHolder>>?) {/* nothing to do */}
+    override fun collectI18nKeys2(localizables: HashMap<String, MutableList<I18nKeyHolder>>?) {/* nothing to do */
+    }
 
     override fun collectI18nKeys2(s: HashMap<String, MutableList<I18nKeyHolder>>?, seen: MutableSet<Any>?) {
         // nothing to do

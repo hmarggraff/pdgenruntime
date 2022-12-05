@@ -7,15 +7,12 @@ import org.pdgen.model.style.CellStyle;
 
 import java.awt.*;
 
-public class RVEnvValue extends RVString
-{
-    public RVEnvValue(String string, CellStyle cs, Graphics2D g)
-    {
+public class RVEnvValue extends RVString {
+    public RVEnvValue(String string, CellStyle cs, Graphics2D g) {
         super(string, cs, g);
     }
 
-    public RVEnvValue(CellDef rb, RunEnvImpl env)
-    {
+    public RVEnvValue(CellDef rb, RunEnvImpl env) {
         EnvValueCell cd = (EnvValueCell) rb;
         string = cd.getFormattedString(env.getPager());
     }

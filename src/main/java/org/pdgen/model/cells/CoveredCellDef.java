@@ -5,22 +5,17 @@ import org.pdgen.model.TemplateModel;
 
 import java.io.ObjectStreamException;
 
-public class CoveredCellDef extends FreeCellDef
-{
+public class CoveredCellDef extends FreeCellDef {
     private static final long serialVersionUID = 7L;
 
-    protected CoveredCellDef(TemplateModel containerGrid)
-    {
+    protected CoveredCellDef(TemplateModel containerGrid) {
         super(containerGrid);
     }
 
-    protected Object readResolve() throws ObjectStreamException
-    {
-        if(getRepeater() != null)
-        {
+    protected Object readResolve() throws ObjectStreamException {
+        if (getRepeater() != null) {
             return new FreeCellDef((TemplateModel) getModel(), getRepeater());
-        }
-        else
+        } else
             return null;
     }
 }

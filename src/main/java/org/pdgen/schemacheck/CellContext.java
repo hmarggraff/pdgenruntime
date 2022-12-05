@@ -4,17 +4,15 @@ package org.pdgen.schemacheck;
 import org.pdgen.model.Template;
 import org.pdgen.model.TemplateBoxInterface;
 
-public class CellContext
-{
-	Template template;
-	TemplateBoxInterface frame;
-	int r, c;
+public class CellContext {
+    Template template;
+    TemplateBoxInterface frame;
+    int r, c;
 
-	public CellContext(final Template template, final TemplateBoxInterface frame, final int r, final int c)
-	{
-		this.template = template;
-		this.frame = frame;
-		this.r = r;
-		this.c = c;
-	}
+    public CellContext(final Template template, final TemplateBoxInterface frame, final int r, final int c) {
+        this.template = template;
+        this.frame = frame;
+        this.r = r;
+        this.c = c;
+    }
 }

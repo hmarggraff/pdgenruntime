@@ -18,6 +18,7 @@ import kotlin.reflect.KClass
 class BuildJavaInternals(val internals: HashMap<String, JoriaType>) {
 
     val objectType: JavaClass
+
     init {
         putPrimitive(Boolean::class, DefaultBooleanLiteral.instance())
         putPrimitive(java.lang.Boolean::class, DefaultBooleanLiteral.instance())
@@ -67,21 +68,23 @@ class BuildJavaInternals(val internals: HashMap<String, JoriaType>) {
         val name = kc.java.name
         internals[name] = jc
     }
+
     fun putClass(kc: KClass<*>, jc: JoriaType) {
         val name = kc.java.name
-        internals[name] = jc }
+        internals[name] = jc
+    }
 
     private fun buildNumberClass(): JavaClass {
         val numberClass = Number::class.java
         val numberType = JavaClass(numberClass)
-        numberType.setInternal(true)
-        numberType.setName("Number")
+        numberType.isInternal = true
+        numberType.name = "Number"
         try {
             val members = arrayOf(
                 JavaMethod(numberType, numberClass.getMethod("longValue"), DefaultIntLiteral.instance()),
                 JavaMethod(numberType, numberClass.getMethod("doubleValue"), DefaultRealLiteral.instance())
             )
-            numberType.setMembers(members)
+            numberType.members = members
         } catch (ex: NoSuchMethodException) {
             throw JoriaAssertionError("init java.lang.Long method not found")
         }
@@ -91,14 +94,14 @@ class BuildJavaInternals(val internals: HashMap<String, JoriaType>) {
     private fun buildObjectClass(): JavaClass {
         val objectClass = Object::class.java
         val objectType = JavaClass(objectClass)
-        objectType.setInternal(true)
-        objectType.setName("Object")
+        objectType.isInternal = true
+        objectType.name = "Object"
         try {
             val members = arrayOf(
                 JavaMethod(objectType, objectClass.getMethod("toString"), DefaultStringLiteral.instance()),
                 JavaMethod(objectType, objectClass.getMethod("getClass"), JavaClassAsLiteral.instance())
             )
-            objectType.setMembers(members)
+            objectType.members = members
         } catch (ex: NoSuchMethodException) {
             throw JoriaAssertionError("init java.lang.Object method not found")
         }
@@ -108,8 +111,8 @@ class BuildJavaInternals(val internals: HashMap<String, JoriaType>) {
     private fun buildStreamClass(): JavaClass {
         val streamClass = InputStream::class.java
         val streamType = JavaClass(streamClass)
-        streamType.setInternal(true)
-        streamType.setName("java.io.InputStream")
+        streamType.isInternal = true
+        streamType.name = "java.io.InputStream"
         try {
             val members = arrayOf(
                 JavaMethod(streamType, streamClass.getMethod("toString"), DefaultStringLiteral.instance()),
@@ -121,7 +124,7 @@ class BuildJavaInternals(val internals: HashMap<String, JoriaType>) {
                 )
             )
 
-            streamType.setMembers(members)
+            streamType.members = members
         } catch (ex: NoSuchMethodException) {
             throw JoriaAssertionError("init java.lang.Object method not found")
         }
@@ -131,8 +134,8 @@ class BuildJavaInternals(val internals: HashMap<String, JoriaType>) {
     private fun buildUriClass(): JavaClass {
         val klass = URI::class.java
         val type = JavaClass(klass)
-        type.setInternal(true)
-        type.setName("java.net.URI")
+        type.isInternal = true
+        type.name = "java.net.URI"
         try {
             val members = arrayOf(
                 JavaMethod(type, klass.getMethod("getFragment"), DefaultStringLiteral.instance()),
@@ -144,7 +147,7 @@ class BuildJavaInternals(val internals: HashMap<String, JoriaType>) {
                 JavaMethod(type, klass.getMethod("toString"), DefaultStringLiteral.instance()),
                 JavaMethod(type, klass.getMethod("getQuery"), DefaultStringLiteral.instance())
             )
-            type.setMembers(members)
+            type.members = members
         } catch (ex: NoSuchMethodException) {
             throw JoriaAssertionError("init java.lang.Object method not found")
         }
@@ -154,14 +157,14 @@ class BuildJavaInternals(val internals: HashMap<String, JoriaType>) {
     fun buildMapeEntryClass(): JavaClass {
         val mapEntryClass = Map.Entry::class.java
         val mapEntryType = JavaClass(mapEntryClass)
-        mapEntryType.setInternal(true)
-        mapEntryType.setName("Map.Entry")
+        mapEntryType.isInternal = true
+        mapEntryType.name = "Map.Entry"
         try {
             val members = arrayOf(
                 JavaMethod(mapEntryType, mapEntryClass.getMethod("getKey"), objectType),
                 JavaMethod(mapEntryType, mapEntryClass.getMethod("getValue"), objectType)
             )
-            mapEntryType.setMembers(members)
+            mapEntryType.members = members
         } catch (ex: NoSuchMethodException) {
             throw JoriaAssertionError("init java.util.Map.Entry methods not found")
         }

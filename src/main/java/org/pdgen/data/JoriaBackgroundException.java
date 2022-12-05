@@ -8,12 +8,10 @@ import org.pdgen.env.Res;
  * Date: Jul 26, 2006
  * Time: 4:41:10 PM
  */
-public class JoriaBackgroundException extends JoriaDataException
-{
+public class JoriaBackgroundException extends JoriaDataException {
     private static final long serialVersionUID = 7L;
 
-    public JoriaBackgroundException(Throwable cause)
-	{
-		super(Res.asis("none"), cause);
-	}
+    public JoriaBackgroundException(Throwable cause) {
+        super(Res.asis("none"), cause);
+    }
 }

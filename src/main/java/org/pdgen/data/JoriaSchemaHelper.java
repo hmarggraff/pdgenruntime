@@ -8,22 +8,20 @@ package org.pdgen.data;
  * Time: 2:51:49 PM
  * To change this template use File | Settings | File Templates.
  */
-public class JoriaSchemaHelper
-{
-    public static Object convertLiteralDBDateToObject(DBData dbVal) throws JoriaDataException
-    {
-        if(dbVal instanceof DBStringImpl)
-            return ((DBStringImpl)dbVal).getStringValue();
-        else if(dbVal instanceof DBIntImpl)
+public class JoriaSchemaHelper {
+    public static Object convertLiteralDBDateToObject(DBData dbVal) throws JoriaDataException {
+        if (dbVal instanceof DBStringImpl)
+            return ((DBStringImpl) dbVal).getStringValue();
+        else if (dbVal instanceof DBIntImpl)
             return ((DBIntImpl) dbVal).getIntValue();
-        else if(dbVal instanceof DBRealImpl)
+        else if (dbVal instanceof DBRealImpl)
             return ((DBRealImpl) dbVal).getRealValue();
-        else if(dbVal instanceof DBBooleanImpl)
+        else if (dbVal instanceof DBBooleanImpl)
             return ((DBBooleanImpl) dbVal).getBooleanValue();
-        else if(dbVal instanceof DBDateTime)
-            return ((DBDateTime)dbVal).getDate();
+        else if (dbVal instanceof DBDateTime)
+            return ((DBDateTime) dbVal).getDate();
         else
-            throw new JoriaDataException("unsupported type "+dbVal.getClass().getName());
+            throw new JoriaDataException("unsupported type " + dbVal.getClass().getName());
 
     }
 

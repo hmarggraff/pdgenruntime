@@ -11,8 +11,7 @@ import java.io.Serializable;
  * Date: Jul 28, 2006
  * Time: 9:59:52 AM
  */
-public class RowOnNewPage implements Serializable
-{
+public class RowOnNewPage implements Serializable {
     private static final long serialVersionUID = 7L;
     private final int linesBeforeNewLine;
     public static final int ALWAYS = 1;
@@ -22,36 +21,32 @@ public class RowOnNewPage implements Serializable
     public static final int NEVER = 0;
     public static final RowOnNewPage never = new RowOnNewPage(NEVER);
 
-    private RowOnNewPage(int linesBeforeNewLine)
-    {
+    private RowOnNewPage(int linesBeforeNewLine) {
         this.linesBeforeNewLine = linesBeforeNewLine;
     }
 
-    public String toString()
-    {
-        if(linesBeforeNewLine == ALWAYS)
+    public String toString() {
+        if (linesBeforeNewLine == ALWAYS)
             return Res.str("always");
-        if(linesBeforeNewLine == ON_SECOND_ROW)
+        if (linesBeforeNewLine == ON_SECOND_ROW)
             return Res.str("on_second_row");
-        if(linesBeforeNewLine == NEVER)
+        if (linesBeforeNewLine == NEVER)
             return Res.str("never");
-        throw new JoriaAssertionError("unexpected value "+linesBeforeNewLine);
+        throw new JoriaAssertionError("unexpected value " + linesBeforeNewLine);
     }
 
-    public int getLinesBeforeNewLine()
-    {
+    public int getLinesBeforeNewLine() {
         return linesBeforeNewLine;
     }
 
-    protected Object readResolve()
-    {
-        if(linesBeforeNewLine == ALWAYS)
+    protected Object readResolve() {
+        if (linesBeforeNewLine == ALWAYS)
             return always;
-        else if(linesBeforeNewLine == ON_SECOND_ROW)
+        else if (linesBeforeNewLine == ON_SECOND_ROW)
             return onSecondRow;
-        else if(linesBeforeNewLine == NEVER)
+        else if (linesBeforeNewLine == NEVER)
             return never;
-        else throw new JoriaAssertionError("unexpected value "+linesBeforeNewLine);
+        else throw new JoriaAssertionError("unexpected value " + linesBeforeNewLine);
     }
 
 }

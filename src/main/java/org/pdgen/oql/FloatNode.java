@@ -7,39 +7,32 @@ import org.pdgen.data.JoriaAccess;
 import org.pdgen.data.JoriaDataException;
 import org.pdgen.model.run.RunEnv;
 
-public class FloatNode extends Node
-{
-	protected double value;
+public class FloatNode extends Node {
+    protected double value;
 
-	public FloatNode(double p0)
-	{
-		value = p0;
-	}
+    public FloatNode(double p0) {
+        value = p0;
+    }
 
-	public double getFloatValue(RunEnv env, DBData p0)
-	{
-		return value;
-	}
+    public double getFloatValue(RunEnv env, DBData p0) {
+        return value;
+    }
 
-	public String getTokenString()
-	{
-		return String.valueOf(value);
-	}
+    public String getTokenString() {
+        return String.valueOf(value);
+    }
 
-	public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel)
-	{
-		collector.append('"');
-		collector.append(value);
-		collector.append('"');
-	}
+    public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel) {
+        collector.append('"');
+        collector.append(value);
+        collector.append('"');
+    }
 
-	public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException
-	{
-		return new DBRealImpl(null, value);
-	}
+    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException {
+        return new DBRealImpl(null, value);
+    }
 
-	public boolean isReal()
-	{
-		return true;
-	}
+    public boolean isReal() {
+        return true;
+    }
 }

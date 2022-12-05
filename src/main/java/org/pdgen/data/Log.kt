@@ -7,10 +7,12 @@ enum class Log(var level: Int = 1) {
     ini(level("Log.ini")),
     schema(level("Log.schema")),
     ui(level("Log.ui")),
-    run(level("Log.run"));
+    run(level("Log.run")),
+    migrate(level("Log.migrate")),
+    action(level("Log.action"));
 
     fun warn(msg: String): Unit {
-        if (level >= levelDebug)
+        if (level >= levelWarn)
             out.println("$blanks${this.name} $msg")
     }
 
@@ -38,27 +40,41 @@ enum class Log(var level: Int = 1) {
         ex.printStackTrace(out)
     }
 
-    fun error(ex: Throwable, msg:String): Unit {
+    fun error(ex: Throwable, msg: String): Unit {
         out.println("$blanks${this.name} ${ex.message}: $msg")
         ex.printStackTrace(out)
     }
 
-    public fun indent() {
-        indent++;
+    fun indent() {
+        indent++
         blanks = blanks + "  "
     }
 
-    public fun undent() {
+    fun undent() {
         if (indent <= 0) return
-        indent--;
+        indent--
         blanks = blanks.substring(2)
+    }
+
+    fun warnWitchStack(msg: String) {
+        if (level < levelWarn) return
+
+        val t = Throwable()
+        val el = t.stackTrace.first()
+        out.println("$blanks${el.className}.${el.methodName}:${el.lineNumber} $msg")
+    }
+
+    fun debugMemory(msg: String): Unit {
+        if (level >= levelDebug)
+            out.println("$blanks${this.name} $msg ${(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024}/${Runtime.getRuntime().totalMemory() / 1024}")
     }
 
 }
 
 fun level(module: String) = Settings.get(module)?.toInt() ?: 3
+
 var blanks: String = ""
-var indent = 0;
+var indent = 0
 
 
 val out = System.out

@@ -3,7 +3,6 @@ package org.pdgen.oql;
 
 import org.pdgen.data.Named;
 
-public interface SymbolEntry extends Named
-{
+public interface SymbolEntry extends Named {
 
 }

@@ -4,13 +4,11 @@ package org.pdgen.model.run;
 /**
  * one specific exception to break out of a running template if an exception occured deep inside
  */
-public class RunBreakException extends Error
-{
+public class RunBreakException extends Error {
     private static final long serialVersionUID = 7L;
 
-    RunBreakException(Throwable ex)
-   {
-      super(ex);
-   }
+    RunBreakException(Throwable ex) {
+        super(ex);
+    }
 
 }

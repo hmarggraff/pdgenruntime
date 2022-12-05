@@ -10,12 +10,16 @@ import org.pdgen.model.run.RunEnv;
  * Time: 12:17:11 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface JoriaAccessWithParameters extends JoriaAccess
-{
+public interface JoriaAccessWithParameters extends JoriaAccess {
     String getLongName();
+
     JoriaClass getDefiningClass();
+
     JoriaType getType();
+
     DBData getValue(DBData from, JoriaAccess asView, RunEnv env, DBData[] parameterValues) throws JoriaDataException;
+
     boolean isRootUsable();
+
     JoriaParameter[] getParameters();
 }

@@ -6,7 +6,6 @@ package org.pdgen.data;
  * Date: Dec 19, 2006
  * Time: 8:50:25 AM
  */
-public interface NameableProtectedRemove extends Nameable
-{
+public interface NameableProtectedRemove extends Nameable {
     boolean isRemoveable();
 }

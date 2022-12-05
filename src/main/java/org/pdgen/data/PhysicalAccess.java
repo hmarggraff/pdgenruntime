@@ -6,6 +6,5 @@ package org.pdgen.data;
  * Date: May 29, 2007
  * Time: 12:33:52 PM
  */
-public interface PhysicalAccess
-{
+public interface PhysicalAccess {
 }

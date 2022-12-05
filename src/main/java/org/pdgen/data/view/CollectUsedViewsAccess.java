@@ -11,9 +11,8 @@ import java.util.Set;
  * Time: 11:30:44 AM
  * To change this template use Options | File Templates.
  */
-public interface CollectUsedViewsAccess
-{
-    void  collectUsedViews(Set<MutableView> s);
+public interface CollectUsedViewsAccess {
+    void collectUsedViews(Set<MutableView> s);
 
     void collectViewUsage(Map<MutableView, Set<Object>> viewUsage, Set<MutableView> visitedViews);
 }

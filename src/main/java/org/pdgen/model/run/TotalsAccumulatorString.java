@@ -6,87 +6,73 @@ import org.pdgen.data.Trace;
 import org.pdgen.data.view.AggregateDef;
 
 
-public class TotalsAccumulatorString implements TotalsAccumulator
-{
-	protected String[] val = new String[5];
-	protected String tVal;
-	protected int function;
+public class TotalsAccumulatorString implements TotalsAccumulator {
+    protected String[] val = new String[5];
+    protected String tVal;
+    protected int function;
 
-	public TotalsAccumulatorString(int function)
-	{
-		this.function = function;
-	}
+    public TotalsAccumulatorString(int function) {
+        this.function = function;
+    }
 
-	public void rowComplete()
-	{
-		if (tVal != null)
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				if (val[i] == null)
-					val[i] = tVal;
-				else
-				{
-					switch (function)
-					{
+    public void rowComplete() {
+        if (tVal != null) {
+            for (int i = 0; i < 4; i++) {
+                if (val[i] == null)
+                    val[i] = tVal;
+                else {
+                    switch (function) {
 
-						case AggregateDef.min:
-							if (val[i].compareTo(tVal) > 0) val[i] = tVal;
-							break;
+                        case AggregateDef.min:
+                            if (val[i].compareTo(tVal) > 0) val[i] = tVal;
+                            break;
 
-						case AggregateDef.max:
-							if (val[i].compareTo(tVal) < 0) val[i] = tVal;
-							break;
-					}
-				}
-			}
-			tVal = null;
-		}
-	}
+                        case AggregateDef.max:
+                            if (val[i].compareTo(tVal) < 0) val[i] = tVal;
+                            break;
+                    }
+                }
+            }
+            tVal = null;
+        }
+    }
 
 
-	public void reset(int scope)
-	{
-        if(scope == AggregateDef.page)
+    public void reset(int scope) {
+        if (scope == AggregateDef.page)
             val[AggregateDef.lastRunning] = val[AggregateDef.running];
         val[scope] = null;
-		tVal = null;
-	}
+        tVal = null;
+    }
 
 
-	public double getDoubleVal(int scope)
-	{
-		throw new JoriaAssertionError("Not possible for this subclass");
-	}
+    public double getDoubleVal(int scope) {
+        throw new JoriaAssertionError("Not possible for this subclass");
+    }
 
 
-	public long getLongVal(int scope)
-	{
-		throw new JoriaAssertionError("Not possible for this subclass");
-	}
+    public long getLongVal(int scope) {
+        throw new JoriaAssertionError("Not possible for this subclass");
+    }
 
 
-	public String getStringVal(int scope)
-	{
-		return val[scope];
-	}
+    public String getStringVal(int scope) {
+        return val[scope];
+    }
 
 
-	public void add(String nVal)
-	{
-		Trace.check(tVal == null);
-		tVal = nVal;
-	}
+    public void add(String nVal) {
+        Trace.check(tVal == null);
+        tVal = nVal;
+    }
 
 
-	public void add(double nVal)
-	{
-		throw new JoriaAssertionError("Not possible for this subclass");
-	}
+    public void add(double nVal) {
+        throw new JoriaAssertionError("Not possible for this subclass");
+    }
 
 
-	public void redoRow()
-	{
-		tVal = null;
-	}
+    public void redoRow() {
+        tVal = null;
+    }
 }

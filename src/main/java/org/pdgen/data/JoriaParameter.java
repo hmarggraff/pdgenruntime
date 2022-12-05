@@ -8,24 +8,20 @@ package org.pdgen.data;
  * Time: 12:19:51 PM
  * To change this template use File | Settings | File Templates.
  */
-public class JoriaParameter
-{
+public class JoriaParameter {
     String name;
     JoriaType type;
 
-    public JoriaParameter(String name, JoriaType type)
-    {
+    public JoriaParameter(String name, JoriaType type) {
         this.name = name;
         this.type = type;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public JoriaType getType()
-    {
+    public JoriaType getType() {
         return type;
     }
 }

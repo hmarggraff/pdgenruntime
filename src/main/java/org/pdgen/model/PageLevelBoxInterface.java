@@ -2,9 +2,9 @@
 package org.pdgen.model;
 
 // Created 15.09.2007 by hmf
+
 /**
  * only exists for backward compatibility
  */
-public interface PageLevelBoxInterface
-{
+public interface PageLevelBoxInterface {
 }

@@ -8,7 +8,6 @@ import org.pdgen.model.cells.CellDef;
  * Date: Feb 8, 2006
  * Time: 9:34:22 AM
  */
-public interface CellVisitor
-{
+public interface CellVisitor {
     boolean visit(CellDef cd, int r, int c);
 }

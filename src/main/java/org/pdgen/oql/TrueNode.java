@@ -8,32 +8,26 @@ import org.pdgen.data.JoriaAccess;
 import org.pdgen.data.JoriaDataException;
 import org.pdgen.model.run.RunEnv;
 
-public class TrueNode extends Node
-{
+public class TrueNode extends Node {
 
-	public boolean getBooleanValue(RunEnv env, DBData p0)
-	{
-		return true;
-	}
+    public boolean getBooleanValue(RunEnv env, DBData p0) {
+        return true;
+    }
 
-	public String getTokenString()
-	{
-		return "true";
-	}
+    public String getTokenString() {
+        return "true";
+    }
 
-	public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel)
-	{
-		collector.append(" true ");
-	}
+    public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel) {
+        collector.append(" true ");
+    }
 
-	public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException
-    {
+    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException {
         return new DBBooleanImpl(null, true);
     }
 
     /* ----------------------------------------------------------------------- isBoolean */
-	public boolean isBoolean()
-	{
-		return true;
-	}
+    public boolean isBoolean() {
+        return true;
+    }
 }

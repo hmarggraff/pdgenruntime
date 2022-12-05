@@ -8,82 +8,70 @@ import org.pdgen.data.view.MutableView;
 import org.pdgen.data.view.NameableAccess;
 import org.pdgen.model.run.RunEnv;
 
-
 import java.util.Map;
 
-public class NumberAsDate extends MutableAccess
-{
-	public static final String JAVADATE = "JavaDate";
-	public static final String POSIXDATE = "PosixDate";
-	public static final String NUMBER = "Number";
-	public static final String ENUM = "Enumeration";
+public class NumberAsDate extends MutableAccess {
+    public static final String JAVADATE = "JavaDate";
+    public static final String POSIXDATE = "PosixDate";
+    public static final String NUMBER = "Number";
+    public static final String ENUM = "Enumeration";
     private static final long serialVersionUID = 7L;
 
     protected String dateType;
 
-	private NumberAsDate(JoriaClass parent, JoriaAccess from, String dateType)
-	{
-		super(parent, JoriaDateTime.instance(), from);
-		this.dateType = dateType;
-		makeName();
-	}
+    private NumberAsDate(JoriaClass parent, JoriaAccess from, String dateType) {
+        super(parent, JoriaDateTime.instance(), from);
+        this.dateType = dateType;
+        makeName();
+    }
 
-	public NameableAccess dup(JoriaClass newParent, Map<Object,Object> alreadyCopied)
-	{
-		final Object duplicate = alreadyCopied.get(this);
-		if (duplicate != null)
-			return (NameableAccess) duplicate;
+    public NameableAccess dup(JoriaClass newParent, Map<Object, Object> alreadyCopied) {
+        final Object duplicate = alreadyCopied.get(this);
+        if (duplicate != null)
+            return (NameableAccess) duplicate;
 
-		NumberAsDate ret = new NumberAsDate(newParent, myBaseAccess, dateType);
-		alreadyCopied.put(this, ret);
+        NumberAsDate ret = new NumberAsDate(newParent, myBaseAccess, dateType);
+        alreadyCopied.put(this, ret);
 
-		fillDup(ret, alreadyCopied);
-		MutableView newType = (MutableView) alreadyCopied.get(type);
-		if (newType == null)
-		{
-			newType = ((MutableView) type).dup(alreadyCopied);
-		}
-		ret.type = newType;
-		return ret;
-	}
+        fillDup(ret, alreadyCopied);
+        MutableView newType = (MutableView) alreadyCopied.get(type);
+        if (newType == null) {
+            newType = ((MutableView) type).dup(alreadyCopied);
+        }
+        ret.type = newType;
+        return ret;
+    }
 
-	public void makeName()
-	{
-		makeName(dateType);
-	}
+    public void makeName() {
+        makeName(dateType);
+    }
 
-	public DBData getValue(DBData from, JoriaAccess asView, RunEnv env) throws JoriaDataException
-	{
-		DBInt iv = (DBInt) getBaseAccess().getValue(from, getBaseAccess(), env);
-		if (dateType.equals(POSIXDATE))
-			return new DBDateTime(this, iv.getIntValue() * 1000); // convert seconds to milliseconds
-		else
-			return new DBDateTime(this, iv.getIntValue()); // gets a long and creates a java date
-	}
+    public DBData getValue(DBData from, JoriaAccess asView, RunEnv env) throws JoriaDataException {
+        DBInt iv = (DBInt) getBaseAccess().getValue(from, getBaseAccess(), env);
+        if (dateType.equals(POSIXDATE))
+            return new DBDateTime(this, iv.getIntValue() * 1000); // convert seconds to milliseconds
+        else
+            return new DBDateTime(this, iv.getIntValue()); // gets a long and creates a java date
+    }
 
-	public boolean isPlain()
-	{
-		return false;
-	}
+    public boolean isPlain() {
+        return false;
+    }
 
-	public String getDateType()
-	{
-		return dateType;
-	}
+    public String getDateType() {
+        return dateType;
+    }
 
-	public JoriaType getSourceTypeForChildren()
-	{
-		return JoriaDateTime.instance();
-	}
+    public JoriaType getSourceTypeForChildren() {
+        return JoriaDateTime.instance();
+    }
 
-	public long getIntValue(DBObject from, RunEnv env) throws JoriaDataException
-	{
-		throw new JoriaAssertionError("NumberAsDate does not get an int");
-	}
+    public long getIntValue(DBObject from, RunEnv env) throws JoriaDataException {
+        throw new JoriaAssertionError("NumberAsDate does not get an int");
+    }
 
-	protected NumberAsDate(JoriaClass parent, String name)
-	{
-		super(parent, name);
-	}
+    protected NumberAsDate(JoriaClass parent, String name) {
+        super(parent, name);
+    }
 
 }

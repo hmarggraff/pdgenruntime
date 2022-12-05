@@ -1,16 +1,26 @@
-// This software may be used as allowed by the Gnu Affero General Public License. Details are in the file LICENSE, that must be included in the distribution of ths software.
 package org.pdgen.util;
 
-import org.pdgen.model.run.FillPagedFrame;
-import org.pdgen.model.run.FrameFlowSupport;
-import org.pdgen.model.run.MultiColFrameSupport;
+import org.pdgen.data.NotYetImplementedError;
+import org.pdgen.model.run.*;
 
 public class RuntimeComponentFactory {
-    public static RuntimeComponentFactory instance;
-    public FrameFlowSupport getFrameFlowSupport(float flowingFrameColumnWidth, FillPagedFrame fillPagedFrame) {
-        if (!fillPagedFrame.getTemplate().getFrame().getCascadedFrameStyle().hasFlowingColumns())// no flowing columns: dont set up support
-            return new FrameFlowSupport(fillPagedFrame);
-        else
-            return new MultiColFrameSupport(fillPagedFrame, flowingFrameColumnWidth);
+    public static RuntimeComponentFactory theInstance;
+
+    public static RuntimeComponentFactory instance() {
+        if (theInstance == null)
+            theInstance = new RuntimeComponentFactory();
+        return theInstance;
     }
+
+    public FrameFlowSupport getFrameFlowSupport(float flowingFrameColumnWidth, FillPagedFrame fillPagedFrame) {
+        return new FrameFlowSupport(fillPagedFrame);
+    }
+
+    public RunTemplate getFillRunner(RDRangeBase rdef, RVTemplate rvt, FillPagedFrame frame) {
+        if (frame.getTemplate().isCrosstabFrame())
+            throw new NotYetImplementedError("Crosstabs are a plus-feature. Please Contact Qint Software");
+        else
+            return new RunTemplate(frame, rvt, rdef, 0, frame.getTemplate());
+    }
+
 }

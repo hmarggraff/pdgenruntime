@@ -3,7 +3,6 @@ package org.pdgen.data.view;
 
 import org.pdgen.data.*;
 
-
 import java.util.Map;
 import java.util.Set;
 
@@ -14,33 +13,32 @@ import java.util.Set;
  * Note that MutableView neither implements JoriaClass nor JoriaCollection directly
  * in order to keep those interfaces separated
  */
-public interface MutableView extends JoriaType, VariableProvider, Nameable, Rebindable
-{
-	/*
-		* Add a Fieldaccess to this ClassProjection (ClassView)
-		* Child is added at the end.
-		*/
-	void addChild(JoriaAccess f);
+public interface MutableView extends JoriaType, VariableProvider, Nameable, Rebindable {
+    /*
+     * Add a Fieldaccess to this ClassProjection (ClassView)
+     * Child is added at the end.
+     */
+    void addChild(JoriaAccess f);
 
-	JoriaAccess findMember(String f);
+    JoriaAccess findMember(String f);
 
-	void removeChild(JoriaAccess f);
+    void removeChild(JoriaAccess f);
 
-	void replaceChild(JoriaAccess f, JoriaAccess fNew);
+    void replaceChild(JoriaAccess f, JoriaAccess fNew);
 
-	JoriaType getOriginalType();
+    JoriaType getOriginalType();
 
-	void setBase(JoriaClass c);
+    void setBase(JoriaClass c);
 
-	boolean fixAccess();
+    boolean fixAccess();
 
-	MutableView dup(Map<Object, Object> alreadyCopiedViews);
+    MutableView dup(Map<Object, Object> alreadyCopiedViews);
 
-	void collectUsedViews(Set<MutableView> s);
+    void collectUsedViews(Set<MutableView> s);
 
-	void collectViewUsage(Map<MutableView, Set<Object>> viewUsage, Set<MutableView> visitedViews);
+    void collectViewUsage(Map<MutableView, Set<Object>> viewUsage, Set<MutableView> visitedViews);
 
-	boolean hasName();
+    boolean hasName();
 
-	void sortMembers();
+    void sortMembers();
 }

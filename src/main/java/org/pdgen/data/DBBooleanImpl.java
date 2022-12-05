@@ -2,51 +2,43 @@
 package org.pdgen.data;
 
 
-public class DBBooleanImpl extends AbstractDBData implements DBBoolean
-{
-   boolean myBoolean;
+public class DBBooleanImpl extends AbstractDBData implements DBBoolean {
+    boolean myBoolean;
 
-   public DBBooleanImpl(JoriaAccess axs, boolean value)
-   {
-      super(axs);
-      myBoolean = value;
-   }
+    public DBBooleanImpl(JoriaAccess axs, boolean value) {
+        super(axs);
+        myBoolean = value;
+    }
 
-   /* ----------------------------------------------------------------------- equals */
+    /* ----------------------------------------------------------------------- equals */
 
-   public boolean equals(Object obj)
-   {
-       return obj instanceof DBBoolean && ((DBBoolean) obj).getBooleanValue() == myBoolean;
-   }
+    public boolean equals(Object obj) {
+        return obj instanceof DBBoolean && ((DBBoolean) obj).getBooleanValue() == myBoolean;
+    }
 
-   /* ----------------------------------------------------------------------- getBooleanValue */
+    /* ----------------------------------------------------------------------- getBooleanValue */
 
-   public boolean getBooleanValue()
-   {
-      return myBoolean;
-   }
+    public boolean getBooleanValue() {
+        return myBoolean;
+    }
 
-   /* ----------------------------------------------------------------------- isNull */
+    /* ----------------------------------------------------------------------- isNull */
 
-   public boolean isNull()
-   {
-      return false;
-   }
+    public boolean isNull() {
+        return false;
+    }
 
-   /* ----------------------------------------------------------------------- toString */
+    /* ----------------------------------------------------------------------- toString */
 
-    public String toString()
-    {
+    public String toString() {
         return String.valueOf(myBoolean);
     }
 
-    public int hashCode()
-    {
-        return myBoolean?0:1;
+    public int hashCode() {
+        return myBoolean ? 0 : 1;
     }
 
-    public boolean same(DBData theOther)
-    {
+    public boolean same(DBData theOther) {
         return theOther instanceof DBBoolean && ((DBBoolean) theOther).getBooleanValue() == myBoolean;
     }
 }

@@ -10,14 +10,12 @@ import java.util.ArrayList;
  * The heavyweight objects referenced by the drawing operatrions are in
  * the list of ref objects. (These may be images, Attributed CharacterIterators etc)
  */
-public class RenderedGraphic
-{
-	byte[] data;
-	ArrayList<?> refObjects;
+public class RenderedGraphic {
+    byte[] data;
+    ArrayList<?> refObjects;
 
-	public RenderedGraphic(byte[] data, ArrayList<?> refObjects)
-	{
-		this.data = data;
-		this.refObjects = refObjects;
-	}
+    public RenderedGraphic(byte[] data, ArrayList<?> refObjects) {
+        this.data = data;
+        this.refObjects = refObjects;
+    }
 }

@@ -10,7 +10,7 @@ class SchemaDumper {
     var markupChars = ",:<>{}[]#!@;"
 
 
-    public fun dumpSchema(p: PrintStream, it: JoriaSchema, internals: Iterable<JoriaType>) {
+    fun dumpSchema(p: PrintStream, it: JoriaSchema, internals: Iterable<JoriaType>) {
         p.println("YAML: Pdgen Schema Dump")
         p.print("Created: '")
         p.print(Date())

@@ -8,29 +8,28 @@ import java.io.IOException;
  * Date: Jan 14, 2003
  * Time: 1:20:57 PM
  */
-public interface JoriaPrinter
-{
-	void startPage() throws IOException;
+public interface JoriaPrinter {
+    void startPage() throws IOException;
 
-	void endPage() throws IOException;
+    void endPage() throws IOException;
 
-	void printDecoration(GrelViewer gv) throws IOException;
+    void printDecoration(GrelViewer gv) throws IOException;
 
-	void printGETextLines(GraphElTextLines textLines);
+    void printGETextLines(GraphElTextLines textLines);
 
-	void printGEPicture(GraphElPicture picture);
+    void printGEPicture(GraphElPicture picture);
 
-	void printGEText(GraphElText text);
+    void printGEText(GraphElText text);
 
-	void printGERect(GraphicElementRect rect);
+    void printGERect(GraphicElementRect rect);
 
-	void printGELine(GraphElLine line);
+    void printGELine(GraphElLine line);
 
-	void printMetaFile(GraphElMetaFile data);
+    void printMetaFile(GraphElMetaFile data);
 
-	void printGEHtmlText(GraphElHtmlText htmlText);
+    void printGEHtmlText(GraphElHtmlText htmlText);
 
-	void printGERtfText(GraphElRtfText graphElRtfText);
+    void printGERtfText(GraphElRtfText graphElRtfText);
 
     void printGEStyledText(GraphElStyledText graphElStyledText);
 }

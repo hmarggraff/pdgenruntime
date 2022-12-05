@@ -3,44 +3,37 @@ package org.pdgen.oql;
 
 import org.pdgen.data.JoriaCollection;
 
-public class IteratorRef extends ObjectRef
-{
+public class IteratorRef extends ObjectRef {
 
-	JoriaCollection collType;
+    JoriaCollection collType;
 
-	/* ----------------------------------------------------------------------- IteratorRef */
-	public IteratorRef(String refName, JoriaCollection c)
-	{
-		super(refName, c.getElementType());
-		collType = c;
-	}
+    /* ----------------------------------------------------------------------- IteratorRef */
+    public IteratorRef(String refName, JoriaCollection c) {
+        super(refName, c.getElementType());
+        collType = c;
+    }
 
-	/* ----------------------------------------------------------------------- getCollectionType */
-	public JoriaCollection getCollectionType()
-	{
-		return collType;
-	}
+    /* ----------------------------------------------------------------------- getCollectionType */
+    public JoriaCollection getCollectionType() {
+        return collType;
+    }
 
-	/* ----------------------------------------------------------------------- getName */
-	public String getName()
-	{
-		return name;
-	}
+    /* ----------------------------------------------------------------------- getName */
+    public String getName() {
+        return name;
+    }
 
-	/* ----------------------------------------------------------------------- isEnvironment */
-	public boolean isEnvironment()
-	{
-		return false;
-	}
+    /* ----------------------------------------------------------------------- isEnvironment */
+    public boolean isEnvironment() {
+        return false;
+    }
 
-	/* ----------------------------------------------------------------------- isObject */
-	public boolean isObject()
-	{
-		return true;
-	}
+    /* ----------------------------------------------------------------------- isObject */
+    public boolean isObject() {
+        return true;
+    }
 
-	public boolean isPackage()
-	{
-		return false;
-	}
+    public boolean isPackage() {
+        return false;
+    }
 }

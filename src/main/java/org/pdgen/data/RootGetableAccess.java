@@ -6,7 +6,6 @@ package org.pdgen.data;
  * Date: Feb 19, 2007
  * Time: 6:45:09 AM
  */
-public interface RootGetableAccess
-{
+public interface RootGetableAccess {
     JoriaAccess getRootAccess();
 }

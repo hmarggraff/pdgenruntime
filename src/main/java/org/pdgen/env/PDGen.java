@@ -8,11 +8,17 @@ import org.pdgen.util.RuntimeComponentFactory;
 import java.io.OutputStream;
 
 public class PDGen {
-    private String templateFileName;
+    private final String templateFileName;
 
     public PDGen(String templateFileName) {
         this.templateFileName = templateFileName;
-        RuntimeComponentFactory.instance = new RuntimeComponentFactory();
+        RuntimeComponentFactory.theInstance = new RuntimeComponentFactory();
+        RepoLoader loader = new RepoLoader(templateFileName); // Builds the env
+    }
+
+    protected PDGen(String templateFileName, RuntimeComponentFactory otherComponentFactory) {
+        this.templateFileName = templateFileName;
+        RuntimeComponentFactory.theInstance = otherComponentFactory;
         RepoLoader loader = new RepoLoader(templateFileName); // Builds the env
     }
 

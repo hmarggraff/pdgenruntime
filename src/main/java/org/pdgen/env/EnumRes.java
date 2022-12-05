@@ -6,25 +6,22 @@ package org.pdgen.env;
  * Date: Feb 7, 2007
  * Time: 8:20:38 AM
  */
-public class EnumRes<T extends Enum<?>>
-{
+public class EnumRes<T extends Enum<?>> {
     public T inner;
 
-    public EnumRes(T inner)
-    {
+    public EnumRes(T inner) {
         this.inner = inner;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return stringOf(inner);
     }
-    public static String stringOf(Enum<?> inner)
-    {
+
+    public static String stringOf(Enum<?> inner) {
         String className = inner.getClass().getName();
-        if(className.contains("."))
-            className = className.substring(className.lastIndexOf('.')+1);
-        return Res.str(className +"." + inner);
+        if (className.contains("."))
+            className = className.substring(className.lastIndexOf('.') + 1);
+        return Res.str(className + "." + inner);
     }
 
 }

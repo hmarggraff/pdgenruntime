@@ -4,200 +4,167 @@ package org.pdgen.oql;
 import org.pdgen.data.*;
 import org.pdgen.model.run.RunEnv;
 
-
 import java.util.HashSet;
 
-public interface Exec extends SymbolEntry
-{
+public interface Exec extends SymbolEntry {
 
-	JoriaType getType(NodeInterface[] a);
+    JoriaType getType(NodeInterface[] a);
 
-	JoriaType parse(NodeInterface[] a) throws OQLParseException;
+    JoriaType parse(NodeInterface[] a) throws OQLParseException;
 
-	boolean isPageRelative();
+    boolean isPageRelative();
 
     boolean isNeedsAllPages();
 
     void i18nKeys(HashSet<String> collect);
 
-	String getGroup();
+    String getGroup();
 
-	String getDescription();
+    String getDescription();
 
-    interface ExecChar extends Exec
-	{
+    interface ExecChar extends Exec {
 
-		char execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
-	}
+        char execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
+    }
 
-	interface ExecString extends Exec
-	{
+    interface ExecString extends Exec {
 
-		String execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
-	}
+        String execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
+    }
 
-	interface ExecReal extends Exec
-	{
+    interface ExecReal extends Exec {
 
-		double execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
-	}
+        double execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
+    }
 
-	interface ExecInteger extends Exec
-	{
+    interface ExecInteger extends Exec {
 
-		long execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
-	}
+        long execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
+    }
 
-	interface ExecBoolean extends Exec
-	{
+    interface ExecBoolean extends Exec {
 
-		boolean execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
-	}
+        boolean execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
+    }
 
-	interface ExecDBData extends Exec
-	{
+    interface ExecDBData extends Exec {
 
-		DBData execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
-	}
+        DBData execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException;
+    }
 
-	interface ExecDate extends ExecDBData
-	{
+    interface ExecDate extends ExecDBData {
 
-	}
+    }
 
-	abstract class ExecIntegerAbstract extends WithName implements Exec.ExecInteger
-	{
+    abstract class ExecIntegerAbstract extends WithName implements Exec.ExecInteger {
 
-		protected ExecIntegerAbstract(String name, String group, String description)
-		{
-			super(name, group, description);
-		}
+        protected ExecIntegerAbstract(String name, String group, String description) {
+            super(name, group, description);
+        }
 
-		public JoriaType getDefaultType()
-		{
-			return DefaultIntLiteral.instance();
-		}
+        public JoriaType getDefaultType() {
+            return DefaultIntLiteral.instance();
+        }
 
-		public JoriaType parse(NodeInterface[] a)
-		{
-			return getType(a);
-		}
-	}
+        public JoriaType parse(NodeInterface[] a) {
+            return getType(a);
+        }
+    }
 
-	abstract class ExecRealAbstract extends WithName implements Exec.ExecReal
-	{
+    abstract class ExecRealAbstract extends WithName implements Exec.ExecReal {
 
-		protected ExecRealAbstract(String name, String group, String description)
-		{
-			super(name, group, description);
-		}
+        protected ExecRealAbstract(String name, String group, String description) {
+            super(name, group, description);
+        }
 
-		public JoriaType getDefaultType()
-		{
-			return DefaultRealLiteral.instance();
-		}
+        public JoriaType getDefaultType() {
+            return DefaultRealLiteral.instance();
+        }
 
-		public JoriaType parse(NodeInterface[] a)
-		{
-			return getType(a);
-		}
-	}
+        public JoriaType parse(NodeInterface[] a) {
+            return getType(a);
+        }
+    }
 
-	abstract class ExecStringAbstract extends WithName implements Exec.ExecString
-	{
+    abstract class ExecStringAbstract extends WithName implements Exec.ExecString {
 
-		protected ExecStringAbstract(String name, String group, String description)
-		{
-			super(name, group, description);
-		}
+        protected ExecStringAbstract(String name, String group, String description) {
+            super(name, group, description);
+        }
 
-		public JoriaType getDefaultType()
-		{
-			return DefaultStringLiteral.instance();
-		}
+        public JoriaType getDefaultType() {
+            return DefaultStringLiteral.instance();
+        }
 
-		public JoriaType parse(NodeInterface[] a) throws OQLParseException
-		{
-			return getType(a);
-		}
-	}
+        public JoriaType parse(NodeInterface[] a) throws OQLParseException {
+            return getType(a);
+        }
+    }
 
-	abstract class ExecDBDataAbstract extends WithName implements Exec.ExecDBData
-	{
+    abstract class ExecDBDataAbstract extends WithName implements Exec.ExecDBData {
 
-		protected ExecDBDataAbstract(String name, String group, String description)
-		{
-			super(name, group, description);
-		}
+        protected ExecDBDataAbstract(String name, String group, String description) {
+            super(name, group, description);
+        }
 
-		public JoriaType parse(NodeInterface[] a)
-		{
-			return getType(a);
-		}
-	}
+        public JoriaType parse(NodeInterface[] a) {
+            return getType(a);
+        }
+    }
 
-	abstract class ExecDateAbstract extends ExecDBDataAbstract implements Exec.ExecDate
-	{
+    abstract class ExecDateAbstract extends ExecDBDataAbstract implements Exec.ExecDate {
 
-		protected ExecDateAbstract(String name, String group, String description)
-		{
-			super(name, group, description);
-		}
+        protected ExecDateAbstract(String name, String group, String description) {
+            super(name, group, description);
+        }
 
-	}
+    }
 
-	abstract class ExecBooleanAbstract extends WithName implements Exec.ExecBoolean
-	{
+    abstract class ExecBooleanAbstract extends WithName implements Exec.ExecBoolean {
 
-		protected ExecBooleanAbstract(String name, String group, String description)
-		{
-			super(name, group, description);
-		}
-		public JoriaType parse(NodeInterface[] a)
-		{
-			return getType(a);
-		}
+        protected ExecBooleanAbstract(String name, String group, String description) {
+            super(name, group, description);
+        }
 
-	}
+        public JoriaType parse(NodeInterface[] a) {
+            return getType(a);
+        }
 
-	abstract class ExecBoolean4String extends ExecBooleanAbstract
-	{
+    }
 
-		public ExecBoolean4String(String name, String group, String description)
-		{
-			super(name, group, description);
-		}
+    abstract class ExecBoolean4String extends ExecBooleanAbstract {
 
-		public boolean execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException
-		{
+        public ExecBoolean4String(String name, String group, String description) {
+            super(name, group, description);
+        }
+
+        public boolean execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException {
             //noinspection SimplifiableIfStatement
-            if(args[0] == null || args[0].isNull() || args[1] == null || args[1].isNull())
+            if (args[0] == null || args[0].isNull() || args[1] == null || args[1].isNull())
                 return false;
-			return compare(((DBString) args[0]).getStringValue(), ((DBString) args[1]).getStringValue());
-		}
+            return compare(((DBString) args[0]).getStringValue(), ((DBString) args[1]).getStringValue());
+        }
 
-		protected abstract boolean compare(String s1, String s2);
+        protected abstract boolean compare(String s1, String s2);
 
-		public JoriaType getType(NodeInterface[] a)
-		{
-			if (a.length == 2 && a[0].isString() && a[1].isString())
-				return DefaultBooleanLiteral.instance();
-			return null;
-		}
-	}
-	class WithName
-	{
+        public JoriaType getType(NodeInterface[] a) {
+            if (a.length == 2 && a[0].isString() && a[1].isString())
+                return DefaultBooleanLiteral.instance();
+            return null;
+        }
+    }
 
-		String name;
-		String group;
-		String description;
+    class WithName {
 
-		protected WithName(String name, String group, String description)
-		{
-			this.description = description;
-			this.group = group;
-			this.name = name;
-		}
+        String name;
+        String group;
+        String description;
+
+        protected WithName(String name, String group, String description) {
+            this.description = description;
+            this.group = group;
+            this.name = name;
+        }
 
 		/*
 		public WithName(String name)
@@ -206,39 +173,32 @@ public interface Exec extends SymbolEntry
 		}
 		*/
 
-		public String getDescription()
-		{
-			return description;
-		}
+        public String getDescription() {
+            return description;
+        }
 
-		public String getGroup()
-		{
-			return group;
-		}
+        public String getGroup() {
+            return group;
+        }
 
-		public String getName()
-		{
-			return name;
-		}
-
-        public String toString()
-        {
+        public String getName() {
             return name;
         }
 
-		public boolean isPageRelative()
-		{
-			return false;
-		}
+        public String toString() {
+            return name;
+        }
 
-        public boolean isNeedsAllPages()
-        {
+        public boolean isPageRelative() {
             return false;
         }
 
-        public void i18nKeys(HashSet<String> collect)
-		{
-			//nothing to do in base
-		}
-	}
+        public boolean isNeedsAllPages() {
+            return false;
+        }
+
+        public void i18nKeys(HashSet<String> collect) {
+            //nothing to do in base
+        }
+    }
 }

@@ -2,18 +2,17 @@
 package org.pdgen.data;
 
 
-public interface DBDictionary extends DBCollection
-{
+public interface DBDictionary extends DBCollection {
 
-   /* ----------------------------------------------------------------------- getKeys */
+    /* ----------------------------------------------------------------------- getKeys */
 
-   DBCollection getKeys() throws JoriaDataException;
+    DBCollection getKeys() throws JoriaDataException;
 
-   /* ----------------------------------------------------------------------- getValueForKey */
+    /* ----------------------------------------------------------------------- getValueForKey */
 
-   DBData getValueForKey(DBData key) throws JoriaDataException;
+    DBData getValueForKey(DBData key) throws JoriaDataException;
 
-   /* ----------------------------------------------------------------------- getValues */
+    /* ----------------------------------------------------------------------- getValues */
 
-   DBCollection getValues() throws JoriaDataException;
+    DBCollection getValues() throws JoriaDataException;
 }

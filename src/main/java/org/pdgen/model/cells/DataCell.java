@@ -6,12 +6,11 @@ package org.pdgen.model.cells;
 import org.pdgen.data.JoriaAccess;
 import org.pdgen.data.JoriaClass;
 
-public interface DataCell extends CellDef, CellWithVariables
-{
-	JoriaAccess getAccessor();
+public interface DataCell extends CellDef, CellWithVariables {
+    JoriaAccess getAccessor();
 
-	String getDisplayMode();
+    String getDisplayMode();
 
-	void rebindByName(final JoriaClass newScope);
+    void rebindByName(final JoriaClass newScope);
 
 }

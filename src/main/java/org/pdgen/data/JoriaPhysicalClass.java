@@ -8,7 +8,6 @@ package org.pdgen.data;
  * Time: 2:44:34 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface JoriaPhysicalClass extends JoriaClass
-{
+public interface JoriaPhysicalClass extends JoriaClass {
     String getPhysicalClassName();
 }

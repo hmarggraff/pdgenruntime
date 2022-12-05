@@ -5,7 +5,6 @@ import org.pdgen.data.JoriaAccess;
 import org.pdgen.data.RootGetableAccess;
 import org.pdgen.data.VisitableAccess;
 
-public interface IndirectAccess extends Rebindable, RootGetableAccess, VisitableAccess
-{
-	JoriaAccess getBaseAccess();
+public interface IndirectAccess extends Rebindable, RootGetableAccess, VisitableAccess {
+    JoriaAccess getBaseAccess();
 }

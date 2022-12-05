@@ -8,15 +8,22 @@ import org.pdgen.data.Nameable;
 
 import java.util.Map;
 
-public interface NameableAccess extends JoriaAccess, Nameable
-{
+public interface NameableAccess extends JoriaAccess, Nameable {
     JoriaType getSourceTypeForChildren();
+
     void setXmlTag(String newTag);
-	void setExportingAsXmlAttribute(boolean newValue);
-	void makeName();
-	String getFormatString();
-	void setFormatString(String formatString);
-	NameableAccess dup(JoriaClass newParent, Map<Object,Object> alreadyCopied);
-	void setDefinedInView(final boolean definedInView);
-	boolean isDefinedInView();
+
+    void setExportingAsXmlAttribute(boolean newValue);
+
+    void makeName();
+
+    String getFormatString();
+
+    void setFormatString(String formatString);
+
+    NameableAccess dup(JoriaClass newParent, Map<Object, Object> alreadyCopied);
+
+    void setDefinedInView(final boolean definedInView);
+
+    boolean isDefinedInView();
 }

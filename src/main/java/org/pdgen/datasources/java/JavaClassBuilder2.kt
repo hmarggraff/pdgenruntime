@@ -203,7 +203,7 @@ class JavaClassBuilder2(jarFileName: String) {
                     else
                         Log.schema.error("failed to build return type for ${it}, skipping it")
 
-                } catch (x:Throwable) {
+                } catch (x: Throwable) {
                     Log.schema.error(x, "failed to build return type for ${it}, skipping it")
                 }
             }

@@ -8,25 +8,21 @@ package org.pdgen.model.run.pdf;
  * Time: 10:26:58 AM
  * To change this template use File | Settings | File Templates.
  */
-public class PdfGState
-{
+public class PdfGState {
 
     public Float fillOpacity;
     public Float strokeOpacity;
     public byte[] outName;
 
-    public PdfGState(byte[] on)
-    {
+    public PdfGState(byte[] on) {
         outName = on;
     }
 
-    public void setFillOpacity(float v)
-    {
+    public void setFillOpacity(float v) {
         fillOpacity = v;
     }
 
-    public void setStrokeOpacity(float v)
-    {
+    public void setStrokeOpacity(float v) {
         strokeOpacity = v;
     }
 }

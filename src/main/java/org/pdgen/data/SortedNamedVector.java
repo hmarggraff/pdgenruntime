@@ -92,7 +92,7 @@ public class SortedNamedVector<E extends Named> implements ListModel<E>, Seriali
                 fireAdd(i);
                 return i;
             } else if (r == 0) {
-                return insertAtFound(e,canReplace, canIgnore, name, i);
+                return insertAtFound(e, canReplace, canIgnore, name, i);
             }
         }
         data.add(e);

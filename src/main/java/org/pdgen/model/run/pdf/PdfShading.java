@@ -11,10 +11,8 @@ import java.awt.geom.Point2D;
  * Time: 9:24:49 AM
  * To change this template use File | Settings | File Templates.
  */
-public class PdfShading
-{
-    PdfShading(byte[] on, Color c1, Color c2, Point2D p1, Point2D p2)
-    {
+public class PdfShading {
+    PdfShading(byte[] on, Color c1, Color c2, Point2D p1, Point2D p2) {
         outName = on;
         this.c1 = c1;
         this.c2 = c2;

@@ -5,45 +5,39 @@ package org.pdgen.env;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-public class JoriaExternalErrorWrapped extends JoriaUserError
-{
+public class JoriaExternalErrorWrapped extends JoriaUserError {
 
     private static final long serialVersionUID = 7L;
 
-    public JoriaExternalErrorWrapped(String s)
-	{
-		super(s);
-	}
+    public JoriaExternalErrorWrapped(String s) {
+        super(s);
+    }
 
-	public JoriaExternalErrorWrapped(String s, Throwable inner)
-	{
-		super(s, inner);
-	}
+    public JoriaExternalErrorWrapped(String s, Throwable inner) {
+        super(s, inner);
+    }
 
-	public void printStackTrace()
-	{
-		if (getCause() != null)
-			getCause().printStackTrace();
-		else
-			System.err.println("JoriaExternalErrorWrapped - no inner");
-		super.printStackTrace();
-	}
+    public void printStackTrace() {
+        if (getCause() != null)
+            getCause().printStackTrace();
+        else
+            System.err.println("JoriaExternalErrorWrapped - no inner");
+        super.printStackTrace();
+    }
 
-	public void printStackTrace(PrintStream s)
-	{
-		if (getCause() != null)
-			getCause().printStackTrace(s);
-		else
-			System.err.println("JoriaExternalErrorWrapped - no inner");
-		super.printStackTrace(s);
-	}
+    public void printStackTrace(PrintStream s) {
+        if (getCause() != null)
+            getCause().printStackTrace(s);
+        else
+            System.err.println("JoriaExternalErrorWrapped - no inner");
+        super.printStackTrace(s);
+    }
 
-	public void printStackTrace(PrintWriter s)
-	{
-		if (getCause() != null)
-			getCause().printStackTrace(s);
-		else
-			System.err.println("JoriaExternalErrorWrapped - no inner");
-		super.printStackTrace(s);
-	}
+    public void printStackTrace(PrintWriter s) {
+        if (getCause() != null)
+            getCause().printStackTrace(s);
+        else
+            System.err.println("JoriaExternalErrorWrapped - no inner");
+        super.printStackTrace(s);
+    }
 }

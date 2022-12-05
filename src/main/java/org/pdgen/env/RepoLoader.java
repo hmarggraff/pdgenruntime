@@ -5,7 +5,7 @@ import org.pdgen.data.*;
 import org.pdgen.data.view.ClassProjection;
 import org.pdgen.model.style.PredefinedStyles;
 
-
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,22 +19,26 @@ import java.util.Set;
  * Untility functions need during repo loading
  */
 public class RepoLoader {
-    private ArrayList<WeakReference<JoriaModifiedAccess>> modifiedAccesses = new ArrayList<>();
-    private ArrayList<WeakReference<JoriaUnknownType>> unknownTypes = new ArrayList<>();
-    private Set<ClassProjection> extentOfAllProjections = new HashSet<>();
+    private final ArrayList<WeakReference<JoriaModifiedAccess>> modifiedAccesses = new ArrayList<>();
+    private final ArrayList<WeakReference<JoriaUnknownType>> unknownTypes = new ArrayList<>();
+    private final Set<ClassProjection> extentOfAllProjections = new HashSet<>();
     private static RepoLoader instance;
 
 
-    public RepoLoader(String absolutePath) {
-        Trace.log(Trace.init, "RepoLoader " + absolutePath);
+    public RepoLoader(String repofile) {
+        this(new File(repofile));
+    }
+
+    public RepoLoader(File repofile) {
+        Trace.log(Trace.init, "RepoLoader " + repofile);
         instance = this;
-        //BIn in = new BIn(absolutePath);
+        //BIn in = new BIn(repofile);
         ObjectInputStream in = null;
         try {
-            in = new ObjectInputStream(new FileInputStream(absolutePath));
+            in = new ObjectInputStream(new FileInputStream(repofile));
             Env.schemaInstance = (JoriaSchema) in.readObject();
             Repository repository = (Repository) in.readObject();
-            new Env(repository);
+            new Env(repository, repofile.getAbsolutePath());
             postLoad();
             repository.checkSchemaAndRepositoryForConsistency(modifiedAccesses, unknownTypes);
             instance = null;

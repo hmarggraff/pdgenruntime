@@ -5,24 +5,21 @@ import org.pdgen.model.run.RunEnv;
 
 import java.lang.reflect.Method;
 
-public class CollectionWrapperRoot extends AbstractJoriaRoot
-{
+public class CollectionWrapperRoot extends AbstractJoriaRoot {
     private static final long serialVersionUID = 7L;
     @org.jetbrains.annotations.NotNull
-	private final transient Method method;
+    private final transient Method method;
 
-	public CollectionWrapperRoot(Method m, JoriaType t)
-	{
-		super(m.getName(), t);
-		method = m;
-	}
-	public DBData getValue(DBData collCache, JoriaAccess asView, RunEnv env) throws JoriaDataException
-	{
-		return new CollectionWrapperValue(asView, collCache, method);
-	}
+    public CollectionWrapperRoot(Method m, JoriaType t) {
+        super(m.getName(), t);
+        method = m;
+    }
 
-	public void setName(String newName)
-	{
-		name = newName;
-	}
+    public DBData getValue(DBData collCache, JoriaAccess asView, RunEnv env) throws JoriaDataException {
+        return new CollectionWrapperValue(asView, collCache, method);
+    }
+
+    public void setName(String newName) {
+        name = newName;
+    }
 }

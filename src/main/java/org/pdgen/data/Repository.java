@@ -2,6 +2,8 @@
 package org.pdgen.data;
 
 import org.pdgen.data.view.*;
+import org.pdgen.env.Env;
+import org.pdgen.env.Res;
 import org.pdgen.model.*;
 import org.pdgen.model.cells.CellDef;
 import org.pdgen.model.cells.StyledTextCellDef;
@@ -12,10 +14,6 @@ import org.pdgen.styledtext.model.AttributeRun;
 import org.pdgen.styledtext.model.StyledParagraph;
 import org.pdgen.styledtext.model.StyledParagraphList;
 import org.pdgen.util.StringPair;
-
-import org.pdgen.env.Env;
-import org.pdgen.env.Res;
-
 
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
@@ -93,7 +91,7 @@ public class Repository implements Serializable, ListDataListener {
         ViewMemberFinder.markAllFieldsInViews();
 
         renameDuplicateRoots();
-        final boolean hasSchemaChanges = modifiedAccesses.size() >0 && unknownTypes.size() > 0;
+        final boolean hasSchemaChanges = modifiedAccesses.size() > 0 && unknownTypes.size() > 0;
         if (hasSchemaChanges) {
             removeOrRepairDeletedRoots();
         }
@@ -217,8 +215,10 @@ public class Repository implements Serializable, ListDataListener {
                         String[] usedFonts = paragraph.getUsedFontFamilies();
                         boolean badFont = false;
                         for (String usedFont : usedFonts) {
-                            if (usedFont.charAt(0) == '*')
+                            if (usedFont.charAt(0) == '*') {
                                 badFont = true;
+                                break;
+                            }
                         }
                         if (badFont) {
                             String baseFont = styled.getCascadedStyle().getFont();

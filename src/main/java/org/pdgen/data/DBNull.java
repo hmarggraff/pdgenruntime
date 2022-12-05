@@ -6,32 +6,26 @@ package org.pdgen.data;
  * Date: 23.04.2008
  * Time: 14:14:19
  */
-public class DBNull implements DBData
-{
+public class DBNull implements DBData {
     private static final DBData instance = new DBNull();
 
-    public JoriaAccess getAccess()
-    {
+    public JoriaAccess getAccess() {
         return null;
     }
 
-    public boolean isNull()
-    {
+    public boolean isNull() {
         return true;
     }
 
-    public JoriaType getActualType()
-    {
+    public JoriaType getActualType() {
         return null;
     }
 
-    public boolean same(DBData theOther)
-    {
+    public boolean same(DBData theOther) {
         return theOther instanceof DBNull;
     }
 
-    public static DBData getInstance()
-    {
+    public static DBData getInstance() {
         return instance;
     }
 }

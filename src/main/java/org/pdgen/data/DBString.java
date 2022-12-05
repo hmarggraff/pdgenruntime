@@ -2,8 +2,7 @@
 package org.pdgen.data;
 
 
-public interface DBString extends DBData, java.io.Serializable, Comparable<DBString>
-{
+public interface DBString extends DBData, java.io.Serializable, Comparable<DBString> {
 
-   String getStringValue();
+    String getStringValue();
 }

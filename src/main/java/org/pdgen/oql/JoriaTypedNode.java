@@ -3,10 +3,9 @@ package org.pdgen.oql;
 
 import org.pdgen.data.JoriaType;
 
-public interface JoriaTypedNode extends NodeInterface
-{
+public interface JoriaTypedNode extends NodeInterface {
 
-	JoriaType getElementType();
+    JoriaType getElementType();
 
-	JoriaType getType();
+    JoriaType getType();
 }

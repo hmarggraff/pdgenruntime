@@ -3,38 +3,32 @@ package org.pdgen.data;
 
 import org.pdgen.env.Env;
 
-public abstract class AbstractJoriaRoot extends AbstractTypedJoriaAccess
-{
+public abstract class AbstractJoriaRoot extends AbstractTypedJoriaAccess {
 
-	private static final long serialVersionUID = 7L;
+    private static final long serialVersionUID = 7L;
 
-	public AbstractJoriaRoot()
-	{
-	}
+    public AbstractJoriaRoot() {
+    }
 
-	public AbstractJoriaRoot(String name)
-	{
-		super(name);
-	}
+    public AbstractJoriaRoot(String name) {
+        super(name);
+    }
 
-	public AbstractJoriaRoot(String name, JoriaType typ)
-	{
-		super(name, typ);
-	}
+    public AbstractJoriaRoot(String name, JoriaType typ) {
+        super(name, typ);
+    }
 
-	public boolean isRoot()
-	{
-		return true;
-	}
+    public boolean isRoot() {
+        return true;
+    }
 
-	protected Object readResolve()
-	{
-		JoriaAccess r = Env.schemaInstance.getRoots().find(name);
-		if (r == null)
-			return JoriaModifiedAccess.createJoriaModifiedAccess(name, type, null, JoriaModifiedAccess.rootNotFound, this, null);
-		if (r.getType() != type)
-			return JoriaModifiedAccess.createJoriaModifiedAccess(name, type, null, JoriaModifiedAccess.typeChanged, this, r);
-		return r;
-	}
+    protected Object readResolve() {
+        JoriaAccess r = Env.schemaInstance.getRoots().find(name);
+        if (r == null)
+            return JoriaModifiedAccess.createJoriaModifiedAccess(name, type, null, JoriaModifiedAccess.rootNotFound, this, null);
+        if (r.getType() != type)
+            return JoriaModifiedAccess.createJoriaModifiedAccess(name, type, null, JoriaModifiedAccess.typeChanged, this, r);
+        return r;
+    }
 
 }

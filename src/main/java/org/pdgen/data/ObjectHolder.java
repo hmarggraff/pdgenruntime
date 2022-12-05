@@ -6,7 +6,6 @@ package org.pdgen.data;
  * Date: Jul 18, 2006
  * Time: 2:47:20 PM
  */
-public class ObjectHolder<E>
-{
+public class ObjectHolder<E> {
     public E value;
 }

@@ -3,8 +3,6 @@ package org.pdgen.schemacheck;
 
 import org.pdgen.data.*;
 import org.pdgen.data.view.*;
-
-
 import org.pdgen.env.Env;
 
 import java.util.HashSet;

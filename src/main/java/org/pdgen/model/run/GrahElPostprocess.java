@@ -3,25 +3,25 @@ package org.pdgen.model.run;
 
 import org.pdgen.model.cells.DeferredTotalPagesCell;
 
-import java.awt.Shape;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.io.Serializable;
 
 /**
  * User: hmf
  * Date: 15.10.2008
  */
-public interface GrahElPostprocess extends Shape, Cloneable, Serializable, GraphicElement
-{
-	/**
-	 * update the text after some postporcessing (totalPages, table of contents etc
-	 * @param newText the actual text to use
-	 * @param g context to use
-	 */
-	void setText(String newText, Graphics2D g);
-	DeferredTotalPagesCell getPostprocessSource();
+public interface GrahElPostprocess extends Shape, Cloneable, Serializable, GraphicElement {
+    /**
+     * update the text after some postporcessing (totalPages, table of contents etc
+     *
+     * @param newText the actual text to use
+     * @param g       context to use
+     */
+    void setText(String newText, Graphics2D g);
 
-	int getPosInDisplayList();
+    DeferredTotalPagesCell getPostprocessSource();
 
-	void setPosInDisplayList(int posInDisplayList);
+    int getPosInDisplayList();
+
+    void setPosInDisplayList(int posInDisplayList);
 }

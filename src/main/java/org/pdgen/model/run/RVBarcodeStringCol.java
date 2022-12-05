@@ -3,24 +3,20 @@ package org.pdgen.model.run;
 
 import org.pdgen.model.cells.Barcode4jCell;
 
-public class RVBarcodeStringCol extends RVStringCol
-{
-	Barcode4jCell src;
+public class RVBarcodeStringCol extends RVStringCol {
+    Barcode4jCell src;
 
-	public RVBarcodeStringCol(final String[] strings, final Barcode4jCell src)
-	{
-		super(strings);
-		this.src = src;
-	}
+    public RVBarcodeStringCol(final String[] strings, final Barcode4jCell src) {
+        super(strings);
+        this.src = src;
+    }
 
-	public RVBarcodeStringCol(final Barcode4jCell src)
-	{
-		this.src = src;
-	}
+    public RVBarcodeStringCol(final Barcode4jCell src) {
+        this.src = src;
+    }
 
-	public RVBarcodeStringCol(final int size, final Barcode4jCell src)
-	{
-		super(size);
-		this.src = src;
-	}
+    public RVBarcodeStringCol(final int size, final Barcode4jCell src) {
+        super(size);
+        this.src = src;
+    }
 }

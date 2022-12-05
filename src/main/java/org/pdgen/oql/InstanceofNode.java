@@ -5,78 +5,65 @@ import org.pdgen.data.*;
 import org.pdgen.data.view.RuntimeParameter;
 import org.pdgen.model.run.RunEnv;
 
-
 import java.util.Set;
 
-public class InstanceofNode extends Node
-{
-	NodeInterface lval;
-	JoriaClass typ;
+public class InstanceofNode extends Node {
+    NodeInterface lval;
+    JoriaClass typ;
 
-	public InstanceofNode(NodeInterface left, JoriaClass right)
-	{
-		lval = left;
-		typ = right;
-	}
+    public InstanceofNode(NodeInterface left, JoriaClass right) {
+        lval = left;
+        typ = right;
+    }
 
-	public String getTokenString()
-	{
-		return lval.getTokenString() + " instanceof " + typ.getName();
-	}
+    public String getTokenString() {
+        return lval.getTokenString() + " instanceof " + typ.getName();
+    }
 
 
-	public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel)
-	{
-		final int newLevel = 7;
-		optBrace(bindingLevel, newLevel, collector, '(');
-		lval.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
-		collector.append(" instanceof ");
-		collector.append(typ.getName());
-		optBrace(bindingLevel, newLevel, collector, ')');
-	}
-	
+    public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel) {
+        final int newLevel = 7;
+        optBrace(bindingLevel, newLevel, collector, '(');
+        lval.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
+        collector.append(" instanceof ");
+        collector.append(typ.getName());
+        optBrace(bindingLevel, newLevel, collector, ')');
+    }
 
-	public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException
-	{
-		return new DBBooleanImpl(null, getBooleanValue(env, p0));
-	}
 
-	public boolean isBoolean()
-	{
-		return true;
-	}
+    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException {
+        return new DBBooleanImpl(null, getBooleanValue(env, p0));
+    }
 
-	public boolean getBooleanValue(RunEnv env, DBData p0) throws JoriaDataException
-	{
-		DBData d = lval.getValue(env, p0);
-		if (!(d instanceof DBObject) || d.isNull())
-			return false;
-		JoriaType ac = d.getActualType();
-		return ac instanceof JoriaClass && JoriaClassHelper.isAssignableFrom(d, typ);
-	}
+    public boolean isBoolean() {
+        return true;
+    }
 
-	public boolean hasMofifiedAccess()
-	{
-		return lval.hasMofifiedAccess() || typ instanceof JoriaUnknownType;
-	}
+    public boolean getBooleanValue(RunEnv env, DBData p0) throws JoriaDataException {
+        DBData d = lval.getValue(env, p0);
+        if (!(d instanceof DBObject) || d.isNull())
+            return false;
+        JoriaType ac = d.getActualType();
+        return ac instanceof JoriaClass && JoriaClassHelper.isAssignableFrom(d, typ);
+    }
 
-	public void cacheDeferredFields(final RunEnv env, final DBData from) throws JoriaDataException
-	{
-		lval.cacheDeferredFields(env, from);
-	}
+    public boolean hasMofifiedAccess() {
+        return lval.hasMofifiedAccess() || typ instanceof JoriaUnknownType;
+    }
 
-	public void getUsedAccessors(Set<JoriaAccess> ret)
-	{
-		lval.getUsedAccessors(ret);
-	}
+    public void cacheDeferredFields(final RunEnv env, final DBData from) throws JoriaDataException {
+        lval.cacheDeferredFields(env, from);
+    }
 
-	public boolean hasText(final String text, final boolean searchLabels, final boolean searchData)
-	{
-		return lval.hasText(text, searchLabels, searchData);
-	}
+    public void getUsedAccessors(Set<JoriaAccess> ret) {
+        lval.getUsedAccessors(ret);
+    }
 
-	public void collectVariables(final Set<RuntimeParameter> set, final Set<Object> seen)
-	{
-		lval.collectVariables(set, seen);
-	}
+    public boolean hasText(final String text, final boolean searchLabels, final boolean searchData) {
+        return lval.hasText(text, searchLabels, searchData);
+    }
+
+    public void collectVariables(final Set<RuntimeParameter> set, final Set<Object> seen) {
+        lval.collectVariables(set, seen);
+    }
 }

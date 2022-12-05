@@ -75,10 +75,7 @@ public abstract class StyleBase implements NameableProtectedRemove, Serializable
     protected static StyleBase getLocalMaster(StyleBase from, boolean really) {
         if (!really)
             return from;
-        if (from == null)
-            return null;
-        else
-            return from;
+        return from;
     }
 
     protected Object readResolve() throws ObjectStreamException {

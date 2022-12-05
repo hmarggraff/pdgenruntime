@@ -2,15 +2,13 @@
 package org.pdgen.data;
 
 
-public class NotYetImplementedError extends Error
-{
+public class NotYetImplementedError extends Error {
 
     private static final long serialVersionUID = 7L;
 
     /* ----------------------------------------------------------------------- NotYetImplementedError */
 
-   public NotYetImplementedError(String msg)
-   {
-      super(msg);
-   }
+    public NotYetImplementedError(String msg) {
+        super(msg);
+    }
 }

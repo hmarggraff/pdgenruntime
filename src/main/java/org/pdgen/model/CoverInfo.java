@@ -8,14 +8,12 @@ import org.pdgen.model.cells.CellDef;
  * Date: Feb 21, 2007
  * Time: 12:47:45 PM
  */
-public class CoverInfo
-{
+public class CoverInfo {
     public CellDef cell;
     public int row;
     public int col;
 
-    public CoverInfo(CellDef cell, int row, int col)
-    {
+    public CoverInfo(CellDef cell, int row, int col) {
         this.cell = cell;
         this.row = row;
         this.col = col;

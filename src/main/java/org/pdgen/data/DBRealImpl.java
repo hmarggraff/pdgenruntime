@@ -2,59 +2,49 @@
 package org.pdgen.data;
 
 
-public class DBRealImpl extends AbstractDBData implements DBReal
-{
+public class DBRealImpl extends AbstractDBData implements DBReal {
     private static final long serialVersionUID = 7L;
     double myReal;
 
 
-   public DBRealImpl(JoriaAccess axs, double value)
-   {
-      super(axs);
-      myReal = value;
-   }
+    public DBRealImpl(JoriaAccess axs, double value) {
+        super(axs);
+        myReal = value;
+    }
 
 
-   public boolean equals(Object obj)
-   {
-      if (obj instanceof DBInt) return ((DBInt) obj).getIntValue() == myReal;
-      if (obj instanceof DBReal) return ((DBReal) obj).getRealValue() == myReal;
-      else return false;
-   }
+    public boolean equals(Object obj) {
+        if (obj instanceof DBInt) return ((DBInt) obj).getIntValue() == myReal;
+        if (obj instanceof DBReal) return ((DBReal) obj).getRealValue() == myReal;
+        else return false;
+    }
 
-   /* ----------------------------------------------------------------------- getRealValue */
+    /* ----------------------------------------------------------------------- getRealValue */
 
-   public double getRealValue()
-   {
-      return myReal;
-   }
+    public double getRealValue() {
+        return myReal;
+    }
 
-   /* ----------------------------------------------------------------------- isNull */
+    /* ----------------------------------------------------------------------- isNull */
 
-   public boolean isNull()
-   {
-	   return Double.isNaN(myReal);      
-   }
+    public boolean isNull() {
+        return Double.isNaN(myReal);
+    }
 
-   /* ----------------------------------------------------------------------- toString */
+    /* ----------------------------------------------------------------------- toString */
 
-   public String toString()
-   {
-      return String.valueOf(myReal);
-   }
-  public int hashCode()
-  {
-     return (int) myReal;
-  }
+    public String toString() {
+        return String.valueOf(myReal);
+    }
 
-    public boolean same(DBData theOther)
-    {
-        if(theOther instanceof DBRealImpl)
-        {
-            return ((DBRealImpl)theOther).myReal == myReal;
-        }
-        else
-        {
+    public int hashCode() {
+        return (int) myReal;
+    }
+
+    public boolean same(DBData theOther) {
+        if (theOther instanceof DBRealImpl) {
+            return ((DBRealImpl) theOther).myReal == myReal;
+        } else {
             return false;
         }
     }

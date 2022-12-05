@@ -3,31 +3,27 @@ package org.pdgen.data;
 
 import org.pdgen.model.run.RunEnv;
 
-public class CollectionValueAccess extends AbstractTypedJoriaMember
-{
+public class CollectionValueAccess extends AbstractTypedJoriaMember {
     private static final long serialVersionUID = 7L;
     protected JoriaAccess collectionAccess;
 
 
-	public CollectionValueAccess(JoriaAccess coll)
-	{
-		super(coll.getDefiningClass(), coll.getName());
+    public CollectionValueAccess(JoriaAccess coll) {
+        super(coll.getDefiningClass(), coll.getName());
 
-		collectionAccess = coll;
-		JoriaCollection jcoll = coll.getSourceCollection();
-		Trace.check(jcoll, "source collection is null because type is probably not a collection");
-		type = jcoll.getElementType();
-		makeLongName();
-	}
+        collectionAccess = coll;
+        JoriaCollection jcoll = coll.getSourceCollection();
+        Trace.check(jcoll, "source collection is null because type is probably not a collection");
+        type = jcoll.getElementType();
+        makeLongName();
+    }
 
-	public JoriaAccess getCollectionAccess()
-	{
-		return collectionAccess;
-	}
+    public JoriaAccess getCollectionAccess() {
+        return collectionAccess;
+    }
 
 
-	public DBData getValue(DBData from, JoriaAccess asView, RunEnv env) throws JoriaDataException
-	{
-		return from;
-	}
+    public DBData getValue(DBData from, JoriaAccess asView, RunEnv env) throws JoriaDataException {
+        return from;
+    }
 }

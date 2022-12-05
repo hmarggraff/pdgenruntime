@@ -3,13 +3,12 @@ package org.pdgen.model.run;
 
 import java.io.PrintStream;
 
-public interface GraphicElement
-{
-	void print(JoriaPrinter pr);
+public interface GraphicElement {
+    void print(JoriaPrinter pr);
 
-	void dump(PrintStream w);
+    void dump(PrintStream w);
 
-	float getHeightFloat();
+    float getHeightFloat();
 
-	void translate(float offsetx, float offsety);
+    void translate(float offsetx, float offsety);
 }

@@ -6,7 +6,6 @@ package org.pdgen.data;
  * Date: Jul 26, 2006
  * Time: 10:53:05 AM
  */
-public class BooleanHolder
-{
+public class BooleanHolder {
     public boolean value;
 }

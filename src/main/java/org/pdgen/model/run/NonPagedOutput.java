@@ -2,17 +2,15 @@
 package org.pdgen.model.run;
 
 import org.pdgen.data.*;
-import org.pdgen.model.*;
-import org.pdgen.model.cells.CellDef;
-
 import org.pdgen.data.view.AccessPath;
 import org.pdgen.data.view.AggregateDef;
 import org.pdgen.data.view.IndirectAccess;
 import org.pdgen.env.Env;
 import org.pdgen.env.JoriaException;
-import org.pdgen.model.run.OutputMode.LastRowState;
+import org.pdgen.model.*;
+import org.pdgen.model.cells.CellDef;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -218,7 +216,7 @@ public abstract class NonPagedOutput {
             }
         } else {
             startOneFrame(frameType);
-            while (out.lastRowState == LastRowState.proceed) {
+            while (out.lastRowState == OutputMode.LastRowState.proceed) {
                 rr++;
                 startOneRow();
                 out.colInCurrRow = 0;

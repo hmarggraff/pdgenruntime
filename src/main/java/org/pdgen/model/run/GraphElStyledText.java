@@ -8,15 +8,14 @@ import org.pdgen.styledtext.model.QSELine;
 import org.pdgen.styledtext.model.StyleRunIterator;
 
 import javax.swing.*;
-import java.awt.Graphics2D;
+import java.awt.*;
 
 /**
  * User: patrick
  * Date: Aug 14, 2006
  * Time: 8:18:39 AM
  */
-public class GraphElStyledText extends GraphElContent
-{
+public class GraphElStyledText extends GraphElContent {
     private static final long serialVersionUID = 7L;
     QSELine[] lines;
     float offset;
@@ -24,8 +23,7 @@ public class GraphElStyledText extends GraphElContent
     StyleRunIterator[] iterators;
     //float[] lineOffsetsX;
 
-    private GraphElStyledText(GraphElStyledText from)
-    {
+    private GraphElStyledText(GraphElStyledText from) {
         super(from);
         lines = from.lines;
         offset = from.offset;
@@ -33,8 +31,7 @@ public class GraphElStyledText extends GraphElContent
         iterators = from.iterators; // TODO fishy
     }
 
-    public GraphElStyledText(QSELine[] lines, StyleRunIterator[] iterators, float offset, CellStyle style, CellDef srcCell, ImageIcon backgroundImage)
-    {
+    public GraphElStyledText(QSELine[] lines, StyleRunIterator[] iterators, float offset, CellStyle style, CellDef srcCell, ImageIcon backgroundImage) {
         super(style.getBackground(), srcCell, backgroundImage);
         this.iterators = iterators;
         this.lines = lines;
@@ -42,29 +39,25 @@ public class GraphElStyledText extends GraphElContent
         this.offset = offset;
     }
 
-    public void setContentX(float xContent, float wEnvelope, float wContent, CellStyle cs, Graphics2D g, float xEnvelope)
-    {
+    public void setContentX(float xContent, float wEnvelope, float wContent, CellStyle cs, Graphics2D g, float xEnvelope) {
         this.wContent = wEnvelope; // Damit nicht nach links geclippt wird Math.min(wContent, wEnvelope);
         this.wEnvelope = wEnvelope;
         this.xContent = xContent;
         this.xEnvelope = xEnvelope;
     }
 
-    public GraphElContent copy()
-    {
+    public GraphElContent copy() {
         return new GraphElStyledText(this);
     }
 
-    public String toString()
-    {
+    public String toString() {
         if (lines.length > 0)
             return lines[0] + super.toString();
         else
             return "*empty*" + super.toString();
     }
 
-    public void print(JoriaPrinter pr)
-    {
-       pr.printGEStyledText(this);
+    public void print(JoriaPrinter pr) {
+        pr.printGEStyledText(this);
     }
 }

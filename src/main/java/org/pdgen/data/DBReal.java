@@ -2,11 +2,11 @@
 package org.pdgen.data;
 
 
-public interface DBReal extends DBData, java.io.Serializable
-{
+public interface DBReal extends DBData, java.io.Serializable {
 
-   /* ----------------------------------------------------------------------- getRealValue */
+    /* ----------------------------------------------------------------------- getRealValue */
 
-   double getRealValue();
+    double getRealValue();
+
     double NULL = Double.NaN;
 }

@@ -4,7 +4,6 @@ package org.pdgen.data.view;
 import org.pdgen.data.VariableProvider;
 
 
-public interface AccessPlus extends IndirectAccess, VariableProvider, NameableAccess
-{
+public interface AccessPlus extends IndirectAccess, VariableProvider, NameableAccess {
 
 }

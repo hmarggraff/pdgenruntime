@@ -9,5 +9,5 @@ package org.pdgen.data;
  * There must be one I18nKeyHolder for each field.
  */
 public interface I18nKeyHolder {
-	void setI18nKey(String newVal);
+    void setI18nKey(String newVal);
 }

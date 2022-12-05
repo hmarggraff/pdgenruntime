@@ -3,60 +3,61 @@ package org.pdgen.model.run;
 
 import org.jetbrains.annotations.NotNull;
 import org.pdgen.data.*;
-
 import org.pdgen.data.view.RuntimeParameter;
 import org.pdgen.data.view.SortOrder;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Properties;
 
-public interface RunEnv
-{
-	void putRuntimeParameter(JoriaAccess key, DBData val);
+public interface RunEnv {
+    void putRuntimeParameter(JoriaAccess key, DBData val);
 
-	Locale getLocale();
+    Locale getLocale();
 
-	void setLocale(Locale newLocale);
+    void setLocale(Locale newLocale);
 
-	int getDisplayPageNo();
+    int getDisplayPageNo();
 
-	int getTotalPagesNumber();
+    int getTotalPagesNumber();
 
-	void putCounter(RuntimeParameter key, DBIntImplMutable counter);
+    void putCounter(RuntimeParameter key, DBIntImplMutable counter);
 
-	Object getDatabaseConnection();
+    Object getDatabaseConnection();
 
-	void setDatabaseConnection(Object databaseConnection);
+    void setDatabaseConnection(Object databaseConnection);
 
-	String getServiceRootValue();
+    String getServiceRootValue();
 
     Properties getUserStorage();
 
-	DBData popFromObjectPath();
+    DBData popFromObjectPath();
 
-	void pushToObjectPath(DBData step);
+    void pushToObjectPath(DBData step);
 
-	HashMap<JoriaCollection, SortOrder[]> getRuntimeOverrides();
+    HashMap<JoriaCollection, SortOrder[]> getRuntimeOverrides();
 
-	AggregateCollector getPager();
+    AggregateCollector getPager();
 
-	HashMap<?, ?> getConnectorMap();
+    HashMap<?, ?> getConnectorMap();
 
     boolean isConnectorMapUsed();
 
-	void removeVariable(JoriaAccess key);
+    void removeVariable(JoriaAccess key);
 
-	boolean isReaskVariables();
+    boolean isReaskVariables();
 
-	int getTransactionCounter();
+    int getTransactionCounter();
 
-	void setTransactionCounter(int transactionCounter);
+    void setTransactionCounter(int transactionCounter);
 
-	@SuppressWarnings("UnusedDeclaration")
-	HashMap<JoriaClass, List<JoriaAccess>> getPhysicalAccessors();
+    @SuppressWarnings("UnusedDeclaration")
+    HashMap<JoriaClass, List<JoriaAccess>> getPhysicalAccessors();
 
-	DBData loadRootVal() throws JoriaDataException;
+    DBData loadRootVal() throws JoriaDataException;
 
-	DBData getRootVal();
+    DBData getRootVal();
 
-	DBData getRuntimeParameterValue(@NotNull JoriaAccess param);
+    DBData getRuntimeParameterValue(@NotNull JoriaAccess param);
 }

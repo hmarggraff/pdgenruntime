@@ -6,43 +6,37 @@ import java.text.AttributedCharacterIterator;
 import java.util.Map;
 
 //* User: hmf   Date: 29.10.2006 Time: 09:13:47
-public abstract class StyleAttribute implements Map.Entry<AttributedCharacterIterator.Attribute, Object>, Serializable
-{
+public abstract class StyleAttribute implements Map.Entry<AttributedCharacterIterator.Attribute, Object>, Serializable {
     private static final long serialVersionUID = 7L;
     AttributedCharacterIterator.Attribute key;
-	StyleAttribute next;
+    StyleAttribute next;
 
-	protected StyleAttribute(AttributedCharacterIterator.Attribute key)
-	{
-		this.key = key;
-	}
+    protected StyleAttribute(AttributedCharacterIterator.Attribute key) {
+        this.key = key;
+    }
 
-	protected StyleAttribute(AttributedCharacterIterator.Attribute key, StyleAttribute next)
-	{
-		this.key = key;
-		this.next = next;
-	}
+    protected StyleAttribute(AttributedCharacterIterator.Attribute key, StyleAttribute next) {
+        this.key = key;
+        this.next = next;
+    }
 
-	public void append(StyleAttribute a)
-	{
-		a.next = next;
-		next = a;
-	}
+    public void append(StyleAttribute a) {
+        a.next = next;
+        next = a;
+    }
 
-	public AttributedCharacterIterator.Attribute getKey()
-	{
-		return key;
-	}
+    public AttributedCharacterIterator.Attribute getKey() {
+        return key;
+    }
 
-	public abstract Object getValue();
+    public abstract Object getValue();
 
-	public abstract Object setValue(Object value);
+    public abstract Object setValue(Object value);
 
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof StyleAttribute))
-			return false;
-		StyleAttribute sta = (StyleAttribute) obj;
-		return key.equals(sta.key);
-	}
+    public boolean equals(Object obj) {
+        if (!(obj instanceof StyleAttribute))
+            return false;
+        StyleAttribute sta = (StyleAttribute) obj;
+        return key.equals(sta.key);
+    }
 }

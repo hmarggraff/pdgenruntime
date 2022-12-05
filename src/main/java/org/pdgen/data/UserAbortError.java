@@ -6,7 +6,6 @@ package org.pdgen.data;
  * Date: Jul 18, 2006
  * Time: 1:03:35 PM
  */
-public class UserAbortError extends Error
-{
+public class UserAbortError extends Error {
     private static final long serialVersionUID = 7L;
 }

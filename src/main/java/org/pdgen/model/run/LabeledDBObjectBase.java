@@ -8,6 +8,6 @@ import org.pdgen.data.DBData;
  * Date: Jun 24, 2005
  * Time: 3:49:09 PM
  */
-public interface LabeledDBObjectBase extends Comparable<LabeledDBObjectBase>{
+public interface LabeledDBObjectBase extends Comparable<LabeledDBObjectBase> {
     DBData getLabel();
 }

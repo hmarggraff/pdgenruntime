@@ -2,8 +2,7 @@
 package org.pdgen.util;
 
 import javax.swing.*;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.PixelGrabber;
@@ -21,35 +20,35 @@ import java.util.Iterator;
  * Time: 3:44:39 PM
  * To change this template use Options | File Templates.
  */
-public class ConvertImageToByteArray
-{
-    public static final Object[]  nullObjectArray = null;
-    // This method returns true if the specified image has transparent pixels
-     public static boolean hasAlpha(Image image) {
-         // If buffered image, the color model is readily available
-         if (image instanceof BufferedImage) {
-             BufferedImage bimage = (BufferedImage)image;
-             return bimage.getColorModel().hasAlpha();
-         }
+public class ConvertImageToByteArray {
+    public static final Object[] nullObjectArray = null;
 
-         // Use a pixel grabber to retrieve the image's color model;
-         // grabbing a single pixel is usually sufficient
-          PixelGrabber pg = new PixelGrabber(image, 0, 0, 1, 1, false);
+    // This method returns true if the specified image has transparent pixels
+    public static boolean hasAlpha(Image image) {
+        // If buffered image, the color model is readily available
+        if (image instanceof BufferedImage) {
+            BufferedImage bimage = (BufferedImage) image;
+            return bimage.getColorModel().hasAlpha();
+        }
+
+        // Use a pixel grabber to retrieve the image's color model;
+        // grabbing a single pixel is usually sufficient
+        PixelGrabber pg = new PixelGrabber(image, 0, 0, 1, 1, false);
         //noinspection EmptyCatchBlock
         try {
             pg.grabPixels();
         } catch (InterruptedException e) {
         }
 
-         // Get the image's color model
-         ColorModel cm = pg.getColorModel();
-         return cm.hasAlpha();
-     }
+        // Get the image's color model
+        ColorModel cm = pg.getColorModel();
+        return cm.hasAlpha();
+    }
 
     // This method returns a buffered image with the contents of an image
     public static BufferedImage toBufferedImage(Image image) {
         if (image instanceof BufferedImage) {
-            return (BufferedImage)image;
+            return (BufferedImage) image;
         }
 
         // This code ensures that all the pixels in the image are loaded
@@ -79,20 +78,17 @@ public class ConvertImageToByteArray
         return bimage;
     }
 
-    public static byte[] convertImage(Image img)
-    {
+    public static byte[] convertImage(Image img) {
         img = toBufferedImage(img);
 
         byte[] outBytes = null;
 
         //noinspection EmptyCatchBlock
-        try
-        {
+        try {
             Class<?> imageioClazz = Class.forName("javax.imageio.ImageIO");
             Method getWriter = imageioClazz.getMethod("getImageWritersByMIMEType", String.class);
-            Iterator<?> it = (Iterator<?>)getWriter.invoke(null, "image/png");
-            if(it.hasNext())
-            {
+            Iterator<?> it = (Iterator<?>) getWriter.invoke(null, "image/png");
+            if (it.hasNext()) {
                 Object iw = it.next();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -114,15 +110,12 @@ public class ConvertImageToByteArray
 
                 outBytes = baos.toByteArray();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
         }
 
-        if(outBytes == null)
+        if (outBytes == null)
             //noinspection EmptyCatchBlock
-            try
-            {
+            try {
                 Class<?> pngEncoder = Class.forName("com.keypoint.PngEncoderB");
                 Constructor<?> pngEncoderCT = pngEncoder.getConstructor(BufferedImage.class);
                 Object png = pngEncoderCT.newInstance(img);
@@ -131,9 +124,7 @@ public class ConvertImageToByteArray
                 Method pngEncode = pngEncoder.getMethod("pngEncode");
                 outBytes = (byte[]) pngEncode.invoke(png, nullObjectArray);
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
             }
 
         return outBytes;

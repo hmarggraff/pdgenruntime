@@ -4,8 +4,8 @@ package org.pdgen.model.cells;
 import java.awt.*;
 import java.util.Locale;
 
-public interface TextCellLayouter
-{
-	void paint(Graphics2D g, float x0, float y0, float w, float h, Locale loc);
-	void calcSize(Locale loc, Graphics2D g);
+public interface TextCellLayouter {
+    void paint(Graphics2D g, float x0, float y0, float w, float h, Locale loc);
+
+    void calcSize(Locale loc, Graphics2D g);
 }

@@ -3,23 +3,21 @@ package org.pdgen.model.run;
 
 import org.pdgen.model.style.FlexSize;
 
-public class MutableFlexSize extends FlexSize
-{
+public class MutableFlexSize extends FlexSize {
 
     private static final long serialVersionUID = 7L;
 
-    public void setVal(float newVal)
-	{
-		val = newVal;
-	}
-	public void setUnit(int unit)
-	{
-		this.unit = unit;
-	}
-	public void set(int unit, float unNormalized)
-	{
-		val = unNormalized * FlexSize.factors[unit];
-		this.unit = unit;
-	}
-	
+    public void setVal(float newVal) {
+        val = newVal;
+    }
+
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
+
+    public void set(int unit, float unNormalized) {
+        val = unNormalized * FlexSize.factors[unit];
+        this.unit = unit;
+    }
+
 }

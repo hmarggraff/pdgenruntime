@@ -6,63 +6,49 @@ package org.pdgen.oql;
 import org.pdgen.data.*;
 import org.pdgen.model.run.RunEnv;
 
+public class InNode extends BinaryOperatorNode {
+    public InNode(NodeInterface l, NodeInterface r) {
+        super(booleanType, l, r);
+    }
 
-public class InNode extends BinaryOperatorNode
-{
-	public InNode(NodeInterface l, NodeInterface r)
-	{
-		super(booleanType, l, r);
-	}
+    public boolean getBooleanValue(RunEnv env, DBData parm1) throws JoriaDataException {
+        DBData o = left.getValue(env, parm1);
+        if (o == null || o.isNull()) {
+            return false;
+        }
+        DBData rv = right.getValue(env, parm1);
+        if (right.isDictionary()) {
+            DBDictionary dbd = (DBDictionary) rv;
+            return dbd.getValueForKey(o) != null;
+        } else if (right.isLiteralCollection()) {
+            DBLiteralCollection dbc = (DBLiteralCollection) rv;
+            return dbc != null && dbc.contains(o);
+        } else {
+            DBCollection dbc = (DBCollection) rv;
+            dbc.reset();
+            while (dbc.next()) {
+                DBData el = dbc.current();
+                if (o.same(el))
+                    return true;
+            }
+            return false;
+        }
+    }
 
-	public boolean getBooleanValue(RunEnv env, DBData parm1) throws JoriaDataException
-	{
-		DBData o = left.getValue(env, parm1);
-		if (o == null || o.isNull())
-		{
-			return false;
-		}
-		DBData rv = right.getValue(env, parm1);
-		if (right.isDictionary())
-		{
-			DBDictionary dbd = (DBDictionary) rv;
-			return dbd.getValueForKey(o) != null;
-		}
-		else if (right.isLiteralCollection())
-		{
-			DBLiteralCollection dbc = (DBLiteralCollection) rv;
-			return dbc != null && dbc.contains(o);
-		}
-		else
-		{
-			DBCollection dbc = (DBCollection) rv;
-			dbc.reset();
-			while (dbc.next())
-			{
-				DBData el = dbc.current();
-				if (o.same(el))
-					return true;
-			}
-			return false;
-		}
-	}
+    public String getTokenString() {
+        return left.getTokenString() + " in " + right.getTokenString();
+    }
 
-	public String getTokenString()
-	{
-		return left.getTokenString() + " in " + right.getTokenString();
-	}
+    public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel) {
+        final int newLevel = 7;
+        optBrace(bindingLevel, newLevel, collector, '(');
+        left.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
+        collector.append(" in ");
+        right.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
+        optBrace(bindingLevel, newLevel, collector, ')');
+    }
 
-	public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel)
-	{
-		final int newLevel = 7;
-		optBrace(bindingLevel, newLevel, collector, '(');
-		left.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
-		collector.append(" in ");
-		right.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
-		optBrace(bindingLevel, newLevel, collector, ')');
-	}
-
-    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException
-    {
+    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException {
         return new DBBooleanImpl(null, getBooleanValue(env, p0));
     }
 }

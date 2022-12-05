@@ -6,6 +6,5 @@ package org.pdgen.data;
  * Date: Apr 24, 2007
  * Time: 11:17:52 AM
  */
-public interface VariableAccess extends JoriaAccess, VariableProvider
-{
+public interface VariableAccess extends JoriaAccess, VariableProvider {
 }

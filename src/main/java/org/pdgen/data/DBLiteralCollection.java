@@ -2,21 +2,26 @@
 package org.pdgen.data;
 
 
+public interface DBLiteralCollection extends DBData {
+    int getLength() throws JoriaDataException;
 
-public interface DBLiteralCollection extends DBData
-{
-	int getLength() throws JoriaDataException;
-	boolean isStrings();
-	boolean isInts();
-	boolean isFloats();
-	boolean isBooleans();
+    boolean isStrings();
 
-	String getStringAt(int i) throws JoriaDataException;
-	long getIntAt(int i) throws JoriaDataException;
-	double getFloatAt(int i) throws JoriaDataException;
-	boolean getBooleanAt(int i) throws JoriaDataException;
+    boolean isInts();
 
-	String pick() throws JoriaDataException;
+    boolean isFloats();
 
-	boolean contains(DBData el);
+    boolean isBooleans();
+
+    String getStringAt(int i) throws JoriaDataException;
+
+    long getIntAt(int i) throws JoriaDataException;
+
+    double getFloatAt(int i) throws JoriaDataException;
+
+    boolean getBooleanAt(int i) throws JoriaDataException;
+
+    String pick() throws JoriaDataException;
+
+    boolean contains(DBData el);
 }

@@ -4,46 +4,37 @@ package org.pdgen.data;
 import org.pdgen.data.view.MutableView;
 import org.pdgen.env.Res;
 
-public abstract class AbstractTypedJoriaAccess extends AbstractJoriaAccess
-{
+public abstract class AbstractTypedJoriaAccess extends AbstractJoriaAccess {
     private static final long serialVersionUID = 7L;
     protected JoriaType type;
 
-	protected AbstractTypedJoriaAccess()
-	{
-	}
+    protected AbstractTypedJoriaAccess() {
+    }
 
-	protected AbstractTypedJoriaAccess(String name)
-	{
-		super(name);
-	}
+    protected AbstractTypedJoriaAccess(String name) {
+        super(name);
+    }
 
-	protected AbstractTypedJoriaAccess(String name, JoriaType typ)
-	{
-		super(name);
-		type = typ;
-	}
+    protected AbstractTypedJoriaAccess(String name, JoriaType typ) {
+        super(name);
+        type = typ;
+    }
 
-	public JoriaType getType()
-	{
-		return type;
-	}
+    public JoriaType getType() {
+        return type;
+    }
 
-	protected JoriaAccess checkTypeForSchemaChange()
-	{
-		if (type instanceof MutableView)
-		{
-			MutableView mutableView = (MutableView) type;
-			if (mutableView.fixAccess())
-			{
-				return new JoriaPlaceHolderAccess(name, type.getName() + Res.stri("affected_by_a_schema_change"));
-			}
-		}
-		return null;
-	}
+    protected JoriaAccess checkTypeForSchemaChange() {
+        if (type instanceof MutableView) {
+            MutableView mutableView = (MutableView) type;
+            if (mutableView.fixAccess()) {
+                return new JoriaPlaceHolderAccess(name, type.getName() + Res.stri("affected_by_a_schema_change"));
+            }
+        }
+        return null;
+    }
 
-	public JoriaAccess getPlaceHolderIfNeeded()
-	{
-		return checkTypeForSchemaChange();
-	}
+    public JoriaAccess getPlaceHolderIfNeeded() {
+        return checkTypeForSchemaChange();
+    }
 }

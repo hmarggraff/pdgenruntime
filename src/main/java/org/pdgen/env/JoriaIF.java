@@ -9,19 +9,18 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class JoriaIF
-{
-	protected static Env theInstance;
+public abstract class JoriaIF {
+    protected static Env theInstance;
 
-	public abstract void handle(Throwable t, Window frame);
+    public abstract void handle(Throwable t, Window frame);
 
-	public abstract void handle(Throwable t, String msg, Window frame);
+    public abstract void handle(Throwable t, String msg, Window frame);
 
-	public abstract void handle(Throwable t);
+    public abstract void handle(Throwable t);
 
-	public abstract void handle(Throwable t, String msg);
+    public abstract void handle(Throwable t, String msg);
 
-	public abstract void handle(Throwable t, ErrorHint[] hints, final String defaultMessage);
+    public abstract void handle(Throwable t, ErrorHint[] hints, final String defaultMessage);
 
-	public abstract void collectI18nKeys(String filter, JoriaType scope, boolean commentOnlyAllowed, String message, HashMap<String, List<I18nKeyHolder>> bag);
+    public abstract void collectI18nKeys(String filter, JoriaType scope, boolean commentOnlyAllowed, String message, HashMap<String, List<I18nKeyHolder>> bag);
 }

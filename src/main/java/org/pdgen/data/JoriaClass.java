@@ -3,22 +3,21 @@ package org.pdgen.data;
 
 import java.util.ArrayList;
 
-public interface JoriaClass extends JoriaType
-{
-	JoriaAccess[] noMembers = new JoriaAccess[0];
-	JoriaClass[] noClasses = new JoriaClass[0];
+public interface JoriaClass extends JoriaType {
+    JoriaAccess[] noMembers = new JoriaAccess[0];
+    JoriaClass[] noClasses = new JoriaClass[0];
 
-	JoriaAccess findMember(String name);
+    JoriaAccess findMember(String name);
 
-	JoriaClass[] getBaseClasses();
+    JoriaClass[] getBaseClasses();
 
-	ArrayList<JoriaClass> getDerivedClasses();
+    ArrayList<JoriaClass> getDerivedClasses();
 
-	int indexOfMember(JoriaAccess a);
+    int indexOfMember(JoriaAccess a);
 
-	JoriaAccess[] getMembers();
+    JoriaAccess[] getMembers();
 
-	JoriaAccess[] getFlatMembers();
+    JoriaAccess[] getFlatMembers();
 
     JoriaAccess findMemberIncludingSuperclass(String name);
 

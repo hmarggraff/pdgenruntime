@@ -8,40 +8,34 @@ import java.text.AttributedCharacterIterator;
  * Date: Nov 6, 2006
  * Time: 10:41:40 AM
  */
-public class FloatStyleAttribute extends StyleAttribute
-{
+public class FloatStyleAttribute extends StyleAttribute {
     private static final long serialVersionUID = 7L;
     private float value;
 
-	public FloatStyleAttribute(AttributedCharacterIterator.Attribute key, float value)
-	{
-		super(key);
-		this.value = value;
-	}
+    public FloatStyleAttribute(AttributedCharacterIterator.Attribute key, float value) {
+        super(key);
+        this.value = value;
+    }
 
-	public FloatStyleAttribute(AttributedCharacterIterator.Attribute key, float value, StyleAttribute next)
-	{
-		super(key, next);
-		this.value = value;
-	}
+    public FloatStyleAttribute(AttributedCharacterIterator.Attribute key, float value, StyleAttribute next) {
+        super(key, next);
+        this.value = value;
+    }
 
-	public Object getValue()
-	{
-		return value;
-	}
+    public Object getValue() {
+        return value;
+    }
 
-	public Object setValue(Object value)
-	{
-		float oldVal = this.value;
-		this.value = (Float) value;
-		return oldVal;
-	}
+    public Object setValue(Object value) {
+        float oldVal = this.value;
+        this.value = (Float) value;
+        return oldVal;
+    }
 
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof FloatStyleAttribute))
-			return false;
-		FloatStyleAttribute sta = (FloatStyleAttribute) obj;
-		return key.equals(sta.key) && value == sta.value;
-	}
+    public boolean equals(Object obj) {
+        if (!(obj instanceof FloatStyleAttribute))
+            return false;
+        FloatStyleAttribute sta = (FloatStyleAttribute) obj;
+        return key.equals(sta.key) && value == sta.value;
+    }
 }

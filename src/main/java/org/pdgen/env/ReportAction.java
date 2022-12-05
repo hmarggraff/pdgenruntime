@@ -13,10 +13,10 @@ import java.util.Stack;
  * Date: 16.01.2007
  * Time: 07:44:24
  */
-public interface ReportAction
-{
+public interface ReportAction {
     /**
      * Determine the menu entry text in a localized way
+     *
      * @param loc Locale for the name
      * @return the menu entry text
      */
@@ -24,6 +24,7 @@ public interface ReportAction
 
     /**
      * Determine the menu entry icon in a localized way
+     *
      * @param loc Locale for the icon
      * @return the icon
      */
@@ -31,7 +32,8 @@ public interface ReportAction
 
     /**
      * Determine if the action should be visible for the current object
-     * @param data the object
+     *
+     * @param data  the object
      * @param stack the stack of objects
      * @return if the action should be included in the menu
      */
@@ -39,7 +41,8 @@ public interface ReportAction
 
     /**
      * Determine if the action should be enabled for the current object
-     * @param data the object
+     *
+     * @param data  the object
      * @param stack the stack of objects
      * @return if the action should be enabled in the menu
      */
@@ -47,7 +50,8 @@ public interface ReportAction
 
     /**
      * execute the action
-     * @param data the object
+     *
+     * @param data  the object
      * @param stack the stack of objects
      */
     void execute(DBData data, Stack<DBData> stack);

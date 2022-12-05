@@ -4,17 +4,12 @@ package org.pdgen.oql;
 import org.pdgen.data.*;
 import org.pdgen.data.view.ClassView;
 import org.pdgen.data.view.RuntimeParameter;
+import org.pdgen.env.*;
 import org.pdgen.model.run.RunEnv;
 import org.pdgen.model.run.RunEnvImpl;
 import org.pdgen.projection.PseudoAccess;
-import org.pdgen.env.JoriaInternalError;
-import org.pdgen.env.JoriaUserDataException;
 import org.pdgen.util.RomanNumeral;
 import org.pdgen.util.TextNumeral;
-
-import org.pdgen.env.Env;
-import org.pdgen.env.Res;
-import org.pdgen.env.Settings;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -103,14 +98,14 @@ public class BuiltIns {
 
             DBData counter = env.getRuntimeParameterValue(runtimeParameter);
             if (counter == null) {
-                counter = new DBIntImplMutable(runtimeParameter,0);
+                counter = new DBIntImplMutable(runtimeParameter, 0);
                 env.putRuntimeParameter(runtimeParameter, counter);
             }
             if (!(counter instanceof DBIntImplMutable))
                 throw new JoriaInternalError("Value of Counter " + cName + " is not mutable.");
 
             DBIntImplMutable mCounter = (DBIntImplMutable) counter;
-            mCounter.setValuet(mCounter.getIntValue()+1);
+            mCounter.setValuet(mCounter.getIntValue() + 1);
             return mCounter.getIntValue();
         }
 
@@ -145,7 +140,7 @@ public class BuiltIns {
 
             DBData counter = env.getRuntimeParameterValue(runtimeParameter);
             if (counter == null) {
-                counter = new DBIntImplMutable(runtimeParameter,newVal);
+                counter = new DBIntImplMutable(runtimeParameter, newVal);
                 env.putRuntimeParameter(runtimeParameter, counter);
             }
             if (!(counter instanceof DBIntImplMutable))
@@ -1600,11 +1595,11 @@ public class BuiltIns {
     };
     public static final Exec[] builtinList = {biAbs, biAddDayToDate, biAddMonthToDate, biAddWeekToDate, biAddYearToDate, biAddWorkingDays,
             biCase, biCharAt, biClassName, biCompareToIgnoreCase, biConcat, biConcatStringCollection, biContains, biCount, //
-			biDate, biDateToMilliSeconds, biEndsWith, //
+            biDate, biDateToMilliSeconds, biEndsWith, //
             biFirst, biFormatInt, biFormatNumber, biFrom, biIndexOf, biIsNaN, biIsNull, //
-			biLastDayOfMonth, biLastDayOfQuarter, biLast, biLastIndexOf, biLength, biLocal, biLocale, biMaxLines,
-			biPadLeft, biPadRight, biParseFloat, biParseInt, biPower, biPrev,
-			biRegex, biReplace, biRoundDate, biRoundFloat, //
+            biLastDayOfMonth, biLastDayOfQuarter, biLast, biLastIndexOf, biLength, biLocal, biLocale, biMaxLines,
+            biPadLeft, biPadRight, biParseFloat, biParseInt, biPower, biPrev,
+            biRegex, biReplace, biRoundDate, biRoundFloat, //
             biFileText, biNewline, biPage, //
             biRegex, biSecondsToDate, biSetCounter, biStartsWith, biStepCounter, biSubstring, //
             biSystemProperty, biTotalPages, biToFloat, biToLower, biToString, biToUpperCase, biTrim, biLTrim, biRTrim, biReplaceAll, biTruncFloat,

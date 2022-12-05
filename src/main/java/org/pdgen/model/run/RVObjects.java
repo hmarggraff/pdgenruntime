@@ -2,28 +2,22 @@
 package org.pdgen.model.run;
 
 
+public class RVObjects implements RVAny {
+    RVTemplate[] elems;
 
-public class RVObjects implements RVAny
-{
-	RVTemplate[] elems;
+    public RVObjects(RVTemplate[] elems) {
+        this.elems = elems;
+    }
 
-	public RVObjects(RVTemplate[] elems)
-	{
-		this.elems = elems;
-	}
+    public int elementCount() {
+        return elems.length;
+    }
 
-	public int elementCount()
-	{
-		return elems.length;
-	}
+    public RVAny get(int elem, int row, int col) {
+        return elems[elem].subs[row][col];
+    }
 
-	public RVAny get(int elem, int row, int col)
-	{
-		return elems[elem].subs[row][col];
-	}
-
-	public void put(int at, RVTemplate v)
-	{
-		elems[at] = v;
-	}
+    public void put(int at, RVTemplate v) {
+        elems[at] = v;
+    }
 }

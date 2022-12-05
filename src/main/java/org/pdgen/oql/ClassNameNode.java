@@ -5,51 +5,43 @@ import org.pdgen.data.*;
 import org.pdgen.model.run.RunEnv;
 
 
-public class ClassNameNode extends Node implements JoriaTypedNode
-{
+public class ClassNameNode extends Node implements JoriaTypedNode {
 
-	// fields
-	protected JoriaType type;
+    // fields
+    protected JoriaType type;
 
-	public ClassNameNode(JoriaType p0)
-	{
-		type = p0;
-	}
+    public ClassNameNode(JoriaType p0) {
+        type = p0;
+    }
 
-	/* ----------------------------------------------------------------------- getTokenString */
-	public String getTokenString()
-	{
-		return '(' + type.getName() + ')';
-	}
+    /* ----------------------------------------------------------------------- getTokenString */
+    public String getTokenString() {
+        return '(' + type.getName() + ')';
+    }
 
-	public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel)
-	{
-		collector.append("(");
-		collector.append(type.getName());
-		collector.append(")");
-	}
+    public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel) {
+        collector.append("(");
+        collector.append(type.getName());
+        collector.append(")");
+    }
 
 
-    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException
-    {
+    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException {
         throw new JoriaAssertionError("Default implementation of getValue may not be called. Origin: " + getClass());
     }
 
     /* ----------------------------------------------------------------------- getType */
-	public JoriaType getType()
-	{
-		return type;
-	}
+    public JoriaType getType() {
+        return type;
+    }
 
-	public JoriaType getElementType()
-	{
-		if (type.isCollection())
-			return ((JoriaCollection) type).getElementType();
-		return null;
-	}
+    public JoriaType getElementType() {
+        if (type.isCollection())
+            return ((JoriaCollection) type).getElementType();
+        return null;
+    }
 
-	public boolean hasMofifiedAccess()
-	{
-		return type instanceof JoriaUnknownType;
-	}
+    public boolean hasMofifiedAccess() {
+        return type instanceof JoriaUnknownType;
+    }
 }

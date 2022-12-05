@@ -7,19 +7,18 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-public interface JoriaSchema extends Serializable
-{
-	Collection<JoriaClass> getClasses();
+public interface JoriaSchema extends Serializable {
+    Collection<JoriaClass> getClasses();
 
-	JoriaClass findClass(String longName);
+    JoriaClass findClass(String longName);
 
-	SortedNamedVector<JoriaAccess> getRoots();
+    SortedNamedVector<JoriaAccess> getRoots();
 
-	void reset();
+    void reset();
 
-	String getDatasourceName();
+    String getDatasourceName();
 
-	JoriaType findInternalType(String name);
+    JoriaType findInternalType(String name);
 
     @NotNull
     List<String> getAllClassNames();

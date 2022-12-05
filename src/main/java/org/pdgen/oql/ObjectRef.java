@@ -3,43 +3,36 @@ package org.pdgen.oql;
 
 import org.pdgen.data.JoriaType;
 
-public class ObjectRef implements SymbolEntry
-{
+public class ObjectRef implements SymbolEntry {
 
-	// fields
-	JoriaType typ;
-	String name;
+    // fields
+    JoriaType typ;
+    String name;
 
-	/* ----------------------------------------------------------------------- ObjectRef */
-	public ObjectRef(String n, JoriaType t)
-	{
-		name = n;
-		typ = t;
-	}
+    /* ----------------------------------------------------------------------- ObjectRef */
+    public ObjectRef(String n, JoriaType t) {
+        name = n;
+        typ = t;
+    }
 
-	/* ----------------------------------------------------------------------- getName */
-	public String getName()
-	{
-		return name;
-	}
+    /* ----------------------------------------------------------------------- getName */
+    public String getName() {
+        return name;
+    }
 
-	public JoriaType getType()
-	{
-		return typ;
-	}
+    public JoriaType getType() {
+        return typ;
+    }
 
-	public boolean isEnvironment()
-	{
-		return false;
-	}
+    public boolean isEnvironment() {
+        return false;
+    }
 
-	public boolean isObject()
-	{
-		return true;
-	}
+    public boolean isObject() {
+        return true;
+    }
 
-	public boolean isPackage()
-	{
-		return false;
-	}
+    public boolean isPackage() {
+        return false;
+    }
 }

@@ -6,7 +6,6 @@ package org.pdgen.data;
  * Date: Feb 27, 2007
  * Time: 10:43:11 AM
  */
-public interface DBByteArray extends DBData
-{
+public interface DBByteArray extends DBData {
     byte[] getByteArrayValue();
 }

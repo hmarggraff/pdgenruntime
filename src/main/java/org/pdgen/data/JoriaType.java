@@ -3,45 +3,44 @@ package org.pdgen.data;
 
 import java.io.Serializable;
 
-public interface JoriaType extends Named, Serializable
-{
-	String getParamString();
+public interface JoriaType extends Named, Serializable {
+    String getParamString();
 
-	boolean isBlob();
+    boolean isBlob();
 
-	boolean isClass();
+    boolean isClass();
 
-	boolean isCollection();
+    boolean isCollection();
 
-	boolean isLiteralCollection();
+    boolean isLiteralCollection();
 
-	boolean isDictionary();
+    boolean isDictionary();
 
-	boolean isInternal();
+    boolean isInternal();
 
-	boolean isLiteral();
+    boolean isLiteral();
 
-	boolean isUnknown();
+    boolean isUnknown();
 
-	boolean isUserClass();
+    boolean isUserClass();
 
-	boolean isView();
+    boolean isView();
 
-	boolean isVoid();
+    boolean isVoid();
 
-	boolean isBooleanLiteral();
+    boolean isBooleanLiteral();
 
-	boolean isCharacterLiteral();
+    boolean isCharacterLiteral();
 
-	boolean isIntegerLiteral();
+    boolean isIntegerLiteral();
 
-	boolean isRealLiteral();
+    boolean isRealLiteral();
 
-	boolean isStringLiteral();
+    boolean isStringLiteral();
 
-	boolean isDate();
+    boolean isDate();
 
-	boolean isImage();
+    boolean isImage();
 
-	JoriaClass getAsParent();
+    JoriaClass getAsParent();
 }

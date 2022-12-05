@@ -6,69 +6,57 @@ import org.pdgen.data.view.CollectUsedViewsAccess;
 import org.pdgen.data.view.MutableView;
 import org.pdgen.model.run.RunEnv;
 
-
-import java.util.Set;
 import java.util.Map;
+import java.util.Set;
 
-public class UnboundAccess extends AbstractTypedJoriaMember implements CollectUsedViewsAccess
-{
+public class UnboundAccess extends AbstractTypedJoriaMember implements CollectUsedViewsAccess {
     private static final long serialVersionUID = 7L;
 
-    public UnboundAccess(JoriaClass aParent, String name)
-	{
-		super(aParent, name);
-		type = DefaultStringLiteral.instance();
-		makeLongName();
-	}
+    public UnboundAccess(JoriaClass aParent, String name) {
+        super(aParent, name);
+        type = DefaultStringLiteral.instance();
+        makeLongName();
+    }
 
-	public UnboundAccess(JoriaClass aParent, String name, JoriaType t)
-	{
-		super(aParent, name, t);
-		makeLongName();
-	}
+    public UnboundAccess(JoriaClass aParent, String name, JoriaType t) {
+        super(aParent, name, t);
+        makeLongName();
+    }
 
 
-	public DBData getValue(DBData from, JoriaAccess asView, RunEnv env) throws JoriaDataException
-	{
-		return null;
-	}
+    public DBData getValue(DBData from, JoriaAccess asView, RunEnv env) throws JoriaDataException {
+        return null;
+    }
 
-	public boolean isRoot()
-	{
-		return false;
-	}
+    public boolean isRoot() {
+        return false;
+    }
 
-	public void setName(String newName)
-	{
-		name = newName;
-		makeLongName();
-	}
+    public void setName(String newName) {
+        name = newName;
+        makeLongName();
+    }
 
-	public JoriaType getSourceTypeForChildren()
-	{
-		return getType();
-	}
+    public JoriaType getSourceTypeForChildren() {
+        return getType();
+    }
 
-	public void makeName()
-	{
-		makeLongName();
-	}
+    public void makeName() {
+        makeLongName();
+    }
 
-	protected Object readResolve()
-	{
-		UnboundAccess match = (UnboundAccess) UnboundMembersClass.instance().findMember(name);
-		if (match != null)
-			return match;
-		return this;
-	}
+    protected Object readResolve() {
+        UnboundAccess match = (UnboundAccess) UnboundMembersClass.instance().findMember(name);
+        if (match != null)
+            return match;
+        return this;
+    }
 
-	public void collectUsedViews(Set<MutableView> s)
-	{
-		//empty
-	}
+    public void collectUsedViews(Set<MutableView> s) {
+        //empty
+    }
 
-	public void collectViewUsage(Map<MutableView,Set<Object>> viewUsage, Set<MutableView> visitedViews)
-	{
-		//empty
-	}
+    public void collectViewUsage(Map<MutableView, Set<Object>> viewUsage, Set<MutableView> visitedViews) {
+        //empty
+    }
 }

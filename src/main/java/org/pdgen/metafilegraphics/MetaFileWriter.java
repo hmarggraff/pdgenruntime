@@ -2,18 +2,17 @@
 package org.pdgen.metafilegraphics;
 
 
-public interface MetaFileWriter
-{
-	void writeByte(byte b);
+public interface MetaFileWriter {
+    void writeByte(byte b);
 
-	void writeCmd(byte b);
+    void writeCmd(byte b);
 
-	void writeInt(int b);
+    void writeInt(int b);
 
-	void writeFloat(float b);
+    void writeFloat(float b);
 
-	void writeDouble(double b);
+    void writeDouble(double b);
 
-	void close();
+    void close();
 
 }

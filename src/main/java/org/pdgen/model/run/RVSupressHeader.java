@@ -3,7 +3,6 @@ package org.pdgen.model.run;
 
 // Created by User: hmf on 11.08.2005
 
-public class RVSupressHeader implements RVAny
-{
-	public static final RVSupressHeader instance = new RVSupressHeader(); 
+public class RVSupressHeader implements RVAny {
+    public static final RVSupressHeader instance = new RVSupressHeader();
 }

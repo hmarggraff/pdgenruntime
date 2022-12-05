@@ -22,13 +22,16 @@ object Settings {
     }
 
     @JvmStatic
-    public val installHome = InstallHome.findInstallHome()
+    val installHome = InstallHome.findInstallHome()
+
     @JvmStatic
-    public val userHomeDir = getenv("USERPROFILE")
+    val userHomeDir = getenv("USERPROFILE")
+
     @JvmStatic
-    public val userdir = getProperty("user.dir")
+    val userdir = getProperty("user.dir")
+
     @JvmStatic
-    public val username = getProperty("user.name")
+    val username = getProperty("user.name")
 
 
     init {
@@ -38,12 +41,13 @@ object Settings {
 
     val screenShotDir: File = File(get("screenShotDir", "$userHomeDir/.pdgen"))
     val showDebugColors = booleanProperty("showDebugColors")
+
     @JvmStatic
-    public val roundingMode = roundingMode()
+    val roundingMode = roundingMode()
 
 
     @JvmStatic
-    public fun booleanProperty(key: String): Boolean {
+    fun booleanProperty(key: String): Boolean {
         val p = get(key)
         return p != null && p.equals("true")
     }
@@ -101,7 +105,7 @@ object Settings {
 
             props.load(FileInputStream(configFile))
         } else
-            Trace.log(Trace.init,"Config found=false, file=${configFile.absolutePath}")
+            Trace.log(Trace.init, "Config found=false, file=${configFile.absolutePath}")
     }
 
     fun roundingMode(): RoundingMode {
@@ -111,13 +115,13 @@ object Settings {
     }
 
     @JvmStatic
-    public fun get(key: String): String? = props.getProperty(key)
+    fun get(key: String): String? = props.getProperty(key)
 
     @JvmStatic
-    public fun get(key: String, defaultValue: String): String = props.getProperty(key) ?: defaultValue
+    fun get(key: String, defaultValue: String): String = props.getProperty(key) ?: defaultValue
 
     @JvmStatic
-    public fun getPropertyNames(): MutableSet<String> = props.stringPropertyNames()!!
+    fun getPropertyNames(): MutableSet<String> = props.stringPropertyNames()!!
 
     @JvmStatic
     fun savePref(key: String, value: String) {

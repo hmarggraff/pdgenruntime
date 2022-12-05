@@ -5,18 +5,15 @@ import org.pdgen.data.JoriaAccess;
 import org.pdgen.data.JoriaType;
 import org.pdgen.env.Res;
 
-public class CollectionWrapperAccess extends DefaultAccess
-{
+public class CollectionWrapperAccess extends DefaultAccess {
 
     private static final long serialVersionUID = 7L;
 
-    public CollectionWrapperAccess(JoriaAccess orignalAccess, JoriaType newType)
-	{
-		super(null, newType, orignalAccess);
-	}
+    public CollectionWrapperAccess(JoriaAccess orignalAccess, JoriaType newType) {
+        super(null, newType, orignalAccess);
+    }
 
-	public void makeName()
-	{
-		makeName(Res.asis("Wrap"));
-	}
+    public void makeName() {
+        makeName(Res.asis("Wrap"));
+    }
 }

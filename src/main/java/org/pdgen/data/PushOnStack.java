@@ -6,6 +6,5 @@ package org.pdgen.data;
  * Date: Jun 18, 2007
  * Time: 7:45:34 AM
  */
-public interface PushOnStack
-{
+public interface PushOnStack {
 }

@@ -2,11 +2,10 @@
 package org.pdgen.model.run;
 
 import org.pdgen.data.*;
-import org.pdgen.model.style.CellStyle;
-
 import org.pdgen.data.view.AggregateDef;
 import org.pdgen.env.Settings;
 import org.pdgen.model.Template;
+import org.pdgen.model.style.CellStyle;
 import org.pdgen.projection.NumberAsDate;
 
 import java.text.DecimalFormat;

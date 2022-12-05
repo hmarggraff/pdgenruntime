@@ -5,25 +5,22 @@ import org.pdgen.model.TemplateModel;
 
 import java.util.Map;
 
-public class LabelCell extends TextCellDef
-{
+public class LabelCell extends TextCellDef {
     private static final long serialVersionUID = 7L;
 
-    public LabelCell(TemplateModel parentGrid)
-	{
-		super(parentGrid);
-	}
-	public LabelCell(TemplateModel parentGrid, String s)
-	{
-		super(parentGrid, s);
-	}
-	public LabelCell(TextCellDef from, TemplateModel parentGrid)
-	{
-		super(from, parentGrid);
-	}
+    public LabelCell(TemplateModel parentGrid) {
+        super(parentGrid);
+    }
 
-    public CellDef duplicate(TemplateModel newContainerGrid, Map<Object,Object> copiedReferences)
-	{
-		return new LabelCell(this, newContainerGrid);
-	}
+    public LabelCell(TemplateModel parentGrid, String s) {
+        super(parentGrid, s);
+    }
+
+    public LabelCell(TextCellDef from, TemplateModel parentGrid) {
+        super(from, parentGrid);
+    }
+
+    public CellDef duplicate(TemplateModel newContainerGrid, Map<Object, Object> copiedReferences) {
+        return new LabelCell(this, newContainerGrid);
+    }
 }

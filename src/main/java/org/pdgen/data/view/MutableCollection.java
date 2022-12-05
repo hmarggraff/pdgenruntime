@@ -6,22 +6,21 @@ import org.pdgen.data.JoriaCollection;
 
 import java.util.Map;
 
-public interface MutableCollection extends JoriaCollection, MutableView
-{
+public interface MutableCollection extends JoriaCollection, MutableView {
 
-	JoriaCollection getBaseCollection();
+    JoriaCollection getBaseCollection();
 
-	void setSorting(SortOrder[] so);
+    void setSorting(SortOrder[] so);
 
-	void setElementType(JoriaClass newElementMatchType);
+    void setElementType(JoriaClass newElementMatchType);
 
-	void setTopN(int topN);
+    void setTopN(int topN);
 
-	int getTopN();
+    int getTopN();
 
-	RuntimeParameter getTopNVariable();
+    RuntimeParameter getTopNVariable();
 
-	void setTopNVariable(RuntimeParameter param);
+    void setTopNVariable(RuntimeParameter param);
 
-	MutableCollection copyReportPrivate(final Map<Object, Object> copiedData);
+    MutableCollection copyReportPrivate(final Map<Object, Object> copiedData);
 }

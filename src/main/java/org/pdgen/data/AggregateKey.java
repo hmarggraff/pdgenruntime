@@ -6,32 +6,27 @@ package org.pdgen.data;
  * Date: Jul 7, 2007
  * Time: 6:44:47 AM
  */
-public class AggregateKey
-{
+public class AggregateKey {
     protected JoriaAccess collection;
     protected JoriaAccess aggregate;
 
-    public AggregateKey(JoriaAccess collection, JoriaAccess aggregate)
-    {
+    public AggregateKey(JoriaAccess collection, JoriaAccess aggregate) {
         this.aggregate = aggregate;
         this.collection = collection;
     }
 
-    public boolean equals(Object obj)
-    {
-        if(!(obj instanceof AggregateKey))
-        	return false;
+    public boolean equals(Object obj) {
+        if (!(obj instanceof AggregateKey))
+            return false;
         AggregateKey o = (AggregateKey) obj;
         return collection.equals(o.collection) && aggregate.equals(o.aggregate);
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         return collection.hashCode() ^ aggregate.hashCode();
     }
 
-    public String toString()
-    {
+    public String toString() {
         return collection.toString() + "|" + aggregate.toString();
     }
 

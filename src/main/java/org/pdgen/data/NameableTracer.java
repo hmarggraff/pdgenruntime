@@ -3,59 +3,49 @@ package org.pdgen.data;
 
 import java.util.*;
 
-public class NameableTracer<E extends Nameable>
-{
+public class NameableTracer<E extends Nameable> {
     static Map<Nameable, List<NameableListener<Nameable>>> workMap;
 
-    public static void reset()
-    {
+    public static void reset() {
         workMap = null;
     }
 
-    public static void registerForNameable(Nameable what, NameableListener<Nameable> who)
-    {
-        if(workMap == null)
+    public static void registerForNameable(Nameable what, NameableListener<Nameable> who) {
+        if (workMap == null)
             workMap = new HashMap<Nameable, List<NameableListener<Nameable>>>();
         List<NameableListener<Nameable>> listeners = workMap.get(what);
-        if(listeners == null)
-        {
+        if (listeners == null) {
             listeners = new ArrayList<NameableListener<Nameable>>();
             workMap.put(what, listeners);
         }
         listeners.add(who);
     }
 
-    public static void unregisterForNameable(Nameable what, NameableListener<Nameable> who)
-    {
-        if(workMap == null)
+    public static void unregisterForNameable(Nameable what, NameableListener<Nameable> who) {
+        if (workMap == null)
             return;
         List<NameableListener<Nameable>> listeners = workMap.get(what);
-        if(listeners == null)
-        {
+        if (listeners == null) {
             return;
         }
         listeners.remove(who);
     }
 
-    public static void notifyListenersPre(Nameable what)
-    {
-        if(workMap == null)
+    public static void notifyListenersPre(Nameable what) {
+        if (workMap == null)
             return;
         List<NameableListener<Nameable>> listeners = workMap.get(what);
-        if(listeners == null)
-        {
+        if (listeners == null) {
             return;
         }
         for (NameableListener<Nameable> listener : Collections.unmodifiableCollection(listeners)) listener.nameableWillBeRenamed(what);
     }
 
-    public static void notifyListenersPost(Nameable what)
-    {
-        if(workMap == null)
+    public static void notifyListenersPost(Nameable what) {
+        if (workMap == null)
             return;
         List<NameableListener<Nameable>> listeners = workMap.get(what);
-        if(listeners == null)
-        {
+        if (listeners == null) {
             return;
         }
         for (NameableListener<Nameable> listener : Collections.unmodifiableCollection(listeners)) listener.nameableHasBeenRenamed(what);

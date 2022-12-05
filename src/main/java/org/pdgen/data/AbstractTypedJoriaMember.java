@@ -9,59 +9,48 @@ import org.pdgen.env.Res;
  * maintains name, longname and defining class
  * provides default implementations for getCollectionType and getClassType
  */
-public abstract class AbstractTypedJoriaMember extends AbstractMember
-{
+public abstract class AbstractTypedJoriaMember extends AbstractMember {
     private static final long serialVersionUID = 7L;
     protected JoriaType type;
 
-	public AbstractTypedJoriaMember(JoriaClass definingClass)
-	{
-		super(definingClass);
-	}
+    public AbstractTypedJoriaMember(JoriaClass definingClass) {
+        super(definingClass);
+    }
 
-	public AbstractTypedJoriaMember(JoriaClass definingClass, String name)
-	{
-		super(definingClass, name);
-	}
+    public AbstractTypedJoriaMember(JoriaClass definingClass, String name) {
+        super(definingClass, name);
+    }
 
-	public AbstractTypedJoriaMember(JoriaClass definingClass, String name, JoriaType typ)
-	{
-		super(definingClass, name);
-		Trace.check(typ);
-		type = typ;
-	}
+    public AbstractTypedJoriaMember(JoriaClass definingClass, String name, JoriaType typ) {
+        super(definingClass, name);
+        Trace.check(typ);
+        type = typ;
+    }
 
-	public AbstractTypedJoriaMember()
-	{
-	}
+    public AbstractTypedJoriaMember() {
+    }
 
-	public JoriaType getType()
-	{
-		return type;
-	}
+    public JoriaType getType() {
+        return type;
+    }
 
-	protected void makeNames(String baseName, String tag)
-	{
-		name = baseName + "_" + tag;
-		makeLongName();
-	}
+    protected void makeNames(String baseName, String tag) {
+        name = baseName + "_" + tag;
+        makeLongName();
+    }
 
-    protected JoriaAccess checkTypeForSchemaChange()
-	{
-		if (type instanceof MutableView && type != definingClass)
-		{
-			MutableView mutableView = (MutableView) type;
-			if (mutableView.fixAccess())
-			{
-				JoriaPlaceHolderAccess joriaPlaceHolderAccess = new JoriaPlaceHolderAccess(name, type.getName() + Res.stri("affected_by_a_schema_change"));
-				return joriaPlaceHolderAccess;
-			}
-		}
-		return null;
-	}
+    protected JoriaAccess checkTypeForSchemaChange() {
+        if (type instanceof MutableView && type != definingClass) {
+            MutableView mutableView = (MutableView) type;
+            if (mutableView.fixAccess()) {
+                JoriaPlaceHolderAccess joriaPlaceHolderAccess = new JoriaPlaceHolderAccess(name, type.getName() + Res.stri("affected_by_a_schema_change"));
+                return joriaPlaceHolderAccess;
+            }
+        }
+        return null;
+    }
 
-	public JoriaAccess getPlaceHolderIfNeeded()
-	{
-		return checkTypeForSchemaChange();
-	}
+    public JoriaAccess getPlaceHolderIfNeeded() {
+        return checkTypeForSchemaChange();
+    }
 }

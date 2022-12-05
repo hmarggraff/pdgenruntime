@@ -4,50 +4,42 @@ package org.pdgen.oql;
 import org.pdgen.data.JoriaAccess;
 import org.pdgen.data.JoriaType;
 
-public class FieldRef implements SymbolEntry
-{
+public class FieldRef implements SymbolEntry {
 
-	// fields
-	JoriaAccess axs;
+    // fields
+    JoriaAccess axs;
 
-	/* ----------------------------------------------------------------------- ObjectRef */
-	public FieldRef(JoriaAccess field)
-	{
-		axs = field;
-	}
+    /* ----------------------------------------------------------------------- ObjectRef */
+    public FieldRef(JoriaAccess field) {
+        axs = field;
+    }
 
-	/* ----------------------------------------------------------------------- getName */
-	public String getName()
-	{
-		return axs.getName();
-	}
+    /* ----------------------------------------------------------------------- getName */
+    public String getName() {
+        return axs.getName();
+    }
 
-	/* ----------------------------------------------------------------------- getType */
-	public JoriaType getType()
-	{
-		return axs.getType();
-	}
+    /* ----------------------------------------------------------------------- getType */
+    public JoriaType getType() {
+        return axs.getType();
+    }
 
-	/* ----------------------------------------------------------------------- isEnvironment */
-	public boolean isEnvironment()
-	{
-		return false;
-	}
+    /* ----------------------------------------------------------------------- isEnvironment */
+    public boolean isEnvironment() {
+        return false;
+    }
 
-	/* ----------------------------------------------------------------------- isObject */
-	public boolean isObject()
-	{
-		return true;
-	}
+    /* ----------------------------------------------------------------------- isObject */
+    public boolean isObject() {
+        return true;
+    }
 
-	/* ----------------------------------------------------------------------- isPackage */
-	public boolean isPackage()
-	{
-		return false;
-	}
+    /* ----------------------------------------------------------------------- isPackage */
+    public boolean isPackage() {
+        return false;
+    }
 
-	public JoriaAccess getField()
-	{
-		return axs;
-	}
+    public JoriaAccess getField() {
+        return axs;
+    }
 }

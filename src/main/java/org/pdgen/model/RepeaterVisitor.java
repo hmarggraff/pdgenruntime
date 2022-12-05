@@ -6,7 +6,6 @@ package org.pdgen.model;
  * Date: Feb 8, 2006
  * Time: 12:22:29 PM
  */
-public interface RepeaterVisitor
-{
+public interface RepeaterVisitor {
     boolean visit(Repeater r);
 }

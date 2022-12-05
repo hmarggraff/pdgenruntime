@@ -3,8 +3,8 @@ package org.pdgen.model.run.html;
 
 import org.pdgen.model.run.ImageDetection;
 
-import java.io.OutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 /**
@@ -14,30 +14,30 @@ import java.io.PrintWriter;
  * Time: 6:36:35 AM
  * To change this template use File | Settings | File Templates.
  */
-public interface HtmlChildDocumentHandler
-{
+public interface HtmlChildDocumentHandler {
     String mapFileNameToUrl(String fileName);
+
     StreamData getDocumentStream(ImageDetection.ImageClass imageClass) throws IOException;
+
     PrintWriter getContentWriter();
+
     PrintWriter getStyleWriter();
+
     String getDrilldownUrlPrefix();
 
     void setTitle(String title);
 
-    class StreamData
-    {
-        public StreamData(String url, OutputStream stream)
-        {
+    class StreamData {
+        public StreamData(String url, OutputStream stream) {
             this.url = url;
             this.stream = stream;
         }
-        public String getUrl()
-        {
+
+        public String getUrl() {
             return url;
         }
 
-        public OutputStream getStream()
-        {
+        public OutputStream getStream() {
             return stream;
         }
 

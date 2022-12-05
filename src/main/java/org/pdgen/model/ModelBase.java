@@ -1,44 +1,50 @@
 // This software may be used as allowed by the Gnu Affero General Public License. Details are in the file LICENSE, that must be included in the distribution of ths software.
 package org.pdgen.model;
 
+import org.pdgen.data.JoriaAccess;
 import org.pdgen.model.cells.CellDef;
 import org.pdgen.model.style.FlexSize;
 import org.pdgen.model.style.JoriaSimpleBorder;
-import org.pdgen.data.JoriaAccess;
 
-public interface ModelBase
-{
+public interface ModelBase {
 
-	CellDef cellAt(int r, int c);
+    CellDef cellAt(int r, int c);
 
-	int getColCount();
+    int getColCount();
 
-	Repeater getRepeaterAt(int sRow, int sCol);
+    Repeater getRepeaterAt(int sRow, int sCol);
 
-	RepeaterList getRepeaterList();
+    RepeaterList getRepeaterList();
 
-	int getRepeaterCount();
+    int getRepeaterCount();
 
-	int getRowCount();
+    int getRowCount();
 
-	JoriaAccess getAccessor();
+    JoriaAccess getAccessor();
 
-	int getStartRow();
-	int getStartCol();
-	int getEndRow();
-	int getEndCol();
+    int getStartRow();
 
-	FlexSize getColSizingAt(int at);
+    int getStartCol();
 
-	FlexSize getRowSizingAt(int at);
+    int getEndRow();
 
-	RDCrossTab getCrosstab();
+    int getEndCol();
+
+    FlexSize getColSizingAt(int at);
+
+    FlexSize getRowSizingAt(int at);
+
+    RDCrossTab getCrosstab();
 
     JoriaSimpleBorder getBorderAt(int r, int c, boolean horizontal, boolean lefttop_vs_rightbottom);
 
     boolean isFirstRow(int r);
+
     boolean isLastRow(int r);
+
     boolean isFirstCol(int c);
+
     boolean isLastCol(int c);
-	TemplateBoxInterface getFrame();
+
+    TemplateBoxInterface getFrame();
 }

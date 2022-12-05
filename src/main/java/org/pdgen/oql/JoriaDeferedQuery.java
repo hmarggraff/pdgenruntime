@@ -7,34 +7,28 @@ import org.pdgen.data.JoriaClass;
 import org.pdgen.data.JoriaDataException;
 import org.pdgen.model.run.RunEnv;
 
-
 import java.util.HashSet;
 
 
-public class JoriaDeferedQuery extends JoriaQuery
-{
-	HashSet<DeferredFieldNode> deferredFields = new HashSet<DeferredFieldNode>();
+public class JoriaDeferedQuery extends JoriaQuery {
+    HashSet<DeferredFieldNode> deferredFields = new HashSet<DeferredFieldNode>();
     private final boolean needsAllPages;
 
-    public JoriaDeferedQuery(JoriaClass p0, NodeInterface topNode, String query, boolean needsAllPages)
-	{
-		super(p0, topNode, query);
+    public JoriaDeferedQuery(JoriaClass p0, NodeInterface topNode, String query, boolean needsAllPages) {
+        super(p0, topNode, query);
         this.needsAllPages = needsAllPages;
-	}
+    }
 
-    public DBData getValue(RunEnv env, DBData from) throws JoriaDataException
-	{
-		sub.cacheDeferredFields(env, from);
-		return new DBDeferredQueryData(this);
-	}
+    public DBData getValue(RunEnv env, DBData from) throws JoriaDataException {
+        sub.cacheDeferredFields(env, from);
+        return new DBDeferredQueryData(this);
+    }
 
-    public boolean isNeedsAllPages()
-    {
+    public boolean isNeedsAllPages() {
         return needsAllPages;
     }
 
-	public DBData getDeferredValue(final RunEnv env) throws JoriaDataException
-	{
-		return sub.getWrappedValue(env, null);
-	}
+    public DBData getDeferredValue(final RunEnv env) throws JoriaDataException {
+        return sub.getWrappedValue(env, null);
+    }
 }

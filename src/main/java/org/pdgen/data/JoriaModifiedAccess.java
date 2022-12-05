@@ -2,10 +2,10 @@
 package org.pdgen.data;
 
 import org.pdgen.data.view.RuntimeParameter;
-import org.pdgen.model.run.RunEnv;
 import org.pdgen.env.Env;
 import org.pdgen.env.RepoLoader;
 import org.pdgen.env.Res;
+import org.pdgen.model.run.RunEnv;
 
 import java.util.HashMap;
 import java.util.List;
@@ -77,8 +77,7 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
         return this;
     }
 
-    public String explainModification()
-    {
+    public String explainModification() {
         StringBuilder ret = new StringBuilder();
         ret.append(JoriaModifiedAccess.reasons[reason]);
         ret.append(" ");

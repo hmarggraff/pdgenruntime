@@ -5,25 +5,22 @@ import org.pdgen.data.*;
 import org.pdgen.data.view.AggregateDef;
 import org.pdgen.data.view.GroupKeyAccess;
 import org.pdgen.data.view.RuntimeParameter;
+import org.pdgen.env.Env;
+import org.pdgen.env.JoriaInternalError;
+import org.pdgen.env.JoriaUserException;
+import org.pdgen.env.Res;
 import org.pdgen.model.cells.*;
 import org.pdgen.model.run.RDRange;
 import org.pdgen.model.run.RDRangeBase;
 import org.pdgen.model.run.RDRepeaterNext;
 import org.pdgen.model.style.*;
-import org.pdgen.projection.UnboundAccess;
-import org.pdgen.env.JoriaInternalError;
-import org.pdgen.env.JoriaUserException;
-
-import org.pdgen.env.Env;
-import org.pdgen.env.Res;
-
-
 import org.pdgen.oql.OQLParseException;
+import org.pdgen.projection.UnboundAccess;
 
 import javax.swing.event.ChangeListener;
-import java.awt.Color;
-import java.awt.Point;
+import java.awt.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.*;
 
 public class TemplateModel implements Serializable, ModelBase {

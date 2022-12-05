@@ -11,13 +11,11 @@ import java.util.List;
  * Date: Nov 7, 2006
  * Time: 10:04:35 AM
  */
-public class ReportActionManager
-{
-	static ArrayList<ReportAction> reportActions;
+public class ReportActionManager {
+    static ArrayList<ReportAction> reportActions;
 
 
-	public static List<ReportAction> getReportActions()
-	{
-		return reportActions;
-	}
+    public static List<ReportAction> getReportActions() {
+        return reportActions;
+    }
 }

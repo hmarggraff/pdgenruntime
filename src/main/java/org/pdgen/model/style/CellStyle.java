@@ -2,18 +2,16 @@
 package org.pdgen.model.style;
 
 import org.pdgen.data.*;
-
 import org.pdgen.env.Env;
 import org.pdgen.env.Res;
 import org.pdgen.model.cells.CellDef;
 import org.pdgen.projection.NumberAsDate;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.List;
 import java.util.*;
 
 
@@ -289,7 +287,7 @@ public class CellStyle extends BoxStyle {
             return false;
         CellStyle from = (CellStyle) o;
         return eq(baseStyle, from.baseStyle) && eq(backgroundImageName, from.backgroundImageName)
-                && eq(spanToInner, from. spanToInner) && eq(supressRepeatedCellInTable, from. supressRepeatedCellInTable)
+                && eq(spanToInner, from.spanToInner) && eq(supressRepeatedCellInTable, from.supressRepeatedCellInTable)
                 && eq(backgroundImageTargetWidth, from.backgroundImageTargetWidth) && eq(autoSpan, from.autoSpan)
                 && eq(alignmentHorizontal, from.alignmentHorizontal) && eq(alignmentVertical, from.alignmentVertical)
                 && eq(spanHorizontal, from.spanHorizontal) && eq(spanVertical, from.spanVertical)

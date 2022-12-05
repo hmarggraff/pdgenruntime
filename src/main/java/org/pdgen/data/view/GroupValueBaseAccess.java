@@ -6,7 +6,6 @@ package org.pdgen.data.view;
  * Date: Nov 10, 2006
  * Time: 7:28:52 AM
  */
-public interface GroupValueBaseAccess extends AccessPlus
-{
+public interface GroupValueBaseAccess extends AccessPlus {
     void setDefiningClass(GroupClass groupClass);
 }

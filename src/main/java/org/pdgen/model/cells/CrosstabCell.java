@@ -6,6 +6,5 @@ package org.pdgen.model.cells;
  * Date: Nov 14, 2006
  * Time: 1:56:45 PM
  */
-public interface CrosstabCell
-{
+public interface CrosstabCell {
 }

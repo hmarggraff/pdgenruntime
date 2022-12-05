@@ -5,41 +5,33 @@ import org.pdgen.env.Res;
 
 import java.util.ArrayList;
 
-public class JoriaClassVoid extends AbstractJoriaClass
-{
-	public static final JoriaClassVoid voidType = new JoriaClassVoid();
+public class JoriaClassVoid extends AbstractJoriaClass {
+    public static final JoriaClassVoid voidType = new JoriaClassVoid();
     private static final long serialVersionUID = 7L;
 
-    private JoriaClassVoid()
-	{
-	}
+    private JoriaClassVoid() {
+    }
 
-	public JoriaAccess[] getFlatMembers()
-	{
-		return noMembers;
-	}
+    public JoriaAccess[] getFlatMembers() {
+        return noMembers;
+    }
 
-	public String getName()
-	{
-		return Res.asis("void");
-	}
+    public String getName() {
+        return Res.asis("void");
+    }
 
-	public String getParamString()
-	{
-		return Res.asis("JoriaClassVoid");
-	}
+    public String getParamString() {
+        return Res.asis("JoriaClassVoid");
+    }
 
-	public boolean isVoid()
-	{
-		return true;
-	}
+    public boolean isVoid() {
+        return true;
+    }
 
-	public void setDerivedClasses(ArrayList<JoriaClass> subs)
-	{
-	}
+    public void setDerivedClasses(ArrayList<JoriaClass> subs) {
+    }
 
-	protected Object readResolve()
-	{
-		return voidType;
-	}
+    protected Object readResolve() {
+        return voidType;
+    }
 }

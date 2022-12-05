@@ -10,15 +10,22 @@ import java.io.IOException;
  * Time: 8:36:59 AM
  * To change this template use Options | File Templates.
  */
-public interface PdfOutputer
-{
+public interface PdfOutputer {
     void writeAttr(String key, String Value) throws IOException;
+
     void writeAttr(String key, long value) throws IOException;
+
     void writeObj(String txt) throws IOException;
+
     void writeln(String txt) throws IOException;
+
     void writeln(byte[] bytes) throws IOException;
+
     void write(String txt) throws IOException;
+
     void write(long value) throws IOException;
+
     void write(float value) throws IOException;
+
     void writeHex(byte[] bytes) throws IOException;
 }

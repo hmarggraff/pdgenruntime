@@ -11,15 +11,12 @@ import java.util.Map;
  * Time: 2:56:47 PM
  * To change this template use File | Settings | File Templates.
  */
-public class JoriaThreadLocalStorage extends ThreadLocal
-{
-    protected Object initialValue()
-    {
-        return new HashMap<Object,Object>();
+public class JoriaThreadLocalStorage extends ThreadLocal {
+    protected Object initialValue() {
+        return new HashMap<Object, Object>();
     }
 
-    public Map<Object,Object> getMap()
-    {
-        return (Map<Object,Object>) get();
+    public Map<Object, Object> getMap() {
+        return (Map<Object, Object>) get();
     }
 }

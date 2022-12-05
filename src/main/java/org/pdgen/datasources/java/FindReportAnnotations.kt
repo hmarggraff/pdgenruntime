@@ -50,16 +50,16 @@ class FindReportAnnotations(val jarFile: File) {
             superName: String?,
             interfaces: Array<out String>?
         ) {
-            currentclassname = name;
-            isReportClass = false;
+            currentclassname = name
+            isReportClass = false
         }
 
         override fun visitAnnotation(descriptor: String, visible: Boolean): AnnotationVisitor? {
             if (descriptor.contains(reportDataProvider)) {
                 Log.schema.debug("reportDataProvider: $currentclassname")
-                isReportClass = true;
+                isReportClass = true
             }
-            return null;
+            return null
         }
 
         override fun visitMethod(
@@ -78,12 +78,12 @@ class FindReportAnnotations(val jarFile: File) {
                         if (descriptor.contains(reportData)) {
                             roots.add(Pair(currentclassname.replace('/', '.'), currentMethod))
                         }
-                        return null;
+                        return null
                     }
                 }
             }
 
-            return null;
+            return null
         }
     }
 }

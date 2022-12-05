@@ -3,82 +3,68 @@ package org.pdgen.data;
 
 import java.io.Serializable;
 
-public class DBStringImpl extends AbstractDBData implements DBString, Serializable
-{
+public class DBStringImpl extends AbstractDBData implements DBString, Serializable {
 
     private static final long serialVersionUID = 7L;
     String myString;
 
-	public DBStringImpl(JoriaAccess axs, String value)
-	{
-		super(axs);
-		myString = value;
-	}
+    public DBStringImpl(JoriaAccess axs, String value) {
+        super(axs);
+        myString = value;
+    }
 
-	public boolean equals(Object obj)
-	{
-		if (obj instanceof DBString)
-		{
-			String stringValue = ((DBString) obj).getStringValue();
-			if (stringValue != null)
-				return stringValue.equals(myString);
-		}
-		return false;
-	}
+    public boolean equals(Object obj) {
+        if (obj instanceof DBString) {
+            String stringValue = ((DBString) obj).getStringValue();
+            if (stringValue != null)
+                return stringValue.equals(myString);
+        }
+        return false;
+    }
 
-	/**
-	 * ----------------------------------------------------------------------- getStringValue
-	 */
-	public String getStringValue()
-	{
-		return myString;
-	}
+    /**
+     * ----------------------------------------------------------------------- getStringValue
+     */
+    public String getStringValue() {
+        return myString;
+    }
 
-	/**
-	 * ----------------------------------------------------------------------- isNull
-	 */
-	public boolean isNull()
-	{
-		return myString == null;
-	}
+    /**
+     * ----------------------------------------------------------------------- isNull
+     */
+    public boolean isNull() {
+        return myString == null;
+    }
 
-	/**
-	 * ----------------------------------------------------------------------- toString
-	 */
-	public String toString()
-	{
-		return myString;
-	}
+    /**
+     * ----------------------------------------------------------------------- toString
+     */
+    public String toString() {
+        return myString;
+    }
 
-	public int hashCode()
-	{
-		if (myString != null)
-			return myString.hashCode();
-		else
-			return 0;
-	}
+    public int hashCode() {
+        if (myString != null)
+            return myString.hashCode();
+        else
+            return 0;
+    }
 
-	public boolean same(DBData theOther)
-	{
-		if (theOther instanceof DBStringImpl)
-		{
-			return ((DBStringImpl) theOther).myString.equals(myString);
-		}
-		else
-		{
-			return false;
-		}
-	}
+    public boolean same(DBData theOther) {
+        if (theOther instanceof DBStringImpl) {
+            return ((DBStringImpl) theOther).myString.equals(myString);
+        } else {
+            return false;
+        }
+    }
 
-	public int compareTo(DBString o)
-	{
-		if (myString == null)
-		{
-			if (o == null)
-				return 0;
-			else
-				return 1;
-		}
-		return myString.compareTo(o.getStringValue());
-	}
+    public int compareTo(DBString o) {
+        if (myString == null) {
+            if (o == null)
+                return 0;
+            else
+                return 1;
+        }
+        return myString.compareTo(o.getStringValue());
+    }
 }

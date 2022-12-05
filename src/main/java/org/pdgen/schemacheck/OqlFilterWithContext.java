@@ -5,7 +5,9 @@ import org.pdgen.data.JoriaClass;
 
 public interface OqlFilterWithContext {
     String getOqlText();
+
     void setOqlText(String newText);
+
     JoriaClass getContextClass();
 
 }

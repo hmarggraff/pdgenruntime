@@ -8,14 +8,13 @@ import org.pdgen.model.run.RunEnv;
 
 import java.util.Set;
 
-public interface OQLNode
-{
-	boolean getBooleanValue(RunEnv env, DBData from) throws JoriaDataException;
+public interface OQLNode {
+    boolean getBooleanValue(RunEnv env, DBData from) throws JoriaDataException;
 
-	boolean isBoolean();
+    boolean isBoolean();
 
-	boolean hasMofifiedAccess();
+    boolean hasMofifiedAccess();
 
-	void getUsedAccessors(Set<JoriaAccess> ret);
+    void getUsedAccessors(Set<JoriaAccess> ret);
 
 }

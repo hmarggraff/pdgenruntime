@@ -7,105 +7,87 @@ import org.pdgen.model.run.RunEnv;
 import org.pdgen.projection.PseudoAccess;
 
 
-public class ThisNode extends Node implements JoriaTypedNode
-{
+public class ThisNode extends Node implements JoriaTypedNode {
 
-	protected JoriaType typ;
-	private PseudoAccess deferredAxs;
+    protected JoriaType typ;
+    private PseudoAccess deferredAxs;
 
-	public ThisNode(JoriaType t)
-	{
-		typ = t;
-	}
+    public ThisNode(JoriaType t) {
+        typ = t;
+    }
 
-	public DBCollection getCollection(RunEnv env, DBData p0) throws JoriaDataException
-	{
-		return (DBCollection) p0;
-	}
+    public DBCollection getCollection(RunEnv env, DBData p0) throws JoriaDataException {
+        return (DBCollection) p0;
+    }
 
-	public String getTokenString()
-	{
-		return " this ";
-	}
+    public String getTokenString() {
+        return " this ";
+    }
 
-	public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel)
-	{
-		collector.append(" this ");
-	}
+    public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel) {
+        collector.append(" this ");
+    }
 
 
-	public JoriaType getType()
-	{
-		return typ;
-	}
+    public JoriaType getType() {
+        return typ;
+    }
 
-	public JoriaType getElementType()
-	{
-		if (typ.isCollection())
-			return ((JoriaCollection) typ).getElementType();
-		return null;
-	}
+    public JoriaType getElementType() {
+        if (typ.isCollection())
+            return ((JoriaCollection) typ).getElementType();
+        return null;
+    }
 
-	public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException
-	{
-		if (deferredAxs == null)
-			return p0;
-		return env.getRuntimeParameterValue(deferredAxs);
-	}
+    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException {
+        if (deferredAxs == null)
+            return p0;
+        return env.getRuntimeParameterValue(deferredAxs);
+    }
 
-	public boolean isBoolean()
-	{
-		return typ.isBooleanLiteral();
-	}
+    public boolean isBoolean() {
+        return typ.isBooleanLiteral();
+    }
 
-	public boolean isCharacter()
-	{
-		return typ.isCharacterLiteral();
-	}
+    public boolean isCharacter() {
+        return typ.isCharacterLiteral();
+    }
 
-	public boolean isCollection()
-	{
-		return typ.isCollection();
-	}
+    public boolean isCollection() {
+        return typ.isCollection();
+    }
 
-	public boolean isLiteralCollection()
-	{
-		return typ.isLiteralCollection();
-	}
+    public boolean isLiteralCollection() {
+        return typ.isLiteralCollection();
+    }
 
-	public boolean isDictionary()
-	{
-		return typ.isDictionary();
-	}
+    public boolean isDictionary() {
+        return typ.isDictionary();
+    }
 
-	public boolean isInteger()
-	{
-		return typ.isIntegerLiteral();
-	}
+    public boolean isInteger() {
+        return typ.isIntegerLiteral();
+    }
 
-	public boolean isReal()
-	{
-		return typ.isRealLiteral();
-	}
+    public boolean isReal() {
+        return typ.isRealLiteral();
+    }
 
-	public boolean isObject()
-	{
-		return typ.isClass();
-	}
+    public boolean isObject() {
+        return typ.isClass();
+    }
 
-	public boolean isString()
-	{
-		return typ.isStringLiteral();
-	}
+    public boolean isString() {
+        return typ.isStringLiteral();
+    }
 
-	public boolean hasMofifiedAccess()
-	{
-		return typ instanceof JoriaUnknownType;
-	}
-	public void cacheDeferredFields(final RunEnv env, final DBData from) throws JoriaDataException
-	{
-		deferredAxs = new PseudoAccess(typ, "this");
-		env.putRuntimeParameter(deferredAxs, from);
+    public boolean hasMofifiedAccess() {
+        return typ instanceof JoriaUnknownType;
+    }
+
+    public void cacheDeferredFields(final RunEnv env, final DBData from) throws JoriaDataException {
+        deferredAxs = new PseudoAccess(typ, "this");
+        env.putRuntimeParameter(deferredAxs, from);
     }
 
 }

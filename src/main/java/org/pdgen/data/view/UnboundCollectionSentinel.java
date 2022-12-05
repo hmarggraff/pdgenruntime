@@ -3,149 +3,115 @@ package org.pdgen.data.view;
 
 import org.pdgen.data.*;
 
+import java.util.*;
 
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Map;
-import java.util.List;
-import java.util.Stack;
-
-public class UnboundCollectionSentinel extends AbstractJoriaCollection implements MutableCollection
-{
+public class UnboundCollectionSentinel extends AbstractJoriaCollection implements MutableCollection {
     private static final long serialVersionUID = 7L;
 
-    public UnboundCollectionSentinel(JoriaCollection sourceCollection)
-	{
-		super(new UnboundClassSentinel(sourceCollection.getElementType()));
-	}
-	public UnboundCollectionSentinel(UnboundCollectionSentinel from)
-	{
-		super(new UnboundClassSentinel(from.elementType));
-	}
+    public UnboundCollectionSentinel(JoriaCollection sourceCollection) {
+        super(new UnboundClassSentinel(sourceCollection.getElementType()));
+    }
 
-	public JoriaCollection getBaseCollection()
-	{
-		return null;
-	}
+    public UnboundCollectionSentinel(UnboundCollectionSentinel from) {
+        super(new UnboundClassSentinel(from.elementType));
+    }
 
-	public void setSorting(SortOrder[] so)
-	{
-	}
+    public JoriaCollection getBaseCollection() {
+        return null;
+    }
 
-	public void setTopN(int topN)
-	{
-	}
+    public void setSorting(SortOrder[] so) {
+    }
 
-	public int getTopN()
-	{
-		return 0;
-	}
+    public void setTopN(int topN) {
+    }
 
-	public RuntimeParameterLiteral getTopNVariable()
-	{
-		return null;
-	}
+    public int getTopN() {
+        return 0;
+    }
 
-	public void setTopNVariable(RuntimeParameter param)
-	{
-	}
+    public RuntimeParameterLiteral getTopNVariable() {
+        return null;
+    }
 
-	public MutableCollection copyReportPrivate(final Map<Object, Object> copiedData)
-	{
-		return new UnboundCollectionSentinel(this);
-	}
+    public void setTopNVariable(RuntimeParameter param) {
+    }
 
-	public void addChild(JoriaAccess f)
-	{
-	}
+    public MutableCollection copyReportPrivate(final Map<Object, Object> copiedData) {
+        return new UnboundCollectionSentinel(this);
+    }
 
-	public JoriaAccess findMember(String f)
-	{
-		return null;
-	}
+    public void addChild(JoriaAccess f) {
+    }
 
-	public void removeChild(JoriaAccess f)
-	{
-	}
+    public JoriaAccess findMember(String f) {
+        return null;
+    }
 
-	public void replaceChild(JoriaAccess f, JoriaAccess fNew)
-	{
-	}
+    public void removeChild(JoriaAccess f) {
+    }
 
-	public void setName(String name)
-	{
-	}
+    public void replaceChild(JoriaAccess f, JoriaAccess fNew) {
+    }
 
-	public JoriaType getOriginalType()
-	{
-		return null;
-	}
+    public void setName(String name) {
+    }
 
-	public JoriaClass getAsParent()
-	{
-		return null;
-	}
+    public JoriaType getOriginalType() {
+        return null;
+    }
 
-	public void setBase(JoriaClass c)
-	{
-	}
+    public JoriaClass getAsParent() {
+        return null;
+    }
 
-	public boolean fixAccess()
-	{
-		return false;
-	}
+    public void setBase(JoriaClass c) {
+    }
 
-	public MutableView dup(Map<Object, Object> alreadyCopiedViews)
-	{
-		return this;
-	}
+    public boolean fixAccess() {
+        return false;
+    }
 
-	public void collectUsedViews(Set<MutableView> s)
-	{
-	}
+    public MutableView dup(Map<Object, Object> alreadyCopiedViews) {
+        return this;
+    }
 
-	public void collectViewUsage(Map<MutableView,Set<Object>> viewUsage, Set<MutableView> visitedViews)
-	{
-	}
+    public void collectUsedViews(Set<MutableView> s) {
+    }
 
-	public boolean hasName()
-	{
-		return false;
-	}
+    public void collectViewUsage(Map<MutableView, Set<Object>> viewUsage, Set<MutableView> visitedViews) {
+    }
 
-	public void collectVariables(Set<RuntimeParameter> s, Set<Object> seen)
-	{
-	}
+    public boolean hasName() {
+        return false;
+    }
 
-	public void collectI18nKeys2(HashMap<String,List<I18nKeyHolder>> s, Set<Object> seen)
-	{
-	}
+    public void collectVariables(Set<RuntimeParameter> s, Set<Object> seen) {
+    }
 
-	public void collectVisiblePickersInScope(List<JoriaAccess[]> collection, Set<RuntimeParameter> visible, Stack<JoriaAccess> pathStack, Set<Object> seen)
-	{
-	}
+    public void collectI18nKeys2(HashMap<String, List<I18nKeyHolder>> s, Set<Object> seen) {
+    }
 
-	public void unbind()
-	{
-	}
+    public void collectVisiblePickersInScope(List<JoriaAccess[]> collection, Set<RuntimeParameter> visible, Stack<JoriaAccess> pathStack, Set<Object> seen) {
+    }
 
-	public boolean unbound()
-	{
-		return false;
-	}
+    public void unbind() {
+    }
 
-	public boolean bindableTo(JoriaAccess newBinding, JoriaAccess newParentBinding)
-	{
-		return false;
-	}
+    public boolean unbound() {
+        return false;
+    }
 
-	public void rebind(JoriaAccess newBinding, JoriaAccess newParentBinding)
-	{
-	}
-	public void sortMembers()
-	{
-		if (elementType instanceof ClassView)
-			((ClassView)elementType).sortMembers();
-	}
-	
+    public boolean bindableTo(JoriaAccess newBinding, JoriaAccess newParentBinding) {
+        return false;
+    }
+
+    public void rebind(JoriaAccess newBinding, JoriaAccess newParentBinding) {
+    }
+
+    public void sortMembers() {
+        if (elementType instanceof ClassView)
+            ((ClassView) elementType).sortMembers();
+    }
+
 }

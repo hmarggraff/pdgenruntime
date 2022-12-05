@@ -3,15 +3,14 @@ package org.pdgen.model.run;
 
 import org.pdgen.model.cells.CellDef;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 /**
  * User: patrick
  * Date: Aug 14, 2006
  * Time: 12:56:07 PM
  */
-public interface Paragraph
-{
+public interface Paragraph {
     void backupSlice();
 
     int getRemainingSpan();   // TODO dieser müsste angepasst werden.
@@ -34,8 +33,9 @@ public interface Paragraph
 
     float getInnerY();
 
-	float roundUp(float smoothColHeight);
+    float roundUp(float smoothColHeight);
 
-	void saveSliceState();
-	void restoreSliceState();
+    void saveSliceState();
+
+    void restoreSliceState();
 }

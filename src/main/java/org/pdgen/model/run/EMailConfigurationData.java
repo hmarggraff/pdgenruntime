@@ -2,29 +2,22 @@
 package org.pdgen.model.run;
 //MARKER The strings in this file shall not be translated
 
-import org.pdgen.data.VariableProvider;
-import org.pdgen.data.DBData;
-import org.pdgen.data.JoriaDataException;
-import org.pdgen.data.DBString;
-import org.pdgen.data.JoriaAccess;
-import org.pdgen.data.I18nKeyHolder;
+import org.pdgen.data.*;
 import org.pdgen.data.view.RuntimeParameter;
-
-import java.util.HashMap;
-import java.util.Set;
-import java.util.List;
-import java.util.Stack;
-import java.io.Serializable;
-
 import org.pdgen.projection.ComputedField;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.Stack;
 
 /**
  * User: patrick
  * Date: Jul 21, 2005
  * Time: 2:16:55 PM
  */
-public class EMailConfigurationData implements VariableProvider, Serializable
-{
+public class EMailConfigurationData implements VariableProvider, Serializable {
     public static final String KEY = "EMAIL";
     private static final long serialVersionUID = 7L;
     ComputedField addressField;
@@ -32,87 +25,74 @@ public class EMailConfigurationData implements VariableProvider, Serializable
     ComputedField letterField;
     String sender;
     String reportFileName;
-    public String getAddress(DBData from, RunEnv env) throws JoriaDataException
-    {
-        return ((DBString)addressField.getValue(from, null, env)).getStringValue();
-    }
-    public String getSubject(DBData from, RunEnv env) throws JoriaDataException
-    {
-        return ((DBString)subjectField.getValue(from, null, env)).getStringValue();
-    }
-    public String getLetter(DBData from, RunEnv env) throws JoriaDataException
-    {
-        return ((DBString)letterField.getValue(from, null, env)).getStringValue();
+
+    public String getAddress(DBData from, RunEnv env) throws JoriaDataException {
+        return ((DBString) addressField.getValue(from, null, env)).getStringValue();
     }
 
-    public void collectVariables(Set<RuntimeParameter> s, Set<Object> seen)
-    {
+    public String getSubject(DBData from, RunEnv env) throws JoriaDataException {
+        return ((DBString) subjectField.getValue(from, null, env)).getStringValue();
+    }
+
+    public String getLetter(DBData from, RunEnv env) throws JoriaDataException {
+        return ((DBString) letterField.getValue(from, null, env)).getStringValue();
+    }
+
+    public void collectVariables(Set<RuntimeParameter> s, Set<Object> seen) {
         addressField.collectVariables(s, seen);
         subjectField.collectVariables(s, seen);
         letterField.collectVariables(s, seen);
     }
 
-    public void collectI18nKeys2(HashMap<String,List<I18nKeyHolder>> s, Set<Object> seen)
-    {
+    public void collectI18nKeys2(HashMap<String, List<I18nKeyHolder>> s, Set<Object> seen) {
         addressField.collectI18nKeys2(s, seen);
         subjectField.collectI18nKeys2(s, seen);
         letterField.collectI18nKeys2(s, seen);
     }
 
-    public void collectVisiblePickersInScope(List<JoriaAccess[]> collection, Set<RuntimeParameter> visible, Stack<JoriaAccess> pathStack, Set<Object> seen)
-    {
+    public void collectVisiblePickersInScope(List<JoriaAccess[]> collection, Set<RuntimeParameter> visible, Stack<JoriaAccess> pathStack, Set<Object> seen) {
         addressField.collectVisiblePickersInScope(collection, visible, pathStack, seen);
         subjectField.collectVisiblePickersInScope(collection, visible, pathStack, seen);
         letterField.collectVisiblePickersInScope(collection, visible, pathStack, seen);
     }
 
-    public ComputedField getAddressField()
-    {
+    public ComputedField getAddressField() {
         return addressField;
     }
 
-    public ComputedField getLetterField()
-    {
+    public ComputedField getLetterField() {
         return letterField;
     }
 
-    public ComputedField getSubjectField()
-    {
+    public ComputedField getSubjectField() {
         return subjectField;
     }
 
-    public void setAddressField(ComputedField addressField)
-    {
+    public void setAddressField(ComputedField addressField) {
         this.addressField = addressField;
     }
 
-    public void setLetterField(ComputedField letterField)
-    {
+    public void setLetterField(ComputedField letterField) {
         this.letterField = letterField;
     }
 
-    public void setSender(String sender)
-    {
+    public void setSender(String sender) {
         this.sender = sender;
     }
 
-    public void setSubjectField(ComputedField subjectField)
-    {
+    public void setSubjectField(ComputedField subjectField) {
         this.subjectField = subjectField;
     }
 
-    public String getSender()
-    {
+    public String getSender() {
         return sender;
     }
 
-    public String getReportFileName()
-    {
+    public String getReportFileName() {
         return reportFileName;
     }
 
-    public void setReportFileName(String reportFileName)
-    {
+    public void setReportFileName(String reportFileName) {
         this.reportFileName = reportFileName;
     }
 }

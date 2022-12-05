@@ -3,8 +3,7 @@ package org.pdgen.model.cells;
 
 import org.pdgen.model.run.AggregateCollector;
 
-public interface EnvValueCell
-{
+public interface EnvValueCell {
 
-	String getFormattedString(AggregateCollector into);
+    String getFormattedString(AggregateCollector into);
 }

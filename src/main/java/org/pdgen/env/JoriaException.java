@@ -6,22 +6,18 @@ package org.pdgen.env;
  * api functions. Catching this exception catches all exceptions. Please be aware that
  * Pdgen also throws Errors. These are the <a href="JoriaUserError">JoriaUserError</a> and the <a href="JoriaInternalError">JoriaInternalError</a>.
  */
-public abstract class JoriaException extends Exception
-{
+public abstract class JoriaException extends Exception {
     private static final long serialVersionUID = 7L;
 
-    public JoriaException(String s)
-	{
-		super(s);
-	}
+    public JoriaException(String s) {
+        super(s);
+    }
 
-	protected JoriaException(Throwable cause)
-	{
-		super(cause);
-	}
+    protected JoriaException(Throwable cause) {
+        super(cause);
+    }
 
-	protected JoriaException(String message, Throwable cause)
-	{
-		super(message, cause);
-	}
+    protected JoriaException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

@@ -2,9 +2,8 @@
 package org.pdgen.data;
 
 
-public interface DBObject extends DBData
-{
-   boolean isAssignableTo(JoriaType t);
+public interface DBObject extends DBData {
+    boolean isAssignableTo(JoriaType t);
 
     boolean isValid();
 }

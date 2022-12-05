@@ -13,19 +13,16 @@ import java.util.Set;
 
 public interface RuntimeParameter extends VariableProvider, JoriaAccess, Nameable, Comparable<RuntimeParameter> {
 
-    public static void addAll(Set<RuntimeParameter> res, Set<RuntimeParameter> vars, final Set<Object> seen)
-    {
+    static void addAll(Set<RuntimeParameter> res, Set<RuntimeParameter> vars, final Set<Object> seen) {
         if (vars == null)
             return;
-        for (RuntimeParameter var : vars)
-        {
+        for (RuntimeParameter var : vars) {
             res.add(var);
             if (seen.contains(var))
                 continue;
             seen.add(var);
-            if (var instanceof VariableProvider)
-            {
-                VariableProvider vp = (VariableProvider) var;
+            if (var instanceof VariableProvider) {
+                VariableProvider vp = var;
                 vp.collectVariables(res, seen);
             }
         }

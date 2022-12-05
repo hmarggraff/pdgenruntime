@@ -13,110 +13,91 @@ import java.util.List;
 import java.util.Set;
 
 
-public abstract class BinaryOperatorNode extends Node
-{
-	// fields
-	protected NodeInterface left;
-	protected NodeInterface right;
-	protected int type;
+public abstract class BinaryOperatorNode extends Node {
+    // fields
+    protected NodeInterface left;
+    protected NodeInterface right;
+    protected int type;
 
-	public BinaryOperatorNode(int p0, NodeInterface p1, NodeInterface p2)
-	{
-		left = p1;
-		right = p2;
-		type = p0;
-	}
+    public BinaryOperatorNode(int p0, NodeInterface p1, NodeInterface p2) {
+        left = p1;
+        right = p2;
+        type = p0;
+    }
 
-	public int getTypeCode()
-	{
-		return type;
-	}
+    public int getTypeCode() {
+        return type;
+    }
 
-	public boolean isBoolean()
-	{
-		return type == NodeInterface.booleanType;
-	}
+    public boolean isBoolean() {
+        return type == NodeInterface.booleanType;
+    }
 
-	public boolean isCharacter()
-	{
-		return type == NodeInterface.charType;
-	}
+    public boolean isCharacter() {
+        return type == NodeInterface.charType;
+    }
 
-	public boolean isCollection()
-	{
-		return type == NodeInterface.collectionType || type == NodeInterface.dictionaryType;
-	}
+    public boolean isCollection() {
+        return type == NodeInterface.collectionType || type == NodeInterface.dictionaryType;
+    }
 
-	public boolean isLiteralCollection()
-	{
-		return type == NodeInterface.literalCollectionType;
-	}
+    public boolean isLiteralCollection() {
+        return type == NodeInterface.literalCollectionType;
+    }
 
-	public boolean isDictionary()
-	{
-		return type == NodeInterface.dictionaryType;
-	}
+    public boolean isDictionary() {
+        return type == NodeInterface.dictionaryType;
+    }
 
-	public boolean isInteger()
-	{
-		return type == NodeInterface.intType;
-	}
+    public boolean isInteger() {
+        return type == NodeInterface.intType;
+    }
 
-	public boolean isReal()
-	{
-		return type == NodeInterface.realType || type == NodeInterface.intType;
-	}
+    public boolean isReal() {
+        return type == NodeInterface.realType || type == NodeInterface.intType;
+    }
 
-	public boolean isObject()
-	{
-		return type == NodeInterface.objectType;
-	}
+    public boolean isObject() {
+        return type == NodeInterface.objectType;
+    }
 
-	public boolean isString()
-	{
-		return type == NodeInterface.stringType;
-	}
+    public boolean isString() {
+        return type == NodeInterface.stringType;
+    }
 
-	public boolean isDate()
-	{
-		return type == NodeInterface.dateType;
-	}
-	public boolean isBlob()
-	{
-		return type == NodeInterface.blobType;
-	}
+    public boolean isDate() {
+        return type == NodeInterface.dateType;
+    }
 
-	public boolean hasMofifiedAccess()
-	{
-		return left.hasMofifiedAccess() || right.hasMofifiedAccess();
-	}
+    public boolean isBlob() {
+        return type == NodeInterface.blobType;
+    }
 
-	public void cacheDeferredFields(final RunEnv env, final DBData from) throws JoriaDataException
-	{
-		left.cacheDeferredFields(env, from);
-		right.cacheDeferredFields(env, from);
-	}
+    public boolean hasMofifiedAccess() {
+        return left.hasMofifiedAccess() || right.hasMofifiedAccess();
+    }
 
-	public void i18nKeys(HashMap<String, List<I18nKeyHolder>> collect)
-	{
-		left.i18nKeys(collect);
-		right.i18nKeys(collect);
-	}
+    public void cacheDeferredFields(final RunEnv env, final DBData from) throws JoriaDataException {
+        left.cacheDeferredFields(env, from);
+        right.cacheDeferredFields(env, from);
+    }
 
-	public void getUsedAccessors(Set<JoriaAccess> ret)
-	{
-		left.getUsedAccessors(ret);
-		right.getUsedAccessors(ret);
-	}
+    public void i18nKeys(HashMap<String, List<I18nKeyHolder>> collect) {
+        left.i18nKeys(collect);
+        right.i18nKeys(collect);
+    }
 
-	public boolean hasText(final String text, final boolean searchLabels, final boolean searchData)
-	{
-		return left.hasText(text, searchLabels, searchData) || right.hasText(text, searchLabels, searchData);
-	}
+    public void getUsedAccessors(Set<JoriaAccess> ret) {
+        left.getUsedAccessors(ret);
+        right.getUsedAccessors(ret);
+    }
 
-	public void collectVariables(final Set<RuntimeParameter> set, final Set<Object> seen)
-	{
-		left.collectVariables(set, seen);
-		right.collectVariables(set, seen);
-	}
+    public boolean hasText(final String text, final boolean searchLabels, final boolean searchData) {
+        return left.hasText(text, searchLabels, searchData) || right.hasText(text, searchLabels, searchData);
+    }
+
+    public void collectVariables(final Set<RuntimeParameter> set, final Set<Object> seen) {
+        left.collectVariables(set, seen);
+        right.collectVariables(set, seen);
+    }
 }

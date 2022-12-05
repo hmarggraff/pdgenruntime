@@ -3,17 +3,14 @@ package org.pdgen.data;
 
 import org.pdgen.env.JoriaException;
 
-public class JoriaDataException extends JoriaException
-{
+public class JoriaDataException extends JoriaException {
     private static final long serialVersionUID = 7L;
 
-    public JoriaDataException(String message)
-	{
-		super(message);
-	}
+    public JoriaDataException(String message) {
+        super(message);
+    }
 
-    public JoriaDataException(String message, Throwable cause)
-    {
+    public JoriaDataException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -8,40 +8,34 @@ import java.text.AttributedCharacterIterator;
  * Date: Jan 8, 2007
  * Time: 12:16:28 PM
  */
-public class IntStyleAttribute extends StyleAttribute
-{
+public class IntStyleAttribute extends StyleAttribute {
     private static final long serialVersionUID = 7L;
     private int value;
 
-	public IntStyleAttribute(AttributedCharacterIterator.Attribute key, int value)
-	{
-		super(key);
-		this.value = value;
-	}
+    public IntStyleAttribute(AttributedCharacterIterator.Attribute key, int value) {
+        super(key);
+        this.value = value;
+    }
 
-	public IntStyleAttribute(AttributedCharacterIterator.Attribute key, int value, StyleAttribute next)
-	{
-		super(key, next);
-		this.value = value;
-	}
+    public IntStyleAttribute(AttributedCharacterIterator.Attribute key, int value, StyleAttribute next) {
+        super(key, next);
+        this.value = value;
+    }
 
-	public Object getValue()
-	{
-		return value;
-	}
+    public Object getValue() {
+        return value;
+    }
 
-	public Object setValue(Object value)
-	{
-		float oldVal = this.value;
-		this.value = (Integer) value;
-		return oldVal;
-	}
+    public Object setValue(Object value) {
+        float oldVal = this.value;
+        this.value = (Integer) value;
+        return oldVal;
+    }
 
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof IntStyleAttribute))
-			return false;
-		IntStyleAttribute sta = (IntStyleAttribute) obj;
-		return key.equals(sta.key) && value == sta.value;
-	}
+    public boolean equals(Object obj) {
+        if (!(obj instanceof IntStyleAttribute))
+            return false;
+        IntStyleAttribute sta = (IntStyleAttribute) obj;
+        return key.equals(sta.key) && value == sta.value;
+    }
 }

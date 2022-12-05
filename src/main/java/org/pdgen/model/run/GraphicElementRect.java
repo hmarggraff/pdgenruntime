@@ -4,34 +4,28 @@ package org.pdgen.model.run;
 import org.pdgen.model.cells.CellDef;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 
-public class GraphicElementRect extends GraphElContent
-{
+public class GraphicElementRect extends GraphElContent {
     private static final long serialVersionUID = 7L;
 
-    private GraphicElementRect(GraphicElementRect from)
-    {
+    private GraphicElementRect(GraphicElementRect from) {
         super(from);
     }
 
-    public GraphicElementRect(Color color, CellDef src, ImageIcon backgroundImage)
-	{
-		super(color, src, backgroundImage);
-	}
+    public GraphicElementRect(Color color, CellDef src, ImageIcon backgroundImage) {
+        super(color, src, backgroundImage);
+    }
 
-    public GraphElContent copy()
-    {
+    public GraphElContent copy() {
         return new GraphicElementRect(this);
     }
 
-    public float getContentWidth()
-	{
-		return width;
-	}
+    public float getContentWidth() {
+        return width;
+    }
 
-	public void print(JoriaPrinter pr)
-	{
-		pr.printGERect(this);
-	}
+    public void print(JoriaPrinter pr) {
+        pr.printGERect(this);
+    }
 }

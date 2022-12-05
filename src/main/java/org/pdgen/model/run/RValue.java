@@ -5,9 +5,8 @@ import org.pdgen.data.view.AggregateDef;
 
 import java.util.ArrayList;
 
-public interface RValue extends RVAny
-{
-	String get(int at);
+public interface RValue extends RVAny {
+    String get(int at);
 
-	void accumulate(AggregateCollector collector, ArrayList<AggregateDef> aggregates, int iter);
+    void accumulate(AggregateCollector collector, ArrayList<AggregateDef> aggregates, int iter);
 }

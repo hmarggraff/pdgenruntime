@@ -4,10 +4,8 @@ package org.pdgen.model.run;
 /**
  * pseudo value holder for the object counter (rank) in a collection
  */
-public class RVRank implements RVAny
-{
+public class RVRank implements RVAny {
 
-	public RVRank()
-	{
-	}
+    public RVRank() {
+    }
 }

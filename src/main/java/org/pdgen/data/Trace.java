@@ -70,7 +70,7 @@ public class Trace {
             "ui",
             "style",
             "serialize",
-            "dump", "wizards", "actionlog", "memory", 
+            "dump", "wizards", "actionlog", "memory",
             "mapdir", "stepper", "copy", "paint",
             "baseInit"};
     static final Vector<String> actionLog = new Vector<String>();
@@ -88,7 +88,7 @@ public class Trace {
             actionLog.setSize(900);
         }
         actionLog.add(txt);
-        log(actionlog, txt);
+        Log.action.debug(txt);
     }
 
     /*
@@ -148,8 +148,7 @@ public class Trace {
 
     public static void logWarn(String message) {
         // noinspection ConstantConditions
-        if (compiledLogLevel >= warnLogLevel && warnLogLevel <= traceLevel)
-        {
+        if (compiledLogLevel >= warnLogLevel && warnLogLevel <= traceLevel) {
             printWithSource(message);
         }
     }

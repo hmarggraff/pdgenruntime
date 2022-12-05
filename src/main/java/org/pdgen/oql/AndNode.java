@@ -8,36 +8,30 @@ import org.pdgen.data.JoriaAccess;
 import org.pdgen.data.JoriaDataException;
 import org.pdgen.model.run.RunEnv;
 
-public class AndNode extends BooleanOperatorNode
-{
+public class AndNode extends BooleanOperatorNode {
 
-	public AndNode(int p0, NodeInterface p1, NodeInterface p2)
-	{
-		super(p0, p1, p2);
-	}
+    public AndNode(int p0, NodeInterface p1, NodeInterface p2) {
+        super(p0, p1, p2);
+    }
 
-	public boolean getBooleanValue(RunEnv env, DBData p0) throws JoriaDataException
-	{
-		return left.getBooleanValue(env, p0) && right.getBooleanValue(env, p0);
-	}
+    public boolean getBooleanValue(RunEnv env, DBData p0) throws JoriaDataException {
+        return left.getBooleanValue(env, p0) && right.getBooleanValue(env, p0);
+    }
 
-	public String getTokenString()
-	{
-		return left.getTokenString() + " and " + right.getTokenString();
-	}
+    public String getTokenString() {
+        return left.getTokenString() + " and " + right.getTokenString();
+    }
 
-	public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel)
-	{
-		final int newLevel = 2;
-		optBrace(bindingLevel, newLevel, collector, '(');
-		left.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
-		collector.append(" and ");
-		right.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
-		optBrace(bindingLevel, newLevel, collector, ')');
-	}
+    public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel) {
+        final int newLevel = 2;
+        optBrace(bindingLevel, newLevel, collector, '(');
+        left.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
+        collector.append(" and ");
+        right.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
+        optBrace(bindingLevel, newLevel, collector, ')');
+    }
 
-    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException
-    {
+    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException {
         return new DBBooleanImpl(null, left.getBooleanValue(env, p0) && right.getBooleanValue(env, p0));
     }
 }

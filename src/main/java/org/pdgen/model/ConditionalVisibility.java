@@ -1,16 +1,15 @@
 // This software may be used as allowed by the Gnu Affero General Public License. Details are in the file LICENSE, that must be included in the distribution of ths software.
 package org.pdgen.model;
 
-import org.pdgen.oql.JoriaQuery;
 import org.pdgen.data.JoriaClass;
+import org.pdgen.oql.JoriaQuery;
 
-public interface ConditionalVisibility
-{
-	String getVisibilityCondition();
+public interface ConditionalVisibility {
+    String getVisibilityCondition();
 
-	void setVisibilityCondition(String newCondition);
+    void setVisibilityCondition(String newCondition);
 
-	JoriaQuery makeVisibilityQuery();
+    JoriaQuery makeVisibilityQuery();
 
-	JoriaClass getScope();
+    JoriaClass getScope();
 }

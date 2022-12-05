@@ -2,8 +2,7 @@
 package org.pdgen.data;
 
 
-public interface DBBoolean extends DBData
-{
+public interface DBBoolean extends DBData {
 
-   boolean getBooleanValue();
+    boolean getBooleanValue();
 }

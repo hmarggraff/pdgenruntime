@@ -5,44 +5,37 @@ package org.pdgen.data;
 import java.io.ObjectStreamException;
 
 
-public class DefaultIntLiteral extends AbstractJoriaLiteral
-{
+public class DefaultIntLiteral extends AbstractJoriaLiteral {
     private static final long serialVersionUID = 7L;
     static DefaultIntLiteral theInstance = new DefaultIntLiteral();
 
-	/* ----------------------------------------------------------------------- instance */
-	public static DefaultIntLiteral instance()
-	{
-		return theInstance;
-	}
+    /* ----------------------------------------------------------------------- instance */
+    public static DefaultIntLiteral instance() {
+        return theInstance;
+    }
 
-	/* ----------------------------------------------------------------------- getName */
-	public String getName()
-	{
-		return "int";
-	}
+    /* ----------------------------------------------------------------------- getName */
+    public String getName() {
+        return "int";
+    }
 
-	/* ----------------------------------------------------------------------- getParamString */
-	public String getParamString()
-	{
-		return "DefaultIntLiteral";
-	}
+    /* ----------------------------------------------------------------------- getParamString */
+    public String getParamString() {
+        return "DefaultIntLiteral";
+    }
 
-	/* ----------------------------------------------------------------------- isIntegerLiteral */
-	public boolean isIntegerLiteral()
-	{
-		return true;
-	}
+    /* ----------------------------------------------------------------------- isIntegerLiteral */
+    public boolean isIntegerLiteral() {
+        return true;
+    }
 
-	/* ----------------------------------------------------------------------- isLiteral */
-	public boolean isLiteral()
-	{
-		return true;
-	}
+    /* ----------------------------------------------------------------------- isLiteral */
+    public boolean isLiteral() {
+        return true;
+    }
 
-	/* ----------------------------------------------------------------------- readResolve */
-	protected Object readResolve() throws ObjectStreamException
-	{
-		return theInstance;
-	}
+    /* ----------------------------------------------------------------------- readResolve */
+    protected Object readResolve() throws ObjectStreamException {
+        return theInstance;
+    }
 }

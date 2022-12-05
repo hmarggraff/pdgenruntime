@@ -9,8 +9,7 @@ import org.pdgen.env.JoriaException;
  * Date: Dec 13, 2004
  * Time: 2:31:53 PM
  */
-public interface AskVariablesHelper
-{
+public interface AskVariablesHelper {
     boolean processMissingVariables(RuntimeParameter[] pvars, boolean multi, RunEnvImpl runEnv) throws JoriaException;
 
     boolean removeBoundVariable(RuntimeParameter pvar);

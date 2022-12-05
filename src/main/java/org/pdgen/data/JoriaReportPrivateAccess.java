@@ -8,7 +8,6 @@ import java.util.Map;
  * Date: Nov 29, 2004
  * Time: 10:03:00 AM
  */
-public interface JoriaReportPrivateAccess extends JoriaAccess
-{
-	JoriaAccess copyReportPrivateAccess(Map<Object, Object> copiedData);
+public interface JoriaReportPrivateAccess extends JoriaAccess {
+    JoriaAccess copyReportPrivateAccess(Map<Object, Object> copiedData);
 }

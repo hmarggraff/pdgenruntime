@@ -5,23 +5,22 @@ import org.pdgen.data.view.Filter;
 import org.pdgen.data.view.SortOrder;
 import org.pdgen.model.run.RunEnv;
 
-public interface JoriaCollection extends JoriaType
-{
-	JoriaClass getElementMatchType();
+public interface JoriaCollection extends JoriaType {
+    JoriaClass getElementMatchType();
 
-	JoriaClass getElementType();
+    JoriaClass getElementType();
 
-	String getElementXmlTag();
+    String getElementXmlTag();
 
-	SortOrder[] getSorting();
+    SortOrder[] getSorting();
 
-	Filter getFilter();
+    Filter getFilter();
 
-	void setFilter(Filter f);
+    void setFilter(Filter f);
 
-	boolean isLarge();
+    boolean isLarge();
 
-	int getMinTopN(RunEnv env) throws JoriaDataException;
+    int getMinTopN(RunEnv env) throws JoriaDataException;
 
     boolean hasFilterOrSortingOrTopN();
 

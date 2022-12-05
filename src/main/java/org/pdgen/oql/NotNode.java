@@ -8,38 +8,32 @@ import org.pdgen.data.JoriaAccess;
 import org.pdgen.data.JoriaDataException;
 import org.pdgen.model.run.RunEnv;
 
-public class NotNode extends UnaryOperatorNode
-{
-	public NotNode(NodeInterface p0)
-	{
-		super(p0);
-	}
+public class NotNode extends UnaryOperatorNode {
+    public NotNode(NodeInterface p0) {
+        super(p0);
+    }
 
-	public boolean getBooleanValue(RunEnv env, DBData p0) throws JoriaDataException
-	{
-		return !sub.getBooleanValue(env, p0);
-	}
+    public boolean getBooleanValue(RunEnv env, DBData p0) throws JoriaDataException {
+        return !sub.getBooleanValue(env, p0);
+    }
 
-	public String getTokenString()
-	{
-		return "not " + sub.getTokenString();
-	}
-	public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel)
-	{
-		final int newLevel = 8;
-		optBrace(bindingLevel, newLevel, collector, '(');
-		collector.append(" not ");
-		sub.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
-		optBrace(bindingLevel, newLevel, collector, ')');
-	}
+    public String getTokenString() {
+        return "not " + sub.getTokenString();
+    }
 
-    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException
-    {
+    public void buildTokenStringWithRenamedAccess(final JoriaAccess access, final String newName, final StringBuffer collector, final int bindingLevel) {
+        final int newLevel = 8;
+        optBrace(bindingLevel, newLevel, collector, '(');
+        collector.append(" not ");
+        sub.buildTokenStringWithRenamedAccess(access, newName, collector, newLevel);
+        optBrace(bindingLevel, newLevel, collector, ')');
+    }
+
+    public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException {
         return new DBBooleanImpl(null, getBooleanValue(env, p0));
     }
 
-	public boolean isBoolean()
-	{
-		return true;
-	}
+    public boolean isBoolean() {
+        return true;
+    }
 }
