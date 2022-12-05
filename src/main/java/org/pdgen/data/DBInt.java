@@ -5,7 +5,7 @@ package org.pdgen.data;
 public interface DBInt extends DBData, java.io.Serializable
 {
 
-   /** ----------------------------------------------------------------------- getIntValue */
+   /* ----------------------------------------------------------------------- getIntValue */
 
    long getIntValue();
 

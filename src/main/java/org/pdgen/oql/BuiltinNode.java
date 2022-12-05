@@ -42,19 +42,19 @@ public class BuiltinNode extends Node implements JoriaTypedNode
 		return null;
 	}
 
-	/** ----------------------------------------------------------------------- getBooleanValue */
+	/* ----------------------------------------------------------------------- getBooleanValue */
 	public boolean getBooleanValue(RunEnv env, DBData p0) throws JoriaDataException
 	{
 		return ((Exec.ExecBoolean) exec).execute(env, p0, getArgValues(env, p0));
 	}
 
-	/** ----------------------------------------------------------------------- getCharacterValue */
+	/* ----------------------------------------------------------------------- getCharacterValue */
 	public char getCharacterValue(RunEnv env, DBData p0) throws JoriaDataException
 	{
 		return ((Exec.ExecChar) exec).execute(env, p0, getArgValues(env, p0));
 	}
 
-	/** ----------------------------------------------------------------------- getFloatValue */
+	/* ----------------------------------------------------------------------- getFloatValue */
 	public double getFloatValue(RunEnv env, DBData p0) throws JoriaDataException
 	{
         if(exec instanceof Exec.ExecReal)
@@ -113,7 +113,7 @@ public class BuiltinNode extends Node implements JoriaTypedNode
 		return null;
 	}
 
-	/** ----------------------------------------------------------------------- getValue */
+	/* ----------------------------------------------------------------------- getValue */
 	public DBData getValue(RunEnv env, DBData p0) throws JoriaDataException
 	{
 		if (exec instanceof Exec.ExecDBData)
@@ -162,25 +162,25 @@ public class BuiltinNode extends Node implements JoriaTypedNode
 		return false;
 	}
 
-	/** ----------------------------------------------------------------------- isInteger */
+	/* ----------------------------------------------------------------------- isInteger */
 	public boolean isInteger()
 	{
 		return exec instanceof Exec.ExecInteger;
 	}
 
-	/** ----------------------------------------------------------------------- isNumber */
+	/* ----------------------------------------------------------------------- isNumber */
 	public boolean isReal()
 	{
 		return exec instanceof Exec.ExecInteger || exec instanceof Exec.ExecReal;
 	}
 
-	/** ----------------------------------------------------------------------- isObject */
+	/* ----------------------------------------------------------------------- isObject */
 	public boolean isObject()
 	{
 		return exec instanceof Exec.ExecDBData;
 	}
 
-	/** ----------------------------------------------------------------------- isString */
+	/* ----------------------------------------------------------------------- isString */
 	public boolean isString()
 	{
 		return exec instanceof Exec.ExecString;

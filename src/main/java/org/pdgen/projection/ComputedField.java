@@ -419,7 +419,7 @@ public class ComputedField extends AbstractTypedJoriaAccess implements NameableA
 	 * Setting the parent must be done with care. Currently only if a template local formula is
 	 * put into a new view for the template
 	 *
-	 * @param view
+	 * @param view the parent view
 	 */
 	public void setParent(final JoriaClass view)
 	{

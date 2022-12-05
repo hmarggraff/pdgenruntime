@@ -9,19 +9,19 @@ import java.util.Hashtable;
 /**
  * A convenience implementation of FileFilter that filters out
  * all files except for those type extensions that it knows about.
- * <p/>
+ * <p>
  * Extensions are of the type ".foo", which is typically found on
  * Windows and Unix boxes, but not on Macinthosh. Case is ignored.
- * <p/>
+ * </p><p>
  * Example - create a new filter that filerts out all files
  * but gif and jpg image files:
- * <p/>
+ * </p><p>
  * JFileChooser chooser = new JFileChooser();
  * ExtensionFileFilter filter = new ExtensionFileFilter(
- * new String{"gif", "jpg"}, "JPEG & GIF Images")
+ * new String{"gif", "jpg"}, "JPEG and GIF Images")
  * chooser.addChoosableFileFilter(filter);
  * chooser.showOpenDialog(this);
- *
+ * </p>
  */
 public class ExtensionFileFilter extends FileFilter
 {
@@ -55,7 +55,6 @@ public class ExtensionFileFilter extends FileFilter
 	/**
 	 * Creates a file filter that accepts the given file type.
 	 * Example: new ExtensionFileFilter("jpg", "JPEG Image Images");
-	 * <p/>
 	 * Note that the "." before the extension is not needed. If
 	 * provided, it will be ignored.
 	 *
@@ -73,7 +72,6 @@ public class ExtensionFileFilter extends FileFilter
 	/**
 	 * Creates a file filter from the given string array.
 	 * Example: new ExtensionFileFilter(String {"gif", "jpg"});
-	 * <p/>
 	 * Note that the "." before the extension is not needed adn
 	 * will be ignored.
 	 *
@@ -85,9 +83,9 @@ public class ExtensionFileFilter extends FileFilter
 	}
 
 	/**
-	 * Creates a file filter from the given string array and description.
+	 * <p>Creates a file filter from the given string array and description.
 	 * Example: new ExtensionFileFilter(String {"gif", "jpg"}, "Gif and JPG Images");
-	 * <p/>
+	 * </p><p>
 	 * Note that the "." before the extension is not needed and will be ignored.
 	 *
 	 * @see #addExtension
@@ -104,9 +102,9 @@ public class ExtensionFileFilter extends FileFilter
 	}
 
 	/**
-	 * Return true if this file should be shown in the directory pane,
+	 * <p>Return true if this file should be shown in the directory pane,
 	 * false if it shouldn't.
-	 * <p/>
+	 * </p><p>
 	 * Files that begin with "." are ignored.
 	 *
 	 * @see #getExtension
@@ -129,6 +127,8 @@ public class ExtensionFileFilter extends FileFilter
 	 *
 	 * @see #getExtension
 	 * @see FileFilter#accept
+	 * @param f the file to extract the extension from
+	 * @return the files extension
 	 */
 	public String getExtension(File f)
 	{
@@ -145,16 +145,17 @@ public class ExtensionFileFilter extends FileFilter
 	}
 
 	/**
-	 * Adds a filetype "caret" extension to filter against.
-	 * <p/>
+	 * <p>Adds a filetype "caret" extension to filter against.
+	 * </p><p>
 	 * For example: the following code will create a filter that filters
 	 * out all files except those that end in ".jpg" and ".tif":
-	 * <p/>
+	 * </p><p>
 	 * ExtensionFileFilter filter = new ExtensionFileFilter();
 	 * filter.addExtension("jpg");
 	 * filter.addExtension("tif");
-	 * <p/>
+	 * </p><p>
 	 * Note that the "." before the extension is not needed and will be ignored.
+	 * @param extension the added extension
 	 */
 	public void addExtension(String extension)
 	{
@@ -202,7 +203,7 @@ public class ExtensionFileFilter extends FileFilter
 	/**
 	 * Sets the human readable description of this filter. For
 	 * example: filter.setDescription("Gif and JPG Images");
-	 *
+	 * @param description the text to show
 	 */
 	public void setDescription(String description)
 	{
@@ -211,11 +212,12 @@ public class ExtensionFileFilter extends FileFilter
 	}
 
 	/**
-	 * Determines whether the extension list (.jpg, .gif, etc) should
+	 * <p>Determines whether the extension list (.jpg, .gif, etc) should
 	 * show up in the human readable description.
-	 * <p/>
+	 * </p><p>
 	 * Only relevent if a description was provided in the constructor
 	 * or using setDescription();
+	 * @param b yes to show description
 	 *
 	 */
 	public void setExtensionListInDescription(boolean b)
@@ -225,12 +227,12 @@ public class ExtensionFileFilter extends FileFilter
 	}
 
 	/**
-	 * Returns whether the extension list (.jpg, .gif, etc) should
+	 * <p>Returns whether the extension list (.jpg, .gif, etc) should
 	 * show up in the human readable description.
-	 * <p/>
+	 * </p><p>
 	 * Only relevent if a description was provided in the constructor
 	 * or using setDescription();
-	 *
+	 * @return the description
 	 */
 	public boolean isExtensionListInDescription()
 	{

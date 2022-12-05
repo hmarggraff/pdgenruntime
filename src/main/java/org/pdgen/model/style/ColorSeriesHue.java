@@ -21,6 +21,10 @@ public class ColorSeriesHue implements ColorSeries
 	/**
 	 * Converts a value from HSV to RGB colorspace.
 	 * R,G,B all (0..255), H (0..360) (or -1 when S == 0), S (0..1), V (0..255)
+	 * @param h hue
+	 * @param s stauration
+	 * @param v value
+	 * @return the color value
 	 */
 	public static Color HSVtoRGB(float h, float s, float v)
 	{

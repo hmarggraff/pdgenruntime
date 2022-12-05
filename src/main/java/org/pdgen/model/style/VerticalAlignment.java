@@ -15,7 +15,7 @@ public class VerticalAlignment implements Serializable
     private static final long serialVersionUID = 7L;
     private float                         align;
 
-   /** ----------------------------------------------------------------------- VerticalAlignment */
+   /* ----------------------------------------------------------------------- VerticalAlignment */
 
    public VerticalAlignment()
    {

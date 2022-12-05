@@ -31,7 +31,7 @@ public class TrueNode extends Node
         return new DBBooleanImpl(null, true);
     }
 
-    /** ----------------------------------------------------------------------- isBoolean */
+    /* ----------------------------------------------------------------------- isBoolean */
 	public boolean isBoolean()
 	{
 		return true;

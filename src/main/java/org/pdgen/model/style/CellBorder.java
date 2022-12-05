@@ -40,12 +40,12 @@ public class CellBorder implements Serializable
         insetBorder.right = new JoriaBorder(JoriaBorder.SOLID, 0f, java.awt.Color.black, 0, 3);
 	}
 
-	/** ----------------------------------------------------------------------- CellBorder */
+	/* ----------------------------------------------------------------------- CellBorder */
 	public CellBorder()
 	{
 	}
 
-	/** ----------------------------------------------------------------------- CellBorder */
+	/* ----------------------------------------------------------------------- CellBorder */
 	public CellBorder(CellBorder from)
 	{
 		if (from == null)
@@ -56,31 +56,31 @@ public class CellBorder implements Serializable
 		bottom = JoriaBorder.newFrom(from.bottom);
 	}
 
-	/** ----------------------------------------------------------------------- getBottom */
+	/* ----------------------------------------------------------------------- getBottom */
 	public JoriaBorder getBottom()
 	{
 		return bottom;
 	}
 
-    /** ----------------------------------------------------------------------- getLeft */
+    /* ----------------------------------------------------------------------- getLeft */
     public JoriaBorder getLeft()
     {
         return left;
     }
 
-	/** ----------------------------------------------------------------------- getRight */
+	/* ----------------------------------------------------------------------- getRight */
 	public JoriaBorder getRight()
 	{
 		return right;
 	}
 
-	/** ----------------------------------------------------------------------- getTop */
+	/* ----------------------------------------------------------------------- getTop */
 	public JoriaBorder getTop()
 	{
 		return top;
 	}
 
-    /** ----------------------------------------------------------------------- newFrom */
+    /* ----------------------------------------------------------------------- newFrom */
 	public boolean equals(Object parm1)
 	{
 		if (parm1 == null || (parm1.getClass() != CellBorder.class))

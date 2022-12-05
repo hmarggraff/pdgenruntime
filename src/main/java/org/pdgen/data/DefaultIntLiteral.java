@@ -10,37 +10,37 @@ public class DefaultIntLiteral extends AbstractJoriaLiteral
     private static final long serialVersionUID = 7L;
     static DefaultIntLiteral theInstance = new DefaultIntLiteral();
 
-	/** ----------------------------------------------------------------------- instance */
+	/* ----------------------------------------------------------------------- instance */
 	public static DefaultIntLiteral instance()
 	{
 		return theInstance;
 	}
 
-	/** ----------------------------------------------------------------------- getName */
+	/* ----------------------------------------------------------------------- getName */
 	public String getName()
 	{
 		return "int";
 	}
 
-	/** ----------------------------------------------------------------------- getParamString */
+	/* ----------------------------------------------------------------------- getParamString */
 	public String getParamString()
 	{
 		return "DefaultIntLiteral";
 	}
 
-	/** ----------------------------------------------------------------------- isIntegerLiteral */
+	/* ----------------------------------------------------------------------- isIntegerLiteral */
 	public boolean isIntegerLiteral()
 	{
 		return true;
 	}
 
-	/** ----------------------------------------------------------------------- isLiteral */
+	/* ----------------------------------------------------------------------- isLiteral */
 	public boolean isLiteral()
 	{
 		return true;
 	}
 
-	/** ----------------------------------------------------------------------- readResolve */
+	/* ----------------------------------------------------------------------- readResolve */
 	protected Object readResolve() throws ObjectStreamException
 	{
 		return theInstance;

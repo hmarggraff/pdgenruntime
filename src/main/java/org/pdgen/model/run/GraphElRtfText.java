@@ -150,7 +150,7 @@ public class GraphElRtfText extends GraphElContent
 		 * Child views can call this on the parent to indicate that
 		 * the preference has changed.  The root view routes this to
 		 * invalidate on the hosting component.
-		 * <p/>
+		 * </p><p>
 		 * This can be called on a different thread from the
 		 * event dispatching thread and is basically unsafe to
 		 * propagate into the component.  To make this safe,

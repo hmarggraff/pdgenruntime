@@ -212,7 +212,7 @@ public class PageMaster implements Serializable
 
 	/**
 	 * sets the data scope for the report and all its matching frames.
-	 * @param newRoot
+	 * @param newRoot the new root to use
 	 */
 	public void setDataAll(final JoriaAccess newRoot)
 	{

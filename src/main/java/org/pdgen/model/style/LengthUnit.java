@@ -21,7 +21,7 @@ public class LengthUnit implements Serializable
    protected float                factor;
    protected String               name = "";
 
-	/** ----------------------------------------------------------------------- LengthUnit */
+	/* ----------------------------------------------------------------------- LengthUnit */
 
    public LengthUnit(String name, float factor)
    {
@@ -29,14 +29,14 @@ public class LengthUnit implements Serializable
       this.factor = factor;
    }
 
-   /** ----------------------------------------------------------------------- getFactor */
+   /* ----------------------------------------------------------------------- getFactor */
 
    public float getFactor()
    {
       return factor;
    }
 
-   /** ----------------------------------------------------------------------- getLengthUnits */
+   /* ----------------------------------------------------------------------- getLengthUnits */
 
    public static LengthUnit[] getLengthUnits()
    {

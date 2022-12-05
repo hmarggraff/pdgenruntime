@@ -21,7 +21,6 @@ public abstract class AbstractJoriaDictionary implements JoriaDictionary
    protected transient JoriaType  keyCollectionType;
    protected transient JoriaType  valueCollectionType;
 
-   /** ----------------------------------------------------------------------- AbstractJoriaDictionary */
 
    protected AbstractJoriaDictionary(JoriaClass et, JoriaType kt, JoriaType vt, JoriaType kct, JoriaType vct)
    {
@@ -32,98 +31,98 @@ public abstract class AbstractJoriaDictionary implements JoriaDictionary
       valueCollectionType = vct;
    }
 
-	/** ----------------------------------------------------------------------- getElementType */
+	/* ----------------------------------------------------------------------- getElementType */
 
    public JoriaClass getElementType()
    {
       return elementType;
    }
 
-   /** ----------------------------------------------------------------------- getKeyType */
+   /* ----------------------------------------------------------------------- getKeyType */
 
    public JoriaType getKeyType()
    {
       return keyType;
    }
 
-   /** ----------------------------------------------------------------------- getValueType */
+   /* ----------------------------------------------------------------------- getValueType */
 
    public JoriaType getValueType()
    {
       return valueType;
    }
 
-   /** ----------------------------------------------------------------------- getKeyCollectionType */
+   /* ----------------------------------------------------------------------- getKeyCollectionType */
 
    public JoriaType getKeyCollectionType()
    {
       return keyCollectionType;
    }
 
-   /** ----------------------------------------------------------------------- getValueCollectionType */
+   /* ----------------------------------------------------------------------- getValueCollectionType */
 
    public JoriaType getValueCollectionType()
    {
       return valueCollectionType;
    }
 
-   /** ----------------------------------------------------------------------- isBlob */
+   /* ----------------------------------------------------------------------- isBlob */
 
    public boolean isBlob()
    {
       return false;
    }
 
-   /** ----------------------------------------------------------------------- isClass */
+   /* ----------------------------------------------------------------------- isClass */
 
    public boolean isClass()
    {
       return false;
    }
 
-   /** ----------------------------------------------------------------------- isCollection */
+   /* ----------------------------------------------------------------------- isCollection */
 
    public boolean isCollection()
    {
       return true;
    }
 
-	/** ----------------------------------------------------------------------- isDictionary */
+	/* ----------------------------------------------------------------------- isDictionary */
 
    public boolean isDictionary()
    {
       return true;
    }
 
-   /** ----------------------------------------------------------------------- isInternal */
+   /* ----------------------------------------------------------------------- isInternal */
 
    public boolean isInternal()
    {
       return false;
    }
 
-   /** ----------------------------------------------------------------------- isLiteral */
+   /* ----------------------------------------------------------------------- isLiteral */
 
    public boolean isLiteral()
    {
       return false;
    }
 
-   /** ----------------------------------------------------------------------- isUnknown */
+   /* ----------------------------------------------------------------------- isUnknown */
 
    public boolean isUnknown()
    {
       return false;
    }
 
-   /** ----------------------------------------------------------------------- isUserClass */
+   /* ----------------------------------------------------------------------- isUserClass */
 
    public boolean isUserClass()
    {
       return true;
    }
 
-   /** ----------------------------------------------------------------------- isView */
+   /* ----------------------------------------------------------------------- isView */
 
    public boolean isView()
    {
@@ -135,7 +134,7 @@ public abstract class AbstractJoriaDictionary implements JoriaDictionary
 		return false;
 	}
 
-   /** ----------------------------------------------------------------------- isVoid */
+   /* ----------------------------------------------------------------------- isVoid */
 
    public boolean isVoid()
    {

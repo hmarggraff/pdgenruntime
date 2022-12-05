@@ -22,21 +22,21 @@ public class DBRealImpl extends AbstractDBData implements DBReal
       else return false;
    }
 
-   /** ----------------------------------------------------------------------- getRealValue */
+   /* ----------------------------------------------------------------------- getRealValue */
 
    public double getRealValue()
    {
       return myReal;
    }
 
-   /** ----------------------------------------------------------------------- isNull */
+   /* ----------------------------------------------------------------------- isNull */
 
    public boolean isNull()
    {
 	   return Double.isNaN(myReal);      
    }
 
-   /** ----------------------------------------------------------------------- toString */
+   /* ----------------------------------------------------------------------- toString */
 
    public String toString()
    {

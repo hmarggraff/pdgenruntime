@@ -9,7 +9,7 @@ public class DefaultImageLiteral extends AbstractJoriaLiteral
    static final long         serialVersionUID = -1L;
    static DefaultImageLiteral instance = new DefaultImageLiteral();
 
-   /** ----------------------------------------------------------------------- instance */
+   /* ----------------------------------------------------------------------- instance */
 
    public static DefaultImageLiteral instance()
    {
@@ -17,21 +17,21 @@ public class DefaultImageLiteral extends AbstractJoriaLiteral
    }
 
 
-   /** ----------------------------------------------------------------------- getName */
+   /* ----------------------------------------------------------------------- getName */
 
    public String getName()
    {
       return "Image";
    }
 
-   /** ----------------------------------------------------------------------- getParamString */
+   /* ----------------------------------------------------------------------- getParamString */
 
    public String getParamString()
    {
       return "DefaultImageLiteral";
    }
 
-   /** ----------------------------------------------------------------------- isRealLiteral */
+   /* ----------------------------------------------------------------------- isRealLiteral */
 
     public boolean isImage()
     {
@@ -44,14 +44,14 @@ public class DefaultImageLiteral extends AbstractJoriaLiteral
 		return true;
 	}
 
-	/** ----------------------------------------------------------------------- isLiteral */
+	/* ----------------------------------------------------------------------- isLiteral */
 
    public boolean isLiteral()
    {
       return true;
    }
 
-   /** ----------------------------------------------------------------------- readResolve */
+   /* ----------------------------------------------------------------------- readResolve */
 
    protected Object readResolve() throws ObjectStreamException
    {

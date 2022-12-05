@@ -25,9 +25,11 @@ public class TopNBuilder
 
 	/**
 	 * extracts the topN froma collection that is already filtered
-	 * @param coll
+	 * @param coll the collection to process
+	 * @param topN how many to extract
+	 * @param comp Defines sort order
 	 * @return sorted collection of topN elements
-	 * @throws JoriaDataException
+	 * @throws JoriaDataException if data cannot be processed
 	 */
 
 	public static List<DBObject> extractTopN(DBCollection coll, int topN, ProjectionComparator comp) throws JoriaDataException

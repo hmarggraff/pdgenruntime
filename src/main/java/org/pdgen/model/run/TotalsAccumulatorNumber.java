@@ -21,7 +21,7 @@ public class TotalsAccumulatorNumber implements TotalsAccumulator
 		this.function = function;
 	}
 
-	/** ----------------------------------------------------------------------- rowComplete */
+	/* ----------------------------------------------------------------------- rowComplete */
 	public void rowComplete()
 	{
 		if (Double.isNaN(tVal))
@@ -85,7 +85,7 @@ public class TotalsAccumulatorNumber implements TotalsAccumulator
 		tVal = Double.NaN;
 	}
 
-	/** ----------------------------------------------------------------------- reset */
+	/* ----------------------------------------------------------------------- reset */
 	public void reset(int scope)
 	{
 		tVal = Double.NaN;
@@ -114,13 +114,13 @@ public class TotalsAccumulatorNumber implements TotalsAccumulator
 		}
 	}
 
-	/** ----------------------------------------------------------------------- getStringVal */
+	/* ----------------------------------------------------------------------- getStringVal */
 	public String getStringVal(int scope)
 	{
 		throw new JoriaAssertionError("Not possible for this subclass");
 	}
 
-	/** ----------------------------------------------------------------------- getLongVal */
+	/* ----------------------------------------------------------------------- getLongVal */
 	public long getLongVal(int scope)
 	{
 		if (Double.isNaN(val[scope]))
@@ -134,7 +134,7 @@ public class TotalsAccumulatorNumber implements TotalsAccumulator
 			return Math.round(val[scope]);
 	}
 
-	/** ----------------------------------------------------------------------- getDoubleVal */
+	/* ----------------------------------------------------------------------- getDoubleVal */
 	public double getDoubleVal(int scope)
 	{
 		if (function == AggregateDef.avg)
@@ -150,20 +150,20 @@ public class TotalsAccumulatorNumber implements TotalsAccumulator
 		}
 	}
 
-	/** ----------------------------------------------------------------------- add */
+	/* ----------------------------------------------------------------------- add */
 	public void add(double nVal)
 	{
         Trace.check(Double.isNaN(tVal));
 		tVal = nVal;
 	}
 
-	/** ----------------------------------------------------------------------- add */
+	/* ----------------------------------------------------------------------- add */
 	public void add(String nVal)
 	{
 		throw new JoriaAssertionError("Not possible for this subclass");
 	}
 
-	/** ----------------------------------------------------------------------- redoRow */
+	/* ----------------------------------------------------------------------- redoRow */
 	public void redoRow()
 	{
 		tVal = Double.NaN;

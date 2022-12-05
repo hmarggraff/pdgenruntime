@@ -16,7 +16,7 @@ public class HorizontalAlignment implements Serializable
     private static final long serialVersionUID = 7L;
     private float align;
 
-	/** ----------------------------------------------------------------------- HorizontalAlignment */
+	/* ----------------------------------------------------------------------- HorizontalAlignment */
 	public HorizontalAlignment()
 	{
 		align = 0;

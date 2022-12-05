@@ -32,7 +32,7 @@ public abstract class BooleanOperatorNode extends Node
 	 *
 	 * @param p   java.lang.String
 	 * @param q   java.lang.String
-	 * @param env
+	 * @param env the environment with locale etc
 	 * @return int returns -1 if p is less than q, 0 if they are equal, +1 if p is greater than q, returns 2 if one of the values is null
 	 */
 	protected int compareStrings(String p, String q, RunEnv env)

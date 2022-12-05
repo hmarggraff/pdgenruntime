@@ -16,7 +16,7 @@ public class ClassNameNode extends Node implements JoriaTypedNode
 		type = p0;
 	}
 
-	/** ----------------------------------------------------------------------- getTokenString */
+	/* ----------------------------------------------------------------------- getTokenString */
 	public String getTokenString()
 	{
 		return '(' + type.getName() + ')';
@@ -35,7 +35,7 @@ public class ClassNameNode extends Node implements JoriaTypedNode
         throw new JoriaAssertionError("Default implementation of getValue may not be called. Origin: " + getClass());
     }
 
-    /** ----------------------------------------------------------------------- getType */
+    /* ----------------------------------------------------------------------- getType */
 	public JoriaType getType()
 	{
 		return type;

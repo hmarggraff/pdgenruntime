@@ -9,7 +9,7 @@ public class DefaultStringLiteral extends AbstractJoriaLiteral
    static final long         serialVersionUID = -1L;
    static DefaultStringLiteral instance = new DefaultStringLiteral();
 
-   /** ----------------------------------------------------------------------- instance */
+   /* ----------------------------------------------------------------------- instance */
 
    public static DefaultStringLiteral instance()
    {
@@ -17,35 +17,35 @@ public class DefaultStringLiteral extends AbstractJoriaLiteral
    }
 
 
-   /** ----------------------------------------------------------------------- getName */
+   /* ----------------------------------------------------------------------- getName */
 
    public String getName()
    {
       return "String";
    }
 
-   /** ----------------------------------------------------------------------- getParamString */
+   /* ----------------------------------------------------------------------- getParamString */
 
    public String getParamString()
    {
       return "DefaultStringLiteral";
    }
 
-   /** ----------------------------------------------------------------------- isRealLiteral */
+   /* ----------------------------------------------------------------------- isRealLiteral */
 
    public boolean isStringLiteral()
    {
       return true;
    }
 
-   /** ----------------------------------------------------------------------- isLiteral */
+   /* ----------------------------------------------------------------------- isLiteral */
 
    public boolean isLiteral()
    {
       return true;
    }
 
-   /** ----------------------------------------------------------------------- readResolve */
+   /* ----------------------------------------------------------------------- readResolve */
 
    protected Object readResolve() throws ObjectStreamException
    {

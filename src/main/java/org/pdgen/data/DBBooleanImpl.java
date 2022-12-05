@@ -12,28 +12,28 @@ public class DBBooleanImpl extends AbstractDBData implements DBBoolean
       myBoolean = value;
    }
 
-   /** ----------------------------------------------------------------------- equals */
+   /* ----------------------------------------------------------------------- equals */
 
    public boolean equals(Object obj)
    {
        return obj instanceof DBBoolean && ((DBBoolean) obj).getBooleanValue() == myBoolean;
    }
 
-   /** ----------------------------------------------------------------------- getBooleanValue */
+   /* ----------------------------------------------------------------------- getBooleanValue */
 
    public boolean getBooleanValue()
    {
       return myBoolean;
    }
 
-   /** ----------------------------------------------------------------------- isNull */
+   /* ----------------------------------------------------------------------- isNull */
 
    public boolean isNull()
    {
       return false;
    }
 
-   /** ----------------------------------------------------------------------- toString */
+   /* ----------------------------------------------------------------------- toString */
 
     public String toString()
     {

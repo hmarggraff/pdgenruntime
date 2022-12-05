@@ -36,6 +36,8 @@ public class AccessPath extends AbstractJoriaAccess implements VariableProvider,
 	* If the last path component is the only collection in the path, then
 	* getvalue does not have to build the collection, but rather returns the value
 	* from the last component. Internal.
+	 * @param thePath the steps to combine
+	 * @return a new access taht combines the steps
 	*/
 
 	public static JoriaAccess makePath(JoriaAccess[] thePath)

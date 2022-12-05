@@ -16,7 +16,7 @@ public interface GrahElPostprocess extends Shape, Cloneable, Serializable, Graph
 	/**
 	 * update the text after some postporcessing (totalPages, table of contents etc
 	 * @param newText the actual text to use
-	 * @param g
+	 * @param g context to use
 	 */
 	void setText(String newText, Graphics2D g);
 	DeferredTotalPagesCell getPostprocessSource();

@@ -10,14 +10,14 @@ public class ObjectRef implements SymbolEntry
 	JoriaType typ;
 	String name;
 
-	/** ----------------------------------------------------------------------- ObjectRef */
+	/* ----------------------------------------------------------------------- ObjectRef */
 	public ObjectRef(String n, JoriaType t)
 	{
 		name = n;
 		typ = t;
 	}
 
-	/** ----------------------------------------------------------------------- getName */
+	/* ----------------------------------------------------------------------- getName */
 	public String getName()
 	{
 		return name;

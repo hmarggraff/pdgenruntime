@@ -10,7 +10,6 @@ public class MetaValueCell extends SimpleTextCellDef
 {
     private static final long serialVersionUID = 7L;
     CellDef definition;
-   /** ----------------------------------------------------------------------- MetaValueCell */
 
    public MetaValueCell(TemplateModel parentGrid, String txt, SimpleTextCellDef definition)
    {

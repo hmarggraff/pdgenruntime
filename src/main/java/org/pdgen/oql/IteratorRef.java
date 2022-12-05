@@ -8,32 +8,32 @@ public class IteratorRef extends ObjectRef
 
 	JoriaCollection collType;
 
-	/** ----------------------------------------------------------------------- IteratorRef */
+	/* ----------------------------------------------------------------------- IteratorRef */
 	public IteratorRef(String refName, JoriaCollection c)
 	{
 		super(refName, c.getElementType());
 		collType = c;
 	}
 
-	/** ----------------------------------------------------------------------- getCollectionType */
+	/* ----------------------------------------------------------------------- getCollectionType */
 	public JoriaCollection getCollectionType()
 	{
 		return collType;
 	}
 
-	/** ----------------------------------------------------------------------- getName */
+	/* ----------------------------------------------------------------------- getName */
 	public String getName()
 	{
 		return name;
 	}
 
-	/** ----------------------------------------------------------------------- isEnvironment */
+	/* ----------------------------------------------------------------------- isEnvironment */
 	public boolean isEnvironment()
 	{
 		return false;
 	}
 
-	/** ----------------------------------------------------------------------- isObject */
+	/* ----------------------------------------------------------------------- isObject */
 	public boolean isObject()
 	{
 		return true;
