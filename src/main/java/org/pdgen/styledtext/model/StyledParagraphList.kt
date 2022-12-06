@@ -104,7 +104,7 @@ class StyledParagraphList : Serializable {
         if (paragraphs.size == parIx + 1) return
         val p1 = paragraphs[parIx]
         p1!!.merge(paragraphs[parIx + 1])
-        paragraphs = ArrayUtils.remove(paragraphs, parIx + 1) as Array<StyledParagraph?>
+        paragraphs = ArrayUtils.remove<StyledParagraph>(paragraphs, parIx + 1)
     }
 
     fun copyForEditing(): StyledParagraphList {
@@ -115,11 +115,11 @@ class StyledParagraphList : Serializable {
         get() = StyledParagraphList(this)
 
     fun removeParagraphs(from: Int, to: Int) {
-        paragraphs = ArrayUtils.remove(paragraphs, from, to) as Array<StyledParagraph?>
+        paragraphs = ArrayUtils.remove<StyledParagraph>(paragraphs, from, to)
     }
 
     fun insertTextsAsParagraphs(texts: Array<StyledParagraph?>?, at: Int) {
-        paragraphs = ArrayUtils.addArray(paragraphs, at, texts) as Array<StyledParagraph?>
+        paragraphs = ArrayUtils.addArray<StyledParagraph>(paragraphs, at, texts)
     }
 
     fun hasText(text: String?): Boolean {

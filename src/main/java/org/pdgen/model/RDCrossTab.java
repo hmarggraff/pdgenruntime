@@ -220,9 +220,8 @@ public class RDCrossTab extends RDRangeBase implements Serializable {
 
     private int fillXHeaders(HashMap<DBData, CrosstabAggregator> spreader, int row, int col, RVAny[][] fill, RunEnv env, int[] colSorter, Graphics2D g) throws JoriaDataException {
         final CellStyle style = xDims[row].getCascadedStyle();
-        //noinspection unchecked
-        final Map.Entry<DBData, CrosstabAggregator>[] entries = spreader.entrySet().toArray(new Map.Entry[spreader.size()]);
-        Arrays.sort(entries, RDCrossTab.ctKeyComparator);
+        java.util.List<Map.Entry<DBData, CrosstabAggregator>> entries = new ArrayList<>(spreader.entrySet());
+        entries.sort(RDCrossTab.ctKeyComparator);
         for (Map.Entry<DBData, CrosstabAggregator> k : entries) {
             fill[row][col] = new RVString(SimpleTextCellDef.wrapText(k.getKey().toString(), style, env.getLocale()), style, g);
             final CrosstabAggregator cta = k.getValue();
@@ -237,9 +236,8 @@ public class RDCrossTab extends RDRangeBase implements Serializable {
     }
 
     private int fillYHeaders(HashMap<DBData, CrosstabAggregator> spreader, int row, int col, RVStringCol[] fill, RunEnv env, int[] rowSorter) {
-        //noinspection unchecked
-        final Map.Entry<DBData, CrosstabAggregator>[] entries = spreader.entrySet().toArray(new Map.Entry[spreader.size()]);
-        Arrays.sort(entries, RDCrossTab.ctKeyComparator);
+        java.util.List<Map.Entry<DBData, CrosstabAggregator>> entries = new ArrayList<>(spreader.entrySet());
+        entries.sort(RDCrossTab.ctKeyComparator);
         final String[] hCol = fill[col].get();
         for (Map.Entry<DBData, CrosstabAggregator> k : entries) {
             final CrosstabAggregator cta = k.getValue();
