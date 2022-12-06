@@ -6,6 +6,7 @@ import org.pdgen.env.Env;
 
 import java.util.*;
 
+@SuppressWarnings("unchecked")
 public class JavaListValue extends JavaValue implements DBCollection {
     protected CollectionValueAccess elax;
     protected int index = -1;
@@ -14,7 +15,7 @@ public class JavaListValue extends JavaValue implements DBCollection {
         super(o, a);
         elax = new CollectionValueAccess(a);
         if (o instanceof Iterator) {
-            myValue = new ArrayList();
+            myValue = new ArrayList<>();
             JavaSchema sch = (JavaSchema) Env.schemaInstance;
             sch.getReflectionDelegate().loadObject(o);
             Iterator<Object> it = (Iterator<Object>) o;
@@ -25,7 +26,7 @@ public class JavaListValue extends JavaValue implements DBCollection {
                 }
             }
         } else if (o instanceof Enumeration) {
-            myValue = new ArrayList();
+            myValue = new ArrayList<>();
             Enumeration<Object> it = (Enumeration<Object>) o;
             while (it.hasMoreElements()) {
                 Object io = it.nextElement();
@@ -35,7 +36,7 @@ public class JavaListValue extends JavaValue implements DBCollection {
             }
         } else if (o instanceof Collection) {
             if (!(o instanceof List)) {
-                myValue = new ArrayList();
+                myValue = new ArrayList<>();
                 JavaSchema sch = (JavaSchema) Env.schemaInstance;
                 sch.getReflectionDelegate().loadObject(o);
                 for (Object io : ((Collection<Object>) o)) {

@@ -13,6 +13,7 @@ public class JavaLargeListValue extends JavaListValue {
         super(o, a);
     }
 
+    @SuppressWarnings("unchecked")
     protected void freeItem(int index) {
         final ReflectionDelegate reflectionDelegate = ((JavaSchema) Env.schemaInstance).getReflectionDelegate();
         reflectionDelegate.evictObject(((List<Object>) myValue).get(index));

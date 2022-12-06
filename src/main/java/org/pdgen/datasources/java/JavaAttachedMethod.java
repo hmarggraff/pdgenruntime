@@ -38,6 +38,7 @@ public class JavaAttachedMethod<DeclaredIn, RetType> extends JavaMember {
         return (long) eval(from);
     }
 
+    @SuppressWarnings("unchecked")
     private RetType eval(DBObject from) {
         DeclaredIn source = (DeclaredIn) ((JavaValue) from).getJavaObject();
         return function.apply(source);

@@ -51,7 +51,7 @@ public class RtfLayouter implements TextCellLayouter {
         Trace.logDebug(Trace.layout, "RTFsize w " + myCell.myWidth + " h " + myCell.myWidth);
     }
 
-    static class ThreadData extends ThreadLocal {
+    static class ThreadData extends ThreadLocal<Object> {
 
         protected Object initialValue() {
             return new JPanel();

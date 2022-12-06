@@ -56,9 +56,7 @@ public class StandardReflection implements ReflectionDelegate {
     public Field getField(Class<?> c, String n) {
         try {
             return c.getDeclaredField(n);
-        } catch (NoSuchFieldException e) {
-            return null;
-        } catch (SecurityException e) {
+        } catch (NoSuchFieldException | SecurityException e) {
             return null;
         }
     }
@@ -289,11 +287,13 @@ public class StandardReflection implements ReflectionDelegate {
         return ret;
     }
 
+    @SuppressWarnings("rawtypes")
     public DBData getAttachedMethodValue(JavaAttachedMethod m, JavaValue jv, JoriaAccess asView, RunEnv env) throws JoriaDataException {
         Object ret = getAttachedMethodValueInner(m, jv);
         return JavaMember.makeValue(jv, ret, asView, m.getType(), env);
     }
 
+    @SuppressWarnings("rawtypes")
     protected Object getAttachedMethodValueInner(JavaAttachedMethod m, JavaValue jv) {
         throw new Error("deprecated");
     }

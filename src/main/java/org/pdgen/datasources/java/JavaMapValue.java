@@ -14,7 +14,7 @@ public class JavaMapValue extends JavaValue implements DBDictionary {
 
     DBCollection myValues;
     DBCollection myKeys;
-    ArrayList<Map.Entry> myElements; // java.util.map.Entry
+    ArrayList<Map.Entry<?,?>> myElements; // java.util.map.Entry
     protected CollectionValueAccess elax;
     RunEnv env;
     int index;
@@ -110,7 +110,7 @@ public class JavaMapValue extends JavaValue implements DBDictionary {
             if (ja.getKeyMatchType() != null && ja.getKeyMatchType().isClass()) {
                 kMatchType = ((JavaClass) ja.getKeyMatchType()).theClass();
             }
-            myElements = new ArrayList<Map.Entry>();
+            myElements = new ArrayList<>();
             Map<?, ?> lv = (Map<?, ?>) myValue;
             for (Map.Entry<?, ?> o1 : lv.entrySet()) {
                 if (vMatchType == null || vMatchType.isInstance(o1.getValue())) {

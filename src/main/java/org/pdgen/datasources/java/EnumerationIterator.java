@@ -4,18 +4,18 @@ package org.pdgen.datasources.java;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-public class EnumerationIterator implements Iterator {
+public class EnumerationIterator<T> implements Iterator<T> {
 
-    Enumeration<?> e;
+    Enumeration<T> e;
 
-    public EnumerationIterator(Enumeration<?> e) {
+    public EnumerationIterator(Enumeration<T> e) {
         this.e = e;
     }
 
     public void remove() {
     }
 
-    public Object next() {
+    public T next() {
         return e.nextElement();
     }
 

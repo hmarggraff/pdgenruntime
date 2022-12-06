@@ -25,7 +25,7 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
         makeLongName();
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public static DBCollection makeCollectionValue(Object o, JoriaAccess axs, JoriaCollection t, RunEnv env) throws JoriaDataException {
         long t0 = System.currentTimeMillis();        // find match type
         JoriaCollection t1 = axs.getSourceCollection();
@@ -69,9 +69,7 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
                 if (large) {
                     List<Object> l = (List<Object>) o;
                     ArrayList<Object> nl = new ArrayList<Object>(l.size());
-                    for (Object aL : l) {
-                        nl.add(aL);
-                    }
+                    nl.addAll(l);
                     res = new JavaLargeListValue(nl, axs);
                 } else
                     res = new JavaListValue(o, axs);
@@ -144,7 +142,7 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
             if (sortRules != null && tb == null)// only sort if not topN, because topN did already sort
             {
                 ProjectionComparator comp = new ProjectionComparator(sortRules, env);
-                Collections.sort(sand, comp);
+                sand.sort(comp);
             }
             if (large)
                 res = new JavaLargeListValue(sandLarge, axs);
@@ -164,49 +162,49 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
             Class<?> cls = o.getClass().getComponentType();
             if (cls == Byte.TYPE) {
                 byte[] ba = (byte[]) o;
-                list = new ArrayList<Object>(ba.length);
+                list = new ArrayList<>(ba.length);
                 for (byte aBa : ba) {
                     list.add((long) aBa);
                 }
             } else if (cls == Short.TYPE) {
                 short[] sa = (short[]) o;
-                list = new ArrayList<Object>(sa.length);
+                list = new ArrayList<>(sa.length);
                 for (short aSa : sa) {
                     list.add((long) aSa);
                 }
             } else if (cls == Character.TYPE) {
                 char[] ca = (char[]) o;
-                list = new ArrayList<Object>(ca.length);
+                list = new ArrayList<>(ca.length);
                 for (char aCa : ca) {
                     list.add((long) aCa);
                 }
             } else if (cls == Integer.TYPE) {
                 int[] ia = (int[]) o;
-                list = new ArrayList<Object>(ia.length);
+                list = new ArrayList<>(ia.length);
                 for (int anIa : ia) {
                     list.add((long) anIa);
                 }
             } else if (cls == Long.TYPE) {
                 long[] la = (long[]) o;
-                list = new ArrayList<Object>(la.length);
+                list = new ArrayList<>(la.length);
                 for (long aLa : la) {
                     list.add(aLa);
                 }
             } else if (cls == Float.TYPE) {
                 float[] fa = (float[]) o;
-                list = new ArrayList<Object>(fa.length);
+                list = new ArrayList<>(fa.length);
                 for (float aFa : fa) {
                     list.add((double) aFa);
                 }
             } else if (cls == Double.TYPE) {
                 double[] da = (double[]) o;
-                list = new ArrayList<Object>(da.length);
+                list = new ArrayList<>(da.length);
                 for (double aDa : da) {
                     list.add(aDa);
                 }
             } else if (cls == Boolean.TYPE) {
                 boolean[] ba = (boolean[]) o;
-                list = new ArrayList<Object>(ba.length);
+                list = new ArrayList<>(ba.length);
                 for (boolean aBa : ba) {
                     list.add(aBa);
                 }
@@ -221,7 +219,7 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
             else if (o instanceof Iterator)
                 it = (Iterator<Object>) o;
             else if (o instanceof Enumeration)
-                it = new EnumerationIterator((Enumeration<Object>) o);
+                it = new EnumerationIterator<>((Enumeration<Object>) o);
             else
                 throw new JoriaAssertionError("unknown Literalcollection " + o.getClass());
             list = new ArrayList<Object>();
@@ -229,8 +227,6 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
                 list.add(it.next());
             }
         }
-        if (list == null)
-            throw new JoriaAssertionError("unknown Literalcollection " + o.getClass());
         Object out = null;
         LiteralCollectionClass lcc = (LiteralCollectionClass) et;
         JoriaType elt = lcc.getLiteralType();
@@ -306,8 +302,7 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
             throw new JoriaAssertionError("unknown Literal " + o.getClass());
     }
 
-    @SuppressWarnings("UnusedDeclaration")
-    public static DBObject makeObjectValue(Object o, JoriaAccess axs, JoriaType t) {
+    public static DBObject makeObjectValue(Object o, JoriaAccess axs, JoriaType ignoredT) {
         if (o instanceof Date) {
             return new DBDateTime(axs, (Date) o);
         } else if (o instanceof Calendar) {
@@ -344,12 +339,11 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
                 DBCollection cv = cache.getCachedCollectionValue(axs);
                 if (cv != null) {
                     Trace.logDebug(Trace.fill, "Found in cache " + axs.getLongName());
-                    return cv;// found in cache: done
                 } else {
                     cv = makeCollectionValue(o, axs, (JoriaCollection) type, env);
                     cache.addCollectionToCache(cv, axs);
-                    return cv;
                 }
+                return cv;// found in cache: done
             } else {
                 Trace.logError("Internal warning: type " + type.getName() + " is a collection but defining class does not implement collection cache");
                 return makeCollectionValue(o, axs, (JoriaCollection) type, env);

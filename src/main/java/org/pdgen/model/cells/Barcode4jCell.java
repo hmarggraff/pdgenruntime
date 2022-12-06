@@ -399,12 +399,11 @@ public class Barcode4jCell extends DataPictureCell implements RenderingCellDef, 
     public RenderedGraphic renderIntoMetaFile(final Graphics2D graphics2D, final String val, final float x0, final float y0, final float w, final float h) {
         if (val == null)
             return null;
-        MetaFileGraphics2D mfg = new MetaFileGraphics2D(graphics2D);
-        doPaint(mfg, x0, y0, w, h, val);
-        mfg.close();
-        mfg.dispose();
-        RenderedGraphic data = mfg.getRenderedGraphic();
-        return data;
+        try (MetaFileGraphics2D mfg = new MetaFileGraphics2D(graphics2D)) {
+
+            doPaint(mfg, x0, y0, w, h, val);
+            return mfg.getRenderedGraphic();
+        }
     }
 
     public void outputToRTF(final RtfOutput rtfOutput, final OutputData data, final RVAny value, final float colWidth) throws JoriaDataException {

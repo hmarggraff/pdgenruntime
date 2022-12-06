@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.AttributedCharacterIterator;
 import java.util.*;
 
-public class MetaFileGraphics2D extends Graphics2D implements DrawCommands {
+public class MetaFileGraphics2D extends Graphics2D implements DrawCommands, AutoCloseable {
 
     protected PrintStream mWriter;
     protected MetaFileWriter out;
@@ -733,11 +733,6 @@ public class MetaFileGraphics2D extends Graphics2D implements DrawCommands {
             out.writeByte(b);
             debugPrintln("]");
         }
-    }
-
-    public void finalize() {
-        super.finalize();
-        close();
     }
 
     public void copyArea(int x, int y, int width, int height, int dx, int dy) {

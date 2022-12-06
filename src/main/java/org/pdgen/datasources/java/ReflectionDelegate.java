@@ -45,6 +45,7 @@ public interface ReflectionDelegate {
 
     DBData getMethodValue(JavaMethod m, JavaValue jv, JoriaAccess asView, RunEnv env) throws JoriaDataException;
 
+    @SuppressWarnings("rawtypes")
     DBData getAttachedMethodValue(JavaAttachedMethod m, JavaValue jv, JoriaAccess asView, RunEnv env) throws JoriaDataException;
 
     void loadObject(Object o) throws JoriaDataException;
