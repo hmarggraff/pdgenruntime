@@ -5,10 +5,7 @@ import org.pdgen.data.*;
 import org.pdgen.data.view.ClassProjection;
 import org.pdgen.model.style.PredefinedStyles;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,13 +29,29 @@ public class RepoLoader {
     public RepoLoader(File repofile) {
         Trace.log(Trace.init, "RepoLoader " + repofile);
         instance = this;
-        //BIn in = new BIn(repofile);
-        ObjectInputStream in = null;
+        String pathname = repofile.getAbsolutePath();
         try {
-            in = new ObjectInputStream(new FileInputStream(repofile));
-            Env.schemaInstance = (JoriaSchema) in.readObject();
-            Repository repository = (Repository) in.readObject();
-            new Env(repository, repofile.getAbsolutePath());
+            FileInputStream fis = new FileInputStream(repofile);
+            doLoad(pathname, fis);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public RepoLoader(String pathname, InputStream in){
+        Log.ini.info("RepoLoader " + pathname);
+        instance = this;
+
+        doLoad(pathname,in);
+    }
+
+    private void doLoad(String pathname, InputStream ins) {
+        try {
+            ObjectInputStream oin = new ObjectInputStream(ins);
+
+            Env.schemaInstance = (JoriaSchema) oin.readObject();
+            Repository repository = (Repository) oin.readObject();
+            new Env(repository, pathname);
             postLoad();
             repository.checkSchemaAndRepositoryForConsistency(modifiedAccesses, unknownTypes);
             instance = null;

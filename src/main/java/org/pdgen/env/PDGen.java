@@ -5,6 +5,7 @@ import org.pdgen.model.Template;
 import org.pdgen.model.run.RunEnvImpl;
 import org.pdgen.util.RuntimeComponentFactory;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 
 public class PDGen {
@@ -14,6 +15,12 @@ public class PDGen {
         this.templateFileName = templateFileName;
         RuntimeComponentFactory.theInstance = new RuntimeComponentFactory();
         RepoLoader loader = new RepoLoader(templateFileName); // Builds the env
+    }
+
+    public PDGen(String name, InputStream repo) {
+        this.templateFileName = name;
+        RuntimeComponentFactory.theInstance = new RuntimeComponentFactory();
+        RepoLoader loader = new RepoLoader(name, repo); // Builds the env
     }
 
     protected PDGen(String templateFileName, RuntimeComponentFactory otherComponentFactory) {

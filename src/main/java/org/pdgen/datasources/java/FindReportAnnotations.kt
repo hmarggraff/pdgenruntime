@@ -35,8 +35,8 @@ class FindReportAnnotations(val jarFile: File) {
     }
 
     class RwClassVisitor : ClassVisitor(Opcodes.ASM9) {
-        private val reportData = "io/pdgen/annotations/ReportData;"
-        private val reportDataProvider = "io/pdgen/annotations/ReportDataProvider;"
+        private val reportData = "org/pdgen/annotations/ReportData;"
+        private val reportDataProvider = "org/pdgen/annotations/ReportDataProvider;"
         var isReportClass = false
         var currentclassname = ""
         var currentMethod = ""

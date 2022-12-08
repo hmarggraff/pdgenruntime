@@ -40,7 +40,8 @@ class JavaClassBuilder2(jarFileName: String) {
         // sequential serach, because parameters are yet unknown
         // therefore root methods must not be overloaded
         val m = c.declaredMethods.find { it.name.equals(mn) }
-        addRoot(m!!)
+        if (m != null) // can be null if the root method was deleted. Must be handled by schema check.
+            addRoot(m)
     }
 
     fun addRoot(m: Method) {

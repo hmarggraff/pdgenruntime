@@ -15,9 +15,9 @@ java {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "org.pdgen"
+            groupId = project.group.toString()
+            version = project.version.toString()
             artifactId = "pdgenannotations"
-            version = "2.1.0-SNAPSHOT"
 
             from(components["java"])
             pom {

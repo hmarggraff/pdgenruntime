@@ -156,7 +156,7 @@ public class PdfOutput implements PdfOutputer {
         writeObj("<< /CreationDate (D:");
         write(dateString);
         write(") /Creator (");
-        final String creator = Res.msgWithProduct("pdgen_org");
+        final String creator = "pdgen.org";
         write(creator);
         write(") /Producer (");
         producer = Res.productName() + " v" + Res.version;

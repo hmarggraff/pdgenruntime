@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
     group = "org.pdgen"
-    version = "2.1.0-SNAPSHOT"
+    version = "2.1.2-SNAPSHOT"
 
 
     apply {
@@ -33,11 +33,10 @@ allprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = "11"
     }
-
 }
 
 dependencies {
-    implementation(project(":pdgenannotations"))
+    api(project(":pdgenannotations"))
     implementation("net.sf.barcode4j:barcode4j:2.1")
     implementation("org.ow2.asm:asm:9.4")
     implementation("joda-time:joda-time:2.12.2")
@@ -46,9 +45,9 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "org.pdgen"
+            groupId = project.group.toString()
+            version = project.version.toString()//"2.1.0-SNAPSHOT"
             artifactId = "pdgenruntime"
-            version = "2.1.0-SNAPSHOT"
 
             from(components["java"])
             pom {

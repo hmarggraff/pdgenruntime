@@ -1582,7 +1582,7 @@ public class TemplateLayouter implements GridLayouter {
 						g.drawRect(Math.round(scale * (offset.x + frameRectScratch.x + 7)), Math.round(scale * (offset.y + frameRectScratch.y + 7)), Math.round(scale * (frameRectScratch.width)), Math.round(scale * (frameRectScratch.height)));
 						g.setColor(oldColor);
 				*/        //Point2D.Float offset = container.getOffsetInOuter(this, pageNo);		//cellComp.setBounds(round(scale * (offset.x + frameRectScratch.x + 7)), round(scale * (offset.y + frameRectScratch.y + 7)), round(scale * (frameRectScratch.width)), round(scale * (frameRectScratch.height)));
-        cellComp.setBounds(round(scale * (frameRectScratch.x + PageLayouter.displayHOffset)), round(scale * (componentPos + frameRectScratch.y + PageLayouter.displayVOffset)), round(scale * (frameRectScratch.width)), round(scale * (frameRectScratch.height)));
+        cellComp.setBounds(round(scale * (frameRectScratch.x + PageLayouter.displayHOffset))-1, round(scale * (componentPos + frameRectScratch.y + PageLayouter.displayVOffset))-1, round(scale * (frameRectScratch.width))+2, round(scale * (frameRectScratch.height))+2);
         Trace.logDebug(Trace.layout, "positionEditorComponent " + round(frameRectScratch.x) + " " + round(frameRectScratch.y) + " " + round(frameRectScratch.width) + " " + round(frameRectScratch.height));        //CellStyle b = cell.getCascadedStyle();		//cellComp.setBackground(b.getBackground());		//cellComp.setForeground(b.getForeground());		//cellComp.setFont(b.getStyledFont());
     }
 

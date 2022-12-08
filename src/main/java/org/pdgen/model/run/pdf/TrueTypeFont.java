@@ -641,7 +641,7 @@ public class TrueTypeFont {
                 }
 
             } catch (NegativeArraySizeException ex) {
-                Log.ini.warn("TrueType Font " + fontFile.getName() + " could not be loaded, due to incompatible encododing.");
+                Log.ini.warn("TrueType Font " + fontFile.getName() + " could not be loaded, due to incompatible encoding.");
             } catch (Throwable e) {
                 Log.ini.error(e);
                 //Env.instance().handle(e);
