@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
     group = "org.pdgen"
-    version = "2.1.2-SNAPSHOT"
+    version = "2.1.2"
 
 
     apply {
