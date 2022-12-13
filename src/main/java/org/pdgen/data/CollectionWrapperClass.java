@@ -146,9 +146,9 @@ public class CollectionWrapperClass implements JoriaClass {
     }
 
     protected Object readResolve() throws ObjectStreamException {
-        Named jc = Env.schemaInstance.findInternalType(name);
+        Named jc = Env.schemaInstance.findClass(name);
         if (jc == null) {
-            jc = Env.schemaInstance.findInternalType(name.replace('.', '_'));
+            jc = Env.schemaInstance.findClass(name.replace('.', '_'));
         }
         if (jc instanceof CollectionWrapperClass)
             return jc;

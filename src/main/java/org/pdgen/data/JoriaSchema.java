@@ -3,16 +3,25 @@ package org.pdgen.data;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public interface JoriaSchema extends Serializable {
-    Collection<JoriaClass> getClasses();
+    SortedNamedVector<JoriaAccess> getRoots();
 
     JoriaClass findClass(String longName);
 
-    SortedNamedVector<JoriaAccess> getRoots();
+
+    Map<String, JoriaType> getTypes();
+
+    Object getSchemaForSave();
+
+    /*
+
+
 
     void reset();
 
@@ -22,5 +31,7 @@ public interface JoriaSchema extends Serializable {
 
     @NotNull
     List<String> getAllClassNames();
+
+     */
 
 }

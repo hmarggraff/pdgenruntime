@@ -1,7 +1,7 @@
 // This software may be used as allowed by the Gnu Affero General Public License. Details are in the file LICENSE, that must be included in the distribution of ths software.
 package org.pdgen.model.run.pdf;
 
-import org.pdgen.data.Log;
+import org.pdgen.util.Log;
 import org.pdgen.env.Env;
 import org.pdgen.env.Settings;
 

@@ -5,8 +5,7 @@ import org.pdgen.model.Template;
 import org.pdgen.model.run.RunEnvImpl;
 import org.pdgen.util.RuntimeComponentFactory;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class PDGen {
     private final String templateFileName;
@@ -14,19 +13,19 @@ public class PDGen {
     public PDGen(String templateFileName) {
         this.templateFileName = templateFileName;
         RuntimeComponentFactory.theInstance = new RuntimeComponentFactory();
-        RepoLoader loader = new RepoLoader(templateFileName); // Builds the env
+        new RepoLoader(templateFileName, false);
     }
 
     public PDGen(String name, InputStream repo) {
         this.templateFileName = name;
         RuntimeComponentFactory.theInstance = new RuntimeComponentFactory();
-        RepoLoader loader = new RepoLoader(name, repo); // Builds the env
+        new RepoLoader(name, repo, false); // Builds the env
     }
 
     protected PDGen(String templateFileName, RuntimeComponentFactory otherComponentFactory) {
         this.templateFileName = templateFileName;
         RuntimeComponentFactory.theInstance = otherComponentFactory;
-        RepoLoader loader = new RepoLoader(templateFileName); // Builds the env
+        new RepoLoader(templateFileName, false);
     }
 
     public void generatePDF(String reportName, Object data, OutputStream receiver) {
@@ -41,4 +40,5 @@ public class PDGen {
             throw new RuntimeException(e.getCause());
         }
     }
+
 }

@@ -1,12 +1,11 @@
 package org.pdgen.datasources.java
 
 import org.objectweb.asm.*
-import org.pdgen.data.Log
-import java.io.File
+import org.pdgen.util.Log
 import java.util.jar.JarFile
 
-class FindReportAnnotations(val jarFile: File) {
-    val roots = ArrayList<Pair<String, String>>()
+class FindReportAnnotations(jarFile: String) {
+    val roots = ArrayList<TestDataRootDef>()
 
     init {
         val jf = JarFile(jarFile)
@@ -21,7 +20,7 @@ class FindReportAnnotations(val jarFile: File) {
                         val classVisitor = RwClassVisitor()
                         ClassReader(jf.getInputStream(it)).accept(classVisitor, 0)
                         classVisitor.roots.forEach {
-                            Log.schema.info(" RootAnnotation class=${it.first}, method=${it.second}")
+                            Log.schema.info(" RootAnnotation class=${it.testDataProviderClass}, method=${it.testDataMethod}")
                         }
                         roots.addAll(classVisitor.roots)
                     } catch (t: Throwable) {
@@ -40,7 +39,7 @@ class FindReportAnnotations(val jarFile: File) {
         var isReportClass = false
         var currentclassname = ""
         var currentMethod = ""
-        val roots = ArrayList<Pair<String, String>>()
+        val roots = ArrayList<TestDataRootDef>()
 
         override fun visit(
             version: Int,
@@ -76,7 +75,7 @@ class FindReportAnnotations(val jarFile: File) {
                 return object : MethodVisitor(Opcodes.ASM9) {
                     override fun visitAnnotation(descriptor: String, visible: Boolean): AnnotationVisitor? {
                         if (descriptor.contains(reportData)) {
-                            roots.add(Pair(currentclassname.replace('/', '.'), currentMethod))
+                            roots.add(TestDataRootDef(currentclassname.replace('/', '.'), currentMethod))
                         }
                         return null
                     }

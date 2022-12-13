@@ -4,8 +4,6 @@ package org.pdgen.data;
 
 import org.pdgen.data.view.*;
 import org.pdgen.env.Env;
-import org.pdgen.env.RepoLoader;
-import org.pdgen.env.Res;
 import org.pdgen.model.run.RunEnv;
 
 import java.util.*;
@@ -18,7 +16,6 @@ public class JoriaUnknownType implements JoriaClass, JoriaLiteral, MutableCollec
     private JoriaUnknownType(String name) {
         Trace.logWarn("JoriaUnknownType " + name);
         this.name = name;
-        RepoLoader.addUnknownType(this);
     }
 
     public JoriaAccess findMember(String n) {
@@ -50,7 +47,7 @@ public class JoriaUnknownType implements JoriaClass, JoriaLiteral, MutableCollec
     }
 
     public String getParamString() {
-        return Res.asis("JoriaUnknownType[") + name + "]";
+        return "JoriaUnknownType[" + name + "]";
     }
 
     public int indexOfMember(JoriaAccess a) {
@@ -161,7 +158,7 @@ public class JoriaUnknownType implements JoriaClass, JoriaLiteral, MutableCollec
     }
 
     public String getElementXmlTag() {
-        return Res.asis("JoriaUnknownType_") + name;
+        return "JoriaUnknownType " + name;
     }
 
     public void setFilter(Filter f) {
@@ -249,16 +246,13 @@ public class JoriaUnknownType implements JoriaClass, JoriaLiteral, MutableCollec
 
     protected Object readResolve() {
         Named a = Env.schemaInstance.findClass(name);
-        if (a == null)
-            a = Env.schemaInstance.findInternalType(name);
         if (a != null) {
             Trace.logWarn("Previously missing type from schema change reconnected: " + name);
 
             Env.repoChanged();
             return a;
         }
-        Trace.logWarn("JoriaUnknownType in save file: " + name);
-        RepoLoader.addUnknownType(this);
+        Trace.logWarn("Placeholder for unknown type in save file: " + name);
         return this;
     }
 

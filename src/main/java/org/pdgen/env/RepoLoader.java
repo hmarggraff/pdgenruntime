@@ -3,73 +3,74 @@ package org.pdgen.env;
 
 import org.pdgen.data.*;
 import org.pdgen.data.view.ClassProjection;
+import org.pdgen.datasources.java.JavaSchema;
 import org.pdgen.model.style.PredefinedStyles;
+import org.pdgen.util.Log;
 
 import java.io.*;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
- * Untility functions need during repo loading
+ * Untility functions needed during repo loading
  */
 public class RepoLoader {
     private final ArrayList<WeakReference<JoriaModifiedAccess>> modifiedAccesses = new ArrayList<>();
     private final ArrayList<WeakReference<JoriaUnknownType>> unknownTypes = new ArrayList<>();
     private final Set<ClassProjection> extentOfAllProjections = new HashSet<>();
-    private static RepoLoader instance;
 
-
-    public RepoLoader(String repofile) {
-        this(new File(repofile));
+    public RepoLoader(String repofile, boolean forDesigner) {
+        this(new File(repofile), forDesigner);
     }
 
-    public RepoLoader(File repofile) {
+    public RepoLoader(File repofile, boolean forDesigner) {
         Trace.log(Trace.init, "RepoLoader " + repofile);
-        instance = this;
         String pathname = repofile.getAbsolutePath();
         try {
             FileInputStream fis = new FileInputStream(repofile);
-            doLoad(pathname, fis);
+            doLoad(pathname, fis, forDesigner);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public RepoLoader(String pathname, InputStream in){
+    public RepoLoader(String pathname, InputStream in, boolean forDesigner){
         Log.ini.info("RepoLoader " + pathname);
-        instance = this;
 
-        doLoad(pathname,in);
+        doLoad(pathname,in, forDesigner);
     }
 
-    private void doLoad(String pathname, InputStream ins) {
+    private void doLoad(String pathname, InputStream ins, boolean forDesigner) {
         try {
             ObjectInputStream oin = new ObjectInputStream(ins);
+            Object saved = oin.readObject();
+            if (saved instanceof JavaSchema) {
+                Env.schemaInstance = (JavaSchema) saved;
+            } else {
+                SavedSchema fromFile = (SavedSchema) saved;
 
-            Env.schemaInstance = (JoriaSchema) oin.readObject();
+                Env.schemaInstance = fromFile.buildSchema(forDesigner);
+            }
             Repository repository = (Repository) oin.readObject();
             new Env(repository, pathname);
             postLoad();
             repository.checkSchemaAndRepositoryForConsistency(modifiedAccesses, unknownTypes);
-            instance = null;
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (Exception e) {
+            Log.ini.error(e, "Loading Templates: ");
             throw new RuntimeException(e);
         }
-    }
-
-    public static void addProjection(ClassProjection classProjection) {
-        instance.extentOfAllProjections.add(classProjection);
     }
 
     public void postLoad() {
 
         PredefinedStyles.instance().loadCellStyles();
-        for (JoriaClass c : Env.schemaInstance.getClasses()) {
-            Env.instance().viewsFor(c);
-        }
+    }
+
+/*
+    public static void addProjection(ClassProjection classProjection) {
+        instance.extentOfAllProjections.add(classProjection);
     }
 
     public static void addModifiedAccess(JoriaModifiedAccess axs) {
@@ -79,6 +80,7 @@ public class RepoLoader {
     public static void addUnknownType(JoriaUnknownType t) {
         instance.unknownTypes.add(new WeakReference<JoriaUnknownType>(t));
     }
+
 
     public static List<String> getSchemaChangeExplanations() {
         ArrayList<String> ret = new ArrayList<>();
@@ -90,4 +92,6 @@ public class RepoLoader {
         }
         return ret;
     }
+
+ */
 }

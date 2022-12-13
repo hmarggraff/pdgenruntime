@@ -3,8 +3,6 @@ package org.pdgen.data.view;
 
 import org.pdgen.data.*;
 import org.pdgen.env.Env;
-import org.pdgen.env.RepoLoader;
-import org.pdgen.env.Res;
 import org.pdgen.schemacheck.ViewChecker;
 
 import java.util.*;
@@ -29,9 +27,6 @@ public class ClassProjection implements ClassView, PushOnStack, Nameable {
             this.base = base;
         myName = name;
         if (name != null) {
-            JoriaClass physical = this.base;
-            while (physical instanceof ClassProjection)
-                physical = ((ClassProjection) physical).getPhysicalClass();
             Env.instance().repo().classProjections.add(this);
         }
     }
@@ -131,7 +126,7 @@ public class ClassProjection implements ClassView, PushOnStack, Nameable {
                 return i;
             }
         }
-        throw new JoriaAssertionError("Field " + f.getLongName() + Res.asis(" not found for shift"));
+        throw new JoriaAssertionError("Field " + f.getLongName() + " not found for shift");
     }
 
     public static ClassProjection copyLiterals(JoriaClass c) {
@@ -189,7 +184,7 @@ public class ClassProjection implements ClassView, PushOnStack, Nameable {
 
     public String getName() {
         if (myName == null)
-            return Res.asis("V_") + base.getName();
+            return "V_" + base.getName();
         return myName;
     }
 
@@ -332,13 +327,13 @@ public class ClassProjection implements ClassView, PushOnStack, Nameable {
             if (m instanceof JoriaPlaceHolderAccess) {
                 nulledCnt++;
                 members[i] = null;
-                Env.instance().repo().logFix(Res.asis("View"), m, Res.asis("Changed Member removed from view"));
+                Env.instance().repo().logFix("View", m, "Changed Member removed from view");
                 Env.repoChanged();
                 // forget this member
             } else {
                 JoriaAccess fixed = m.getPlaceHolderIfNeeded();
                 if (fixed instanceof JoriaPlaceHolderAccess) {
-                    Env.instance().repo().logFix(Res.asis("View"), m, Res.asis("Changed Member removed from view"));
+                    Env.instance().repo().logFix("View", m, "Changed Member removed from view");
                     nulledCnt++;
                     members[i] = null;
                     // forget this member
@@ -413,7 +408,7 @@ public class ClassProjection implements ClassView, PushOnStack, Nameable {
                 } else
                     Trace.logError("Member unparented: " + getName() + "." + m.getName() + " " + m.getClass());
             } else if (m.getDefiningClass() != this) {
-                Trace.logError("Member stolen: " + getName() + "." + m.getName() + " " + m.getClass() + Res.asis(" from ") + m.getDefiningClass().getName());
+                Trace.logError("Member stolen: " + getName() + "." + m.getName() + " " + m.getClass() + " from " + m.getDefiningClass().getName());
                 members[i] = JoriaModifiedAccess.createJoriaModifiedAccess(m.getName(), m.getType(), this, JoriaModifiedAccess.mutipleParents, m, m);
             }
         }
@@ -444,7 +439,6 @@ public class ClassProjection implements ClassView, PushOnStack, Nameable {
     }
 
     protected Object readResolve() {
-        RepoLoader.addProjection(this);
         ViewChecker.add(this);
         makeMembersUnique();
         return this;

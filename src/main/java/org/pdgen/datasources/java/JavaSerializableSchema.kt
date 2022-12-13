@@ -6,7 +6,8 @@ class JavaSerializableSchema(val jarFileName: String) : Serializable {
 
     fun readResolve(): Any {
         println("readResolve JavaSerializableSchema")
-        return JavaSchema(jarFileName)
+        val cb = JavaClassBuilder(jarFileName)
+        return cb.javaSchema()
     }
 
 }
