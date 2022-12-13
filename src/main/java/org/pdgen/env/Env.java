@@ -27,7 +27,6 @@ public class Env {
     public static FontRenderContext fontRenderContext = new FontRenderContext(null, false, false);
     protected static JoriaFileService fileService;
     public static String currentFile;
-    protected Map<JoriaClass, ProjectionHolder> viewMap = new HashMap<>();
     ArrayList<DataChangeListener> repoChangeListeners = new ArrayList<>();
 
 
@@ -46,6 +45,12 @@ public class Env {
         currentFile = absolutePath;
         repositoryInstance = repository;
         TrueTypeFont.readAllFontFileHeaders();
+        /*
+        for (JoriaClass c: schemaInstance.getClasses()) {
+            viewsFor(c);
+        }
+         */
+
     }
 
     public static Env instance() {
@@ -237,22 +242,6 @@ public class Env {
         return threadLocalData;
     }
 
-    public Map<JoriaClass, ProjectionHolder> getViewMap() {
-        return viewMap;
-    }
-
-    public ProjectionHolder viewsFor(JoriaClass joriaClass) {
-        if (joriaClass == null)
-            return null;
-        if (joriaClass instanceof ClassView)
-            joriaClass = ((ClassView) joriaClass).getPhysicalClass();
-        ProjectionHolder ret = viewMap.get(joriaClass);
-        if (ret == null) {
-            ret = new ProjectionHolder(joriaClass);
-            viewMap.put(joriaClass, ret);
-        }
-        return ret;
-    }
 
     public String getCurrentUserName() {
         return Settings.getUsername();

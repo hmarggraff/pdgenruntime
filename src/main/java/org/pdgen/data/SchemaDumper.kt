@@ -30,6 +30,7 @@ class SchemaDumper {
             if (t.isClass) dumpClass(p, t)
         }
         p.println()
+        /*
         p.println("Classes: ")
         for (t in it.classes) {
             dumpClass(p, t)
@@ -37,6 +38,8 @@ class SchemaDumper {
         p.println()
         p.println("Roots: ")
         for (root in it.roots.data) dumpMember(p, root)
+
+         */
     }
 
     protected fun dumpClass(p: PrintStream, t: JoriaType) {

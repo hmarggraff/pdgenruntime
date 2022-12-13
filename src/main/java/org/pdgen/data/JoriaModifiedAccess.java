@@ -3,9 +3,8 @@ package org.pdgen.data;
 
 import org.pdgen.data.view.RuntimeParameter;
 import org.pdgen.env.Env;
-import org.pdgen.env.RepoLoader;
-import org.pdgen.env.Res;
 import org.pdgen.model.run.RunEnv;
+import org.pdgen.util.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,7 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
     public static final int typeChanged = 3;
     public static final int mutipleParents = 4;
     //public static final int inconsistentSchema = 5;
-    static final String[] reasons = {Res.str("Class_not_found"), Res.str("Member_not_found"), Res.str("Root_not_found"), Res.str("Type_changed"), Res.str("Member_appears_in_more_than_one_class"), Res.str("Error_in_saved_data_structure"),};
+    static final String[] reasons = {"Class_not_found", "Member_not_found", "Root_not_found", "Type_changed", "Member_appears_in_more_than_one_class", "Error_in_saved_data_structure"};
     protected int reason;
     protected transient JoriaAccess readAccess;
     protected transient JoriaAccess foundAccess;
@@ -35,7 +34,6 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
         else
             Trace.logWarn("Modified access: " + "no parent " + '.' + name + " reason: " + reasons[reason]);
         this.reason = reason;
-        RepoLoader.addModifiedAccess(this);
         Env.repoChanged();
     }
 
@@ -59,7 +57,7 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
         if (type != null) {
             longName = name + ":" + type.getName();
         } else {
-            longName = name + ":" + Res.asis("unknownType");
+            longName = name + ":" + "unknownType";
         }
     }
 
@@ -67,13 +65,11 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
         if (definingClass != null) {
             JoriaAccess replace = definingClass.findMember(name);
             if (replace != null) {
-                boolean handFix = false;
-                if (replace.getType() == type || handFix)
+                if (replace.getType() == type)
                     return replace;
             }
         }
-        Trace.logWarn("Found a JoriaModifiedAccess in save file. This is a remainder of an incomplete schema evolution. If problem persists then contact support@pdgen.org");
-        RepoLoader.addModifiedAccess(this);
+        Log.ini.warn("Found a JoriaModifiedAccess in save file. This is a remainder of an incomplete schema evolution. If problem persists then contact support@pdgen.org");
         return this;
     }
 
@@ -82,7 +78,7 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
         ret.append(JoriaModifiedAccess.reasons[reason]);
         ret.append(" ");
         if (getDefiningClass() == null)
-            ret.append(Res.strib("for_entry_point"));
+            ret.append("for entry point");
         else {
             ret.append(getDefiningClass().getName());
             ret.append('.');
@@ -102,14 +98,14 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
                 readType = readAccess.getType();
             }
             if (readType.isLiteral() && foundAccess.getType().isLiteral()) {
-                //Repository.logFix(Res.str("Member_"), readAccess, Res.str("changed_to") + foundAccess.getType().getName());
+                //Repository.logFix("Member_"), readAccess, "changed_to") + foundAccess.getType().getName());
                 return foundAccess;
             }
             if (readType.isClass() && foundAccess.getType().isClass()) {
                 JoriaClass readClass = (JoriaClass) readType;
                 JoriaClass foundClass = (JoriaClass) foundAccess.getType();
                 if (testBaseClass(readClass, foundClass)) {
-                    Env.instance().repo().logFix(Res.str("Member_"), this, Res.strp("now_uses_compatible_type", foundClass.getName()));
+                    Env.instance().repo().logFix("Field_", this, "now uses compatible type" + foundClass.getName());
                     return foundAccess;
                 }
             }
@@ -122,7 +118,7 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
         if (type != null)
             orib.append(':').append(getType().getName());
         String ori = orib.toString();
-        Env.instance().repo().logFix(Res.str("Member_"), this, Res.strp("deactivated_original", ori));
+        Env.instance().repo().logFix("Field ", this, "deactivated. Original " + ori);
         return new JoriaPlaceHolderAccess(name, ori);
     }
 

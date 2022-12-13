@@ -27,10 +27,10 @@ public class LiteralCollectionClass extends AbstractJoriaClass {
     }
 
     protected Object readResolve() {
-        Named that = Env.schemaInstance.findInternalType(name);
+        Named that = Env.schemaInstance.findClass(name);
         if (that == null) {
             name = name.replace('.', '_');
-            that = Env.schemaInstance.findInternalType(name);
+            that = Env.schemaInstance.findClass(name);
         }
         if (that == null || !(that instanceof LiteralCollectionClass))
             return JoriaUnknownType.createJoriaUnknownType(name);

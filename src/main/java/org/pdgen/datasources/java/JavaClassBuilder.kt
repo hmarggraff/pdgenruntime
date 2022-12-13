@@ -1,47 +1,78 @@
 package org.pdgen.datasources.java
 
 import org.pdgen.data.*
-import java.awt.Image
+import org.pdgen.util.Log
 import java.io.File
-import java.lang.reflect.*
+import java.lang.reflect.Field
+import java.lang.reflect.Method
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
+import java.lang.reflect.Modifier
 import java.net.URLClassLoader
-import java.util.*
+import java.awt.Image
 import javax.swing.Icon
+import java.util.Enumeration
 
-class JavaClassBuilder2(jarFileName: String) {
-    val jarUrl = File(jarFileName).toURI().toURL()
-
-    val classLoader: URLClassLoader = URLClassLoader(arrayOf(jarUrl))
-
+class JavaClassBuilder {
+    val jarFileName: String
+    val classLoader: ClassLoader
     val types = HashMap<String, JoriaType>()
     val roots = ArrayList<AbstractTypedJoriaAccess>()
     val collectionWrapperClasses = HashMap<JoriaClass, CollectionWrapperClass>()
     val objectType: JavaClass
     val objectArrayType: JoriaCollection
     val objectAsInterfaceBase: Array<JoriaClass>
+    val testDataRoots: List<TestDataRootDef>;
 
 
+    constructor(jarFileName: String) {
+        this.jarFileName = jarFileName
+        classLoader = URLClassLoader(arrayOf(File(jarFileName).toURI().toURL()))
+        val annotationFinder = FindReportAnnotations(jarFileName)
+        testDataRoots = annotationFinder.roots
+        testDataRoots.forEach {
+            addRoot(it.testDataProviderClass, it.testDataMethod)
+        }
+    }
+
+    constructor(jarFileName: String, roots: List<Pair<String, String>>, testDataRoots: List<TestDataRootDef>, forDesigner: Boolean) {
+        this.jarFileName = jarFileName
+        this.testDataRoots = testDataRoots
+        if (forDesigner)
+            classLoader = URLClassLoader(arrayOf(File(jarFileName).toURI().toURL()))
+        else
+            classLoader  = JavaClassBuilder::class.java.classLoader
+        testDataRoots.forEach {
+            addRoot(it.testDataProviderClass, it.testDataMethod)
+        }
+        roots.forEach { if (testDataRoots.firstOrNull { tdr -> tdr.testDataMethod == it.second } == null) Log.schema.warn("Root ${it.second} not found any more.")}
+
+    }
     init {
 
         val internalBuilder = BuildJavaInternals(types)
         objectType = internalBuilder.objectType
-        types[objectType.myClass.name] = objectType
+        types[objectType.name] = objectType
         objectArrayType = collectionOf(Array<Any>::class.java, objectType)
         objectAsInterfaceBase = arrayOf(objectType)
-
-        val rootFinder = FindReportAnnotations(File(jarFileName))
-        rootFinder.roots.forEach {
-            addRoot(it.first, it.second)
-        }
     }
+
 
     fun addRoot(cn: String, mn: String) {
         val c = classLoader.loadClass(cn)
         // sequential serach, because parameters are yet unknown
         // therefore root methods must not be overloaded
-        val m = c.declaredMethods.find { it.name.equals(mn) }
+        //val method = c.getMethod(mn)
+
+        val declaredMethods = c.declaredMethods
+        val m = declaredMethods.find { it.name.equals(mn) }
         if (m != null) // can be null if the root method was deleted. Must be handled by schema check.
+        {
             addRoot(m)
+        }
+        else {
+            Log.schema.warn("Test data method $mn not found in test data provider class $cn.")
+        }
     }
 
     fun addRoot(m: Method) {
@@ -68,19 +99,7 @@ class JavaClassBuilder2(jarFileName: String) {
             roots.add(JavaObjectRoot(m, retType))
     }
 
-    /*
-    fun build(m: Method): JoriaAccess? {
-        val retType = buildReturnType(m)
-        val javaClass = types[m.declaringClass.name]
-        if (javaClass == null) {
-            Log.schema.warn("SchemaBuilder.build building member method, before declaring class has been registered ${m.declaringClass}")
-            return null
-        }
-        return JavaMethod(javaClass, m, retType)
-    }
-    */
-
-    fun buildReturnType(m: Method, genericMap: HashMap<String, String>?): JoriaType? {
+    fun buildReturnType(m: Method, genericMap: java.util.HashMap<String, String>?): JoriaType? {
         val c = m.declaringClass
         val genericType = m.genericReturnType
         val type = m.returnType
@@ -151,7 +170,7 @@ class JavaClassBuilder2(jarFileName: String) {
 
     }
 
-    private fun collectionOf(collectionClass: Class<*>, elementType: JoriaClass): JoriaCollection {
+    protected fun collectionOf(collectionClass: Class<*>, elementType: JoriaClass): JoriaCollection {
         val collectionName = JavaList.makeCollectionName(collectionClass, elementType)
         val ret = types[collectionName]
         if (ret is JoriaCollection)
@@ -193,7 +212,7 @@ class JavaClassBuilder2(jarFileName: String) {
         }
     }
 
-    private fun processMembersForClass(jc: JavaClass, genericMap: HashMap<String, String>?) {
+    private fun processMembersForClass(jc: JavaClass, genericMap: java.util.HashMap<String, String>?) {
         val memberList = ArrayList<JoriaAccess>()
         jc.myClass.methods.forEach {
             if (it.parameterCount == 0 && it.returnType != Void.TYPE && Modifier.isPublic(it.modifiers) && !Modifier.isStatic(it.modifiers)) {
@@ -219,4 +238,5 @@ class JavaClassBuilder2(jarFileName: String) {
                 Iterator::class.java.isAssignableFrom(c) ||
                 Enumeration::class.java.isAssignableFrom(c)
 
+    fun javaSchema(): JavaSchema  = JavaSchema(jarFileName, types, testDataRoots, SortedNamedVector<JoriaAccess>(roots))
 }

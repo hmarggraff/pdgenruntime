@@ -170,9 +170,6 @@ public class OQLParser {
         JoriaType joriaType = schema.findClass(className);
         if (joriaType != null)
             return joriaType;
-        joriaType = schema.findInternalType(className);
-        if (joriaType != null)
-            return joriaType;
         joriaType = repo.classProjections.find(className);
         if (joriaType != null)
             return joriaType;

@@ -21,15 +21,8 @@ public class JavaList extends AbstractJoriaCollection {
         name = makeCollectionName(javaClass, elementType);
     }
 
-    public Class<?> getJavaClass() {
-        return javaClass;
-    }
-
     public static String makeCollectionName(Class<?> javaClass, JoriaClass elementType) {
         String elementTypeName = elementType.getName();
-        if (elementTypeName.startsWith("java.lang.")) {
-            elementTypeName = elementTypeName.substring("java.lang.".length());
-        }
 
         if (javaClass.isArray()) {
             return "Array<" + elementTypeName + ">";
@@ -46,7 +39,7 @@ public class JavaList extends AbstractJoriaCollection {
 
     protected Object readResolve() throws ObjectStreamException {
         JoriaSchema sch = Env.schemaInstance;
-        JoriaType cls = sch.findInternalType(name);
+        JoriaType cls = sch.findClass(name);
         if (cls != null)
             return cls;
         return JoriaUnknownType.createJoriaUnknownType(name);
