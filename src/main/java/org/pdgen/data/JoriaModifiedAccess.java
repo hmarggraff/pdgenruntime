@@ -45,8 +45,14 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
         return reason;
     }
 
+    public String getReasonString() {
+        if (reason <0 || reason > reasons.length)
+            return String.valueOf(reason);
+        return reasons[reason];
+    }
+
     public DBData getValue(DBData a, JoriaAccess asView, RunEnv env) throws JoriaDataException {
-        throw new JoriaDataException("getValue not possible for JoriaModifiedAccess." + getReason() + " in " + getName());
+        throw new JoriaDataException("getValue not possible for JoriaModifiedAccess." + getReasonString() + " in " + getName());
     }
 
     public boolean isRoot() {

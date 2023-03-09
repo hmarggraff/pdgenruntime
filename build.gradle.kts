@@ -11,7 +11,6 @@ allprojects {
     group = "org.pdgen"
     version = "2.1.4-SNAPSHOT"
 
-
     apply {
         plugin("java")
     }
@@ -82,8 +81,13 @@ publishing {
                 val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
                 url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
                 credentials {
-                    username = "hmf"
-                    password = "Fichtenstrasse.19"
+                    /* This will load the properties from gradle.properties.
+                        These should be defined in users local gradle.properties,
+                        by users, that have the right to publish to maven central.
+                        For others publishing will fail due to missing credentials
+                    */
+                    username = rootProject.findProperty("sonatypeUsername") as String?
+                    password = rootProject.findProperty("sonatypePassword") as String?
                 }
 
             }

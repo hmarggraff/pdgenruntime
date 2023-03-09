@@ -676,7 +676,7 @@ public class BuiltIns {
             return getDefaultType();
         }
     };
-    private static final Exec.ExecStringAbstract biRegex = new Exec.ExecStringAbstract("replaceRegex", envGroup, Res.str("replace regular expression"))//trdone
+    private static final Exec.ExecStringAbstract biRegex = new Exec.ExecStringAbstract("replaceRegex", envGroup, Res.str("replaceRegularExpression"))//trdone
     {
         public String execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException {
             if (args.length != 3)
@@ -705,7 +705,7 @@ public class BuiltIns {
             return null;
         }
     };
-    private static final Exec.ExecStringAbstract biMaxLines = new Exec.ExecStringAbstract("maxLines", envGroup, Res.str("return at most n lines"))//trdone
+    private static final Exec.ExecStringAbstract biMaxLines = new Exec.ExecStringAbstract("maxLines", envGroup, Res.str("maxLines"))//trdone
     {
         public String execute(RunEnv env, DBData from, DBData[] args) throws JoriaDataException {
             if (args.length != 2)

@@ -39,9 +39,10 @@ public class JavaList extends AbstractJoriaCollection {
 
     protected Object readResolve() throws ObjectStreamException {
         JoriaSchema sch = Env.schemaInstance;
-        JoriaType cls = sch.findClass(name);
-        if (cls != null)
-            return cls;
+        JoriaType type = sch.getTypes().get(name);
+        //JoriaType cls = sch.findClass(name);
+        if (type != null)
+            return type;
         return JoriaUnknownType.createJoriaUnknownType(name);
     }
 

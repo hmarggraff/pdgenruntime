@@ -10,8 +10,6 @@ java {
 
 }
 
-//version = "2.1"
-
 publishing {
     publications {
         create<MavenPublication>("maven") {
@@ -22,7 +20,7 @@ publishing {
             from(components["java"])
             pom {
                 name.set("Pdgen Runtime")
-                description.set("An engine to generate printable documents programmatically")
+                description.set("An engine to generate printable (e.g pdf) documents programatically")
                 url.set("http://pdgen.org/")
                 licenses {
                     license {
@@ -46,16 +44,17 @@ publishing {
         }
         repositories {
             maven {
-                // change URLs to point to your repos, e.g. http://my.org/repo
                 val releasesRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2")
                 val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
                 url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
                 credentials {
-                    // this code is untested. Need to check if username/password are properly retrieved from ~/.gradle/gradle.properties
-                    val sonatypeUsername: String by project
-                    val sonatypePassword: String by project
-                    username = sonatypeUsername
-                    password = sonatypePassword
+                    /* This will load the properties from gradle.properties.
+                        These should be defined in users local gradle.properties,
+                        by users, that have the right to publish to maven central.
+                        For others publishing will fail due to missing credentials
+                    */
+                    username = rootProject.findProperty("sonatypeUsername") as String?
+                    password = rootProject.findProperty("sonatypePassword") as String?
                 }
             }
         }

@@ -14,7 +14,7 @@ class JavaSavedSchema(base: JavaSchema) : SavedSchema {
     val testDataRoots: List<TestDataRootDef> = base.testDataRoots
 
     override fun buildSchema(forDesigner: Boolean): JoriaSchema {
-        val cb = JavaClassBuilder(jarFileName, roots, testDataRoots, forDesigner)
+        val cb = if (forDesigner) JavaClassBuilder(jarFileName) else JavaClassBuilder(jarFileName, roots, testDataRoots)
         return cb.javaSchema()
     }
 }

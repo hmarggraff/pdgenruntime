@@ -25,6 +25,9 @@ class JavaClassBuilder {
     val testDataRoots: List<TestDataRootDef>;
 
 
+    /**
+     * designer mode: Loads jar for testing and declarations and searches for annotations
+     */
     constructor(jarFileName: String) {
         this.jarFileName = jarFileName
         classLoader = URLClassLoader(arrayOf(File(jarFileName).toURI().toURL()))
@@ -35,13 +38,13 @@ class JavaClassBuilder {
         }
     }
 
-    constructor(jarFileName: String, roots: List<Pair<String, String>>, testDataRoots: List<TestDataRootDef>, forDesigner: Boolean) {
+    /**
+     * runtime mode: expects domain classes in classpath and loads list of roots
+     */
+    constructor(jarFileName: String, roots: List<Pair<String, String>>, testDataRoots: List<TestDataRootDef>) {
         this.jarFileName = jarFileName
         this.testDataRoots = testDataRoots
-        if (forDesigner)
-            classLoader = URLClassLoader(arrayOf(File(jarFileName).toURI().toURL()))
-        else
-            classLoader  = JavaClassBuilder::class.java.classLoader
+        classLoader  = JavaClassBuilder::class.java.classLoader
         testDataRoots.forEach {
             addRoot(it.testDataProviderClass, it.testDataMethod)
         }
