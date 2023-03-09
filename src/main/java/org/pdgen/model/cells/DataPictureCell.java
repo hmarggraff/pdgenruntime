@@ -103,6 +103,8 @@ public class DataPictureCell extends PictureCellBase implements DataCell {
                             pict = ((DBImage) d).getData();
                         }
                     }
+                    if (pict == null)
+                        return null;
                     return new RVImage(pict, outMode.getRunEnv().getLocale(), false);
                 } catch (JoriaDataRetrievalExceptionInUserMethod e) {
                     return new RVImage(Res.missingImageIcon, outMode.getRunEnv().getLocale(), false);

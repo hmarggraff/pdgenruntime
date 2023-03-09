@@ -8,6 +8,7 @@ import org.pdgen.env.Settings;
 import org.pdgen.model.cells.*;
 import org.pdgen.model.style.*;
 import org.pdgen.schemacheck.CheckFormulasForSchemaChange;
+import org.pdgen.util.Log;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -151,10 +152,15 @@ public class TemplateLayouter implements GridLayouter {
     */
 
     private float getRequiredCellWidth(CellDef cd, Graphics2D g) {
-        if (cd instanceof DataCell || cd instanceof StyledTextCellDef)
-            return cd.getCascadedStyle().getSize().getValInPoints() * 2;
-        else
-            return cd.getWidth(Internationalisation.NOREPLACE, g);
+        try {
+            if (cd instanceof DataCell || cd instanceof StyledTextCellDef)
+                return cd.getCascadedStyle().getSize().getValInPoints() * 2;
+            else
+                return cd.getWidth(Internationalisation.NOREPLACE, g);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return 20f;
+        }
     }
 
     private void adjustForHorizontalSpan(Graphics2D g) {

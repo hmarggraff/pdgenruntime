@@ -30,7 +30,7 @@ public class FlowingTextCellLayouter implements TextCellLayouter {
     protected boolean stringIt(Locale loc) {
         CellStyle cs = myCell.getCascadedStyle();
         String txt = myCell.getWrappedText(loc);
-        if ((txt != null) && txt.equals(myText))
+        if (txt != null && txt.equals(myText))
             return false;
         myText = txt;
         if (txt != null && txt.length() != 0) {

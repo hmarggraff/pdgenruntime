@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Untility functions needed during repo loading
+ * Utility functions needed during repo loading
  */
 public class RepoLoader {
     private final ArrayList<WeakReference<JoriaModifiedAccess>> modifiedAccesses = new ArrayList<>();
@@ -46,7 +46,7 @@ public class RepoLoader {
         try {
             ObjectInputStream oin = new ObjectInputStream(ins);
             Object saved = oin.readObject();
-            if (saved instanceof JavaSchema) {
+            if (saved instanceof JavaSchema) { // Backwards compatibility: phase out after 2022
                 Env.schemaInstance = (JavaSchema) saved;
             } else {
                 SavedSchema fromFile = (SavedSchema) saved;
