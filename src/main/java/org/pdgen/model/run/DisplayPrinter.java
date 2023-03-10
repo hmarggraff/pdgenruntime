@@ -20,18 +20,18 @@ public class DisplayPrinter extends Graphics2DPrinter {
     }
 
     public void printDecoration(GrelViewer gv) {
-        Rectangle cr = g.getClipBounds();
-        g.setColor(Color.lightGray);
-        g.fill(cr);
-        g.setColor(Color.darkGray);
-        g.fillRect(20, 20, gv.getPageWidth(), gv.getPageHeight());
-        g.setColor(Color.white);
-        g.fillRect(10, 10, gv.getPageWidth(), gv.getPageHeight());
-        g.translate(offset.getX(), offset.getY());
+        Rectangle cr = graphics2D.getClipBounds();
+        graphics2D.setColor(Color.lightGray);
+        graphics2D.fill(cr);
+        graphics2D.setColor(Color.darkGray);
+        graphics2D.fillRect(20, 20, gv.getPageWidth(), gv.getPageHeight());
+        graphics2D.setColor(Color.white);
+        graphics2D.fillRect(10, 10, gv.getPageWidth(), gv.getPageHeight());
+        graphics2D.translate(offset.getX(), offset.getY());
         if (gv.getScale() != 1) {
-            AffineTransform transform = g.getTransform();
+            AffineTransform transform = graphics2D.getTransform();
             transform.scale(gv.getScale(), gv.getScale());
-            g.setTransform(transform);
+            graphics2D.setTransform(transform);
         }
 
         super.printDecoration(gv);
