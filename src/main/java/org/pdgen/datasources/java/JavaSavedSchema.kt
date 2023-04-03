@@ -2,6 +2,7 @@ package org.pdgen.datasources.java
 
 import org.pdgen.data.JoriaSchema
 import org.pdgen.data.SavedSchema
+import org.pdgen.util.Log
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.Serializable
@@ -14,6 +15,14 @@ class JavaSavedSchema(base: JavaSchema) : SavedSchema {
     val testDataRoots: List<TestDataRootDef> = base.testDataRoots
 
     override fun buildSchema(forDesigner: Boolean): JoriaSchema {
+        val envLocation = System.getenv()["PDGCONNECTORFILE"]
+        if (envLocation != null )
+        {
+            Log.ini.info("PDGCONNECTORFILE=$envLocation")
+            jarFileName = envLocation
+        }
+        else
+            Log.ini.info("adapterjar=$jarFileName")
         val cb = if (forDesigner) JavaClassBuilder(jarFileName) else JavaClassBuilder(jarFileName, roots, testDataRoots)
         return cb.javaSchema()
     }

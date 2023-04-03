@@ -43,6 +43,10 @@ public class Graphics2DPrinter implements JoriaPrinter {
         this.g = g;
     }
 
+    public Graphics2D getGraphics2D() {
+        return g;
+    }
+
     public void startPage() {
         // nothing here to be done
     }

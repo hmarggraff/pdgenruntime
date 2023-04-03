@@ -36,7 +36,7 @@ import java.util.Hashtable;
  * Time: 2:21:59 PM
  */
 public class PDFPrinter implements JoriaPrinter {
-    PdfOutput myOutputter;
+    private PdfOutput myOutputter;
     private final Rectangle2D.Float clipRectangle = new Rectangle2D.Float();
     protected int[] pages = new int[1024];
     protected Color color;
@@ -44,7 +44,7 @@ public class PDFPrinter implements JoriaPrinter {
     private static final FontRenderContext frc = new FontRenderContext(null, false, true);
 
     private Template lastTemplate;
-    float ph;
+    private float ph;
     private final Graphics2D g2d;
 
     PDFPrinter(OutputStream file, PageFormat pap, String title, Template template, Graphics2D g2d, final String userName) throws IOException {
@@ -441,6 +441,14 @@ public class PDFPrinter implements JoriaPrinter {
         return color != null && !color.equals(testColor) && color.getAlpha() != 0;
     }
 
+    public PdfOutput getMyOutputter() {
+        return myOutputter;
+    }
+
+    public float getPh() {
+        return ph;
+    }
+
     private class StyledTextComponent {
         boolean newSuperScript;
         boolean superScript;
@@ -473,7 +481,7 @@ public class PDFPrinter implements JoriaPrinter {
         }
     }
 
-    protected void startContentElement(GraphElContent elem) {
+    public void startContentElement(GraphElContent elem) {
         myOutputter.writePushContext();
         if (elem.color.getAlpha() != 0) {
             myOutputter.setNonStrokeColor(elem.color);
@@ -509,7 +517,7 @@ public class PDFPrinter implements JoriaPrinter {
         myOutputter.writeNewPathToPage();
     }
 
-    protected void endContentElement() {
+    public void endContentElement() {
         myOutputter.writePopContext();
     }
 }
