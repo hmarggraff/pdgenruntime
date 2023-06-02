@@ -18,7 +18,7 @@ allprojects {
         mavenCentral()
     }
     dependencies {
-        testImplementation("org.testng:testng:7.6.1")
+        testImplementation("org.testng:testng:7.7.0")
     }
     tasks.getByName<Test>("test") {
         useTestNG()

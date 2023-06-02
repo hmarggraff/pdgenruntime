@@ -1287,6 +1287,10 @@ public class FillPagedFrame extends OutputMode {
         lastRowState = rowState;
     }
 
+    public float[] getColPos() {
+        return colPos;
+    }
+
     private static class BorderHolder {
         private JoriaSimpleBorder topBorder;
         private JoriaSimpleBorder leftBorder;
@@ -1358,5 +1362,9 @@ public class FillPagedFrame extends OutputMode {
         remainingHeight += spaceForTableBorderAtPageBottom;// remove old valuue
         spaceForTableBorderAtPageBottom = fill.getMaxSpaceForTableBorderAtPageBottom(0.0f);
         remainingHeight -= spaceForTableBorderAtPageBottom;// add new value
+    }
+
+    public int getDynaCols() {
+        return dynaCols;
     }
 }
