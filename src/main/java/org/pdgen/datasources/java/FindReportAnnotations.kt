@@ -1,17 +1,25 @@
 package org.pdgen.datasources.java
 
 import org.objectweb.asm.*
+import org.pdgen.data.JoriaDataException
 import org.pdgen.util.Log
+import java.io.FileNotFoundException
 import java.util.jar.JarFile
 
 class FindReportAnnotations(jarFile: String) {
     val roots = ArrayList<TestDataRootDef>()
 
     init {
-        val jf = JarFile(jarFile)
+
+        val jf = try { JarFile(jarFile)} catch (x: FileNotFoundException) {
+            val msg = "adapterjar not found at: $jarFile"
+            Log.ini.error(msg)
+            throw JoriaDataException(msg, x)
+        }
+
         try {
-            val entries = jf.entries()
             Log.schema.info("FindReportAnnotations: $jarFile")
+            val entries = jf.entries()
 
             entries.asIterator().forEach {
                 if (it.name.endsWith(".class") && !it.name.contains('-')) { // this skips META-INF and module-info.class

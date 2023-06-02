@@ -36,55 +36,46 @@ import java.util.Hashtable;
  * Time: 2:21:59 PM
  */
 public class PDFPrinter implements JoriaPrinter {
-    private static final FontRenderContext frc = new FontRenderContext(null, false, true);
+    private PdfOutput myOutputter;
     private final Rectangle2D.Float clipRectangle = new Rectangle2D.Float();
-
-    public PdfOutput getWriter() {
-        return writer;
-    }
-
-    public float getPageHeight() {
-        return pageHeight;
-    }
-
-    PdfOutput writer;
-    int[] pages = new int[1024];
-    Color color;
-    Color background;
+    protected int[] pages = new int[1024];
+    protected Color color;
+    protected Color background;
+    private static final FontRenderContext frc = new FontRenderContext(null, false, true);
 
     private Template lastTemplate;
-    float pageHeight;
+    private float ph;
     private final Graphics2D g2d;
 
     PDFPrinter(OutputStream file, PageFormat pap, String title, Template template, Graphics2D g2d, final String userName) throws IOException {
         this.g2d = g2d;
-        pageHeight = (float) pap.getPaper().getHeight();
+        ph = (float) pap.getPaper().getHeight();
         if (template.getNextSection() != null)
             lastTemplate = template;
-        writer = new PdfOutput(file, pap.getPaper(), title, g2d);
+        myOutputter = new PdfOutput(file, pap.getPaper(), title, g2d);
     }
 
     public void end(boolean doEndpage) throws IOException {
         if (doEndpage) {
             endPage();
         }
-        writer.end();
+        myOutputter.end();
     }
 
     public void startPage() {
     }
 
     public void endPage() throws IOException {
-        writer.endPage();
+        myOutputter.endPage();
     }
 
     public void printDecoration(GrelViewer gv) throws IOException {
         if (lastTemplate != null && gv.pageContents.currentTemplate != lastTemplate) {
             lastTemplate = gv.pageContents.currentTemplate;
-            writer.startSection(lastTemplate.getPage().getCascadedPageStyle().getPageFormat().getPaper());
-            pageHeight = (float) lastTemplate.getPage().getCascadedPageStyle().getPageFormat().getPaper().getHeight();
+            myOutputter.startSection(lastTemplate.getPage().getCascadedPageStyle().getPageFormat().getPaper());
+            ph = (float) lastTemplate.getPage().getCascadedPageStyle().getPageFormat().getPaper().getHeight();
         }
-        writer.startPage();
+        myOutputter.startPage();
     }
 
     public void printGETextLines(GraphElTextLines textLines) {
@@ -93,9 +84,9 @@ public class PDFPrinter implements JoriaPrinter {
             endContentElement();
             return;
         }
-        PdfOutput.RegFont rf = writer.setFont(textLines.style.getStyledFont());
-        writer.setNonStrokeColor(textLines.style.getForeground());
-        writer.writeBeginTextToPage();
+        PdfOutput.RegFont rf = myOutputter.setFont(textLines.style.getStyledFont());
+        myOutputter.setNonStrokeColor(textLines.style.getForeground());
+        myOutputter.writeBeginTextToPage();
         float lastX = 0;
         float lastY = 0;
         float lineHeight = textLines.style.getLineSpacing();
@@ -106,25 +97,25 @@ public class PDFPrinter implements JoriaPrinter {
             if (isBlockAlignment && textLines.linesParts[i] != null) {
                 for (int j = 0; j < textLines.linesParts[i].length; j++) {
                     float thisX = textLines.xContent + textLines.partOffsets[i][j];
-                    float thisY = pageHeight - (textLines.yContent + i * lineHeight + textLines.style.getBaseLine());
-                    writer.writeTextWithPositionToPage(thisX - lastX, thisY - lastY, textLines.linesParts[i][j], rf);
+                    float thisY = ph - (textLines.yContent + i * lineHeight + textLines.style.getBaseLine());
+                    myOutputter.writeTextWithPositionToPage(thisX - lastX, thisY - lastY, textLines.linesParts[i][j], rf);
                     lastX = thisX;
                     lastY = thisY;
                 }
             } else {
                 float thisX = textLines.xContent + textLines.lineOffsets[i];
-                float thisY = pageHeight - (textLines.yContent + i * lineHeight + textLines.style.getBaseLine());
-                writer.writeTextWithPositionToPage(thisX - lastX, thisY - lastY, textLines.lines[i], rf);
+                float thisY = ph - (textLines.yContent + i * lineHeight + textLines.style.getBaseLine());
+                myOutputter.writeTextWithPositionToPage(thisX - lastX, thisY - lastY, textLines.lines[i], rf);
                 lastX = thisX;
                 lastY = thisY;
             }
         }
-        writer.writeEndTextToPage();
+        myOutputter.writeEndTextToPage();
         if (textLines.style.getUnderlined()) {
             for (int i = 0; i < textLines.lines.length; i++) {
-                LineMetrics lm = writer.getFont().getLineMetrics(textLines.lines[i], frc);
-                Rectangle2D.Float uline = new Rectangle2D.Float(textLines.xContent + textLines.lineOffsets[i], pageHeight - (textLines.yContent + i * lineHeight + textLines.style.getBaseLine() + lm.getUnderlineOffset() + lm.getUnderlineThickness()), textLines.style.getWidth(textLines.lines[i], g2d), lm.getUnderlineThickness());
-                writer.fillRectangle(uline, false);
+                LineMetrics lm = myOutputter.getFont().getLineMetrics(textLines.lines[i], frc);
+                Rectangle2D.Float uline = new Rectangle2D.Float(textLines.xContent + textLines.lineOffsets[i], ph - (textLines.yContent + i * lineHeight + textLines.style.getBaseLine() + lm.getUnderlineOffset() + lm.getUnderlineThickness()), textLines.style.getWidth(textLines.lines[i], g2d), lm.getUnderlineThickness());
+                myOutputter.fillRectangle(uline, false);
             }
         }
         endContentElement();
@@ -145,7 +136,7 @@ public class PDFPrinter implements JoriaPrinter {
                 scaleWidth = picture.scale;
                 scaleHeight = picture.scale;
             }
-            writer.paintImage(picture.img, picture.storedData, picture.getxContent(), pageHeight - picture.yContent - iconHeight, scaleWidth, scaleHeight);
+            myOutputter.paintImage(picture.img, picture.storedData, picture.getxContent(), ph - picture.yContent - iconHeight, scaleWidth, scaleHeight);
         }
         endContentElement();
     }
@@ -156,30 +147,30 @@ public class PDFPrinter implements JoriaPrinter {
             endContentElement();
             return;
         }
-        PdfOutput.RegFont rf = writer.setFont(text.style.getStyledFont());
-        writer.setNonStrokeColor(text.style.getForeground());
+        PdfOutput.RegFont rf = myOutputter.setFont(text.style.getStyledFont());
+        myOutputter.setNonStrokeColor(text.style.getForeground());
         float x = text.xContent;
-        float y = pageHeight - text.yContent - text.style.getBaseLine();
+        float y = ph - text.yContent - text.style.getBaseLine();
         if (text.style.getTextType().equals(CellStyle.vertBottomUp)) {
             x += text.style.getBaseLine();
             y -= text.hContent - text.style.getBaseLine();
-            writer.writeRotate(false, x, y);
+            myOutputter.writeRotate(false, x, y);
             x = 0;
             y = 0;
         } else if (text.style.getTextType().equals(CellStyle.vertTopDown)) {
             x += text.style.getLineSpacing() - text.style.getBaseLine();
             y += text.style.getBaseLine();
-            writer.writeRotate(true, x, y);
+            myOutputter.writeRotate(true, x, y);
             x = 0;
             y = 0;
         }
-        writer.writeBeginTextToPage();
-        writer.writeTextWithPositionToPage(x, y, text.txt, rf);
-        writer.writeEndTextToPage();
+        myOutputter.writeBeginTextToPage();
+        myOutputter.writeTextWithPositionToPage(x, y, text.txt, rf);
+        myOutputter.writeEndTextToPage();
         if (text.style.getUnderlined()) {
-            LineMetrics lm = writer.getFont().getLineMetrics(text.txt, frc);
+            LineMetrics lm = myOutputter.getFont().getLineMetrics(text.txt, frc);
             Rectangle2D.Float uline = new Rectangle2D.Float(x, y - lm.getUnderlineOffset() - lm.getUnderlineThickness(), text.style.getWidth(text.txt, g2d), lm.getUnderlineThickness());
-            writer.fillRectangle(uline, false);
+            myOutputter.fillRectangle(uline, false);
         }
         endContentElement();
     }
@@ -192,45 +183,45 @@ public class PDFPrinter implements JoriaPrinter {
     public void printGELine(GraphElLine line) {
         if (line.lineStyle == JoriaBorder.NONE)
             return;
-        writer.setStrokeColor(line.color);
+        myOutputter.setStrokeColor(line.color);
         if (line.lineStyle == JoriaBorder.DOUBLE) {
             float width = line.thickness / 3;
-            writer.writeLineDashPatternToPage(0, 0);
-            writer.writeLineWidthToPage(width);
+            myOutputter.writeLineDashPatternToPage(0, 0);
+            myOutputter.writeLineWidthToPage(width);
             if (line.isHorizantal()) {
-                writer.writeMoveToToPage(line.x1, pageHeight - line.y1 - width);
-                writer.writeLineToToPage(line.x2, pageHeight - line.y1 - width);
-                writer.writeStrokeToPage();
-                writer.writeMoveToToPage(line.x1, pageHeight - line.y1 + width);
-                writer.writeLineToToPage(line.x2, pageHeight - line.y1 + width);
-                writer.writeStrokeToPage();
+                myOutputter.writeMoveToToPage(line.x1, ph - line.y1 - width);
+                myOutputter.writeLineToToPage(line.x2, ph - line.y1 - width);
+                myOutputter.writeStrokeToPage();
+                myOutputter.writeMoveToToPage(line.x1, ph - line.y1 + width);
+                myOutputter.writeLineToToPage(line.x2, ph - line.y1 + width);
+                myOutputter.writeStrokeToPage();
             } else {
-                writer.writeMoveToToPage(line.x1 - width, pageHeight - line.y1);
-                writer.writeLineToToPage(line.x1 - width, pageHeight - line.y2);
-                writer.writeStrokeToPage();
-                writer.writeMoveToToPage(line.x1 - width, pageHeight - line.y1);
-                writer.writeLineToToPage(line.x1 - width, pageHeight - line.y2);
-                writer.writeStrokeToPage();
+                myOutputter.writeMoveToToPage(line.x1 - width, ph - line.y1);
+                myOutputter.writeLineToToPage(line.x1 - width, ph - line.y2);
+                myOutputter.writeStrokeToPage();
+                myOutputter.writeMoveToToPage(line.x1 - width, ph - line.y1);
+                myOutputter.writeLineToToPage(line.x1 - width, ph - line.y2);
+                myOutputter.writeStrokeToPage();
             }
         } else {
             if (line.lineStyle == JoriaBorder.SOLID) {
-                writer.writeLineDashPatternToPage(0, 0);
+                myOutputter.writeLineDashPatternToPage(0, 0);
             } else if (line.lineStyle == JoriaBorder.DOT) {
-                writer.writeLineDashPatternToPage(line.thickness, line.thickness);
+                myOutputter.writeLineDashPatternToPage(line.thickness, line.thickness);
             } else if (line.lineStyle == JoriaBorder.DASH) {
-                writer.writeLineDashPatternToPage(2 * line.thickness, line.thickness);
+                myOutputter.writeLineDashPatternToPage(2 * line.thickness, line.thickness);
             } else {
                 throw new JoriaInternalError("unknown line style " + line.lineStyle);
             }
-            writer.writeLineWidthToPage(line.thickness);
+            myOutputter.writeLineWidthToPage(line.thickness);
             if (line.isHorizantal()) {
-                writer.writeMoveToToPage(line.x1, pageHeight - line.y1);
-                writer.writeLineToToPage(line.x2, pageHeight - line.y1);
-                writer.writeStrokeToPage();
+                myOutputter.writeMoveToToPage(line.x1, ph - line.y1);
+                myOutputter.writeLineToToPage(line.x2, ph - line.y1);
+                myOutputter.writeStrokeToPage();
             } else {
-                writer.writeMoveToToPage(line.x1, pageHeight - line.y1);
-                writer.writeLineToToPage(line.x1, pageHeight - line.y2);
-                writer.writeStrokeToPage();
+                myOutputter.writeMoveToToPage(line.x1, ph - line.y1);
+                myOutputter.writeLineToToPage(line.x1, ph - line.y2);
+                myOutputter.writeStrokeToPage();
             }
         }
     }
@@ -238,7 +229,7 @@ public class PDFPrinter implements JoriaPrinter {
     public void printMetaFile(GraphElMetaFile mf) {
         startContentElement(mf);
         try {
-            PDFGraphics2D g = new PDFGraphics2D(writer, pageHeight, mf.getBounds());
+            PDFGraphics2D g = new PDFGraphics2D(myOutputter, ph, mf.getBounds());
             g.translate(mf.xContent - mf.x + mf.translateX, mf.yContent - mf.y + mf.translateY);
             MetaFileGraphics2DIn mfg = new MetaFileGraphics2DIn(mf.data);
             mfg.loop(g);
@@ -252,7 +243,7 @@ public class PDFPrinter implements JoriaPrinter {
 
     public void printGEHtmlText(GraphElHtmlText htmlText) {
         startContentElement(htmlText);
-        PDFGraphics2D gc = new PDFGraphics2D(writer, pageHeight, htmlText.getBounds());
+        PDFGraphics2D gc = new PDFGraphics2D(myOutputter, ph, htmlText.getBounds());
         gc.setColor(htmlText.myStyle.getForeground());
         gc.setFont(htmlText.myStyle.getStyledFont());
         gc.translate(htmlText.xContent - htmlText.x, htmlText.yContent - htmlText.y);
@@ -268,7 +259,7 @@ public class PDFPrinter implements JoriaPrinter {
 
     public void printGERtfText(GraphElRtfText graphElRtfText) {
         startContentElement(graphElRtfText);
-        PDFGraphics2D gc = new PDFGraphics2D(writer, pageHeight, graphElRtfText.getBounds());
+        PDFGraphics2D gc = new PDFGraphics2D(myOutputter, ph, graphElRtfText.getBounds());
         gc.setColor(graphElRtfText.myStyle.getForeground());
         gc.setFont(graphElRtfText.myStyle.getStyledFont());
         gc.translate(graphElRtfText.xContent - graphElRtfText.x, graphElRtfText.yContent - graphElRtfText.y);
@@ -288,9 +279,9 @@ public class PDFPrinter implements JoriaPrinter {
             endContentElement();
             return;
         }
-        writer.setFont(graphElStyledText.style.getStyledFont());
-        writer.setNonStrokeColor(graphElStyledText.style.getForeground());
-        writer.writeBeginTextToPage();
+        myOutputter.setFont(graphElStyledText.style.getStyledFont());
+        myOutputter.setNonStrokeColor(graphElStyledText.style.getForeground());
+        myOutputter.writeBeginTextToPage();
         float lastX = 0;
         float lastY = 0;
         boolean inText = true;
@@ -302,9 +293,9 @@ public class PDFPrinter implements JoriaPrinter {
             boolean isLastLine = line.isLastLineOfParagraph();
             boolean justify = (line.text.getAlignment() == StyledParagraph.alignJustified && !isLastLine);
             float thisX = graphElStyledText.xContent + line.x;
-            float thisY = pageHeight - (graphElStyledText.yContent + line.yCell + line.getAscent() - graphElStyledText.offset);
+            float thisY = ph - (graphElStyledText.yContent + line.yCell + line.getAscent() - graphElStyledText.offset);
             if (!justify) {
-                writer.writeTextPositionToPage(thisX - lastX, thisY - lastY);
+                myOutputter.writeTextPositionToPage(thisX - lastX, thisY - lastY);
                 lastY = thisY;
                 lastX = thisX;
             }
@@ -379,18 +370,18 @@ public class PDFPrinter implements JoriaPrinter {
                 Color testColor = graphElStyledText.color;
                 if (isValidColor(color, testColor)) {
                     if (inText) {
-                        writer.writeEndTextToPage();
+                        myOutputter.writeEndTextToPage();
                         inText = false;
                     }
-                    writer.setNonStrokeColor(color);
+                    myOutputter.setNonStrokeColor(color);
                     double superScriptOffset = textComponent.superScript ? (textComponent.fontSize / 2) : 0;
-                    clipRectangle.setRect(runningX + r.getX(), pageHeight - (graphElStyledText.yContent + line.getAscent() + line.yCell - graphElStyledText.offset) - r.getY() - r.getHeight() + superScriptOffset, r.getWidth(), r.getHeight());
-                    writer.fillRectangle(clipRectangle, false);
-                    writer.setNonStrokeColor(testColor);
+                    clipRectangle.setRect(runningX + r.getX(), ph - (graphElStyledText.yContent + line.getAscent() + line.yCell - graphElStyledText.offset) - r.getY() - r.getHeight() + superScriptOffset, r.getWidth(), r.getHeight());
+                    myOutputter.fillRectangle(clipRectangle, false);
+                    myOutputter.setNonStrokeColor(testColor);
                 }
                 runningX += r.getWidth();
             }
-            writer.setNonStrokeColor(graphElStyledText.style.getForeground());
+            myOutputter.setNonStrokeColor(graphElStyledText.style.getForeground());
             Color lastForegound = graphElStyledText.style.getForeground();
             for (StyledTextComponent textComponent : components) {
                 Font font = textComponent.font;
@@ -398,35 +389,35 @@ public class PDFPrinter implements JoriaPrinter {
                 Rectangle2D r = textComponent.rect;
                 if (!lastForegound.equals(textComponent.foregroundColor) && !(lastForegound == graphElStyledText.style.getForeground() && textComponent.foregroundColor == null)) {
                     if (inText) {
-                        writer.writeEndTextToPage();
+                        myOutputter.writeEndTextToPage();
                         inText = false;
                     }
                     lastForegound = isValidColor(textComponent.foregroundColor, graphElStyledText.style.getForeground()) ? textComponent.foregroundColor : graphElStyledText.style.getForeground();
-                    writer.setNonStrokeColor(lastForegound);
+                    myOutputter.setNonStrokeColor(lastForegound);
                 }
                 if (!inText) {
                     lastY = 0;
                     lastX = 0;
-                    writer.writeBeginTextToPage();
-                    writer.writeTextPositionToPage(thisX - lastX, thisY - lastY);
+                    myOutputter.writeBeginTextToPage();
+                    myOutputter.writeTextPositionToPage(thisX - lastX, thisY - lastY);
                     lastY = thisY;
                     lastX = thisX;
                     inText = true;
                 } else if (justify) {
-                    writer.writeTextPositionToPage(thisX - lastX, thisY - lastY);
+                    myOutputter.writeTextPositionToPage(thisX - lastX, thisY - lastY);
                     lastY = thisY;
                     lastX = thisX;
                 }
                 if (textComponent.newSuperScript) {
                     if (textComponent.superScript) {
-                        writer.writeTextRise(textComponent.fontSize / 2);
+                        myOutputter.writeTextRise(textComponent.fontSize / 2);
                     } else {
-                        writer.writeTextRise(0);
+                        myOutputter.writeTextRise(0);
                     }
                 }
-                PdfOutput.RegFont rf = writer.setFont(font);
-                writer.writeFontToPage();
-                writer.writeTextToPage(text, rf);
+                PdfOutput.RegFont rf = myOutputter.setFont(font);
+                myOutputter.writeFontToPage();
+                myOutputter.writeTextToPage(text, rf);
                 if (textComponent.underlined) {
                     LineMetrics lm = font.getLineMetrics(text, g2d.getFontRenderContext());
                     Rectangle2D.Float uline = new Rectangle2D.Float(startX, thisY - lm.getUnderlineOffset() - lm.getUnderlineThickness(), (float) r.getWidth(), lm.getUnderlineThickness());
@@ -436,18 +427,26 @@ public class PDFPrinter implements JoriaPrinter {
                 thisX += (float) r.getWidth();
             }
             components.clear();
-            writer.writeEOLToPage();
+            myOutputter.writeEOLToPage();
         }
         if (inText)
-            writer.writeEndTextToPage();
+            myOutputter.writeEndTextToPage();
         for (Rectangle2D.Float aFloat : underLines) {
-            writer.fillRectangle(aFloat, false);
+            myOutputter.fillRectangle(aFloat, false);
         }
         endContentElement();
     }
 
     private boolean isValidColor(Color color, Color testColor) {
         return color != null && !color.equals(testColor) && color.getAlpha() != 0;
+    }
+
+    public PdfOutput getMyOutputter() {
+        return myOutputter;
+    }
+
+    public float getPh() {
+        return ph;
     }
 
     private class StyledTextComponent {
@@ -483,19 +482,19 @@ public class PDFPrinter implements JoriaPrinter {
     }
 
     public void startContentElement(GraphElContent elem) {
-        writer.writePushContext();
+        myOutputter.writePushContext();
         if (elem.color.getAlpha() != 0) {
-            writer.setNonStrokeColor(elem.color);
-            clipRectangle.setRect(elem.x, pageHeight - elem.y - elem.height, elem.width, elem.height);
-            writer.fillRectangle(clipRectangle, true);
+            myOutputter.setNonStrokeColor(elem.color);
+            clipRectangle.setRect(elem.x, ph - elem.y - elem.height, elem.width, elem.height);
+            myOutputter.fillRectangle(clipRectangle, true);
         }
-        writer.writeRectangleToPage(elem.x, pageHeight - elem.y - elem.height, elem.width, elem.height);
-        writer.writeClipToPage();
-        writer.writeNewPathToPage();
+        myOutputter.writeRectangleToPage(elem.x, ph - elem.y - elem.height, elem.width, elem.height);
+        myOutputter.writeClipToPage();
+        myOutputter.writeNewPathToPage();
         if (elem.background != null) {
-            writer.writeRectangleToPage(elem.xEnvelope, pageHeight - elem.yEnvelope - elem.hEnvelope, elem.wEnvelope, elem.hEnvelope);
-            writer.writeClipToPage();
-            writer.writeNewPathToPage();
+            myOutputter.writeRectangleToPage(elem.xEnvelope, ph - elem.yEnvelope - elem.hEnvelope, elem.wEnvelope, elem.hEnvelope);
+            myOutputter.writeClipToPage();
+            myOutputter.writeNewPathToPage();
             float scaleWidth = Float.NaN;
             float scaleHeight = Float.NaN;
             float iconHeight = elem.background.getIconHeight();
@@ -510,15 +509,15 @@ public class PDFPrinter implements JoriaPrinter {
             }
             float x = elem.xEnvelope + (elem.wEnvelope - iconWidth) * cellStyle.getAlignmentHorizontal().getAlign();
             float y = elem.yEnvelope + (elem.hEnvelope - iconHeight) * cellStyle.getAlignmentVertical().getAlign();
-            writer.paintImage(elem.background, cellStyle.getBackgroundImageName(), x, pageHeight - y - elem.hEnvelope, scaleWidth, scaleHeight);
+            myOutputter.paintImage(elem.background, cellStyle.getBackgroundImageName(), x, ph - y - elem.hEnvelope, scaleWidth, scaleHeight);
         }
-        writer.writeRectangleToPage(elem.xEnvelope, pageHeight - elem.yEnvelope - elem.hEnvelope, elem.wEnvelope, elem.hEnvelope);
+        myOutputter.writeRectangleToPage(elem.xEnvelope, ph - elem.yEnvelope - elem.hEnvelope, elem.wEnvelope, elem.hEnvelope);
         //        myOutputter.writeRectangleToPage(elem.xContent, ph - elem.yContent - elem.hContent, elem.wContent, elem.hContent);
-        writer.writeClipToPage();
-        writer.writeNewPathToPage();
+        myOutputter.writeClipToPage();
+        myOutputter.writeNewPathToPage();
     }
 
     public void endContentElement() {
-        writer.writePopContext();
+        myOutputter.writePopContext();
     }
 }
