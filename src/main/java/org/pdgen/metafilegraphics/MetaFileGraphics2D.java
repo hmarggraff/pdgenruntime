@@ -128,16 +128,16 @@ public class MetaFileGraphics2D extends Graphics2D implements DrawCommands, Auto
     }
 
     protected void i4(String cmd, int p1, int p2, int p3, int p4) {
-        //mWriter.println(cmd + "(" + p1 + "," + p2 + "," + p3 + "," + p4 + ")");
+        mWriter.println(cmd + "(" + p1 + "," + p2 + "," + p3 + "," + p4 + ")");
     }
 
     protected void debugPrint(String s) {
-        //mWriter.print(s);
+        mWriter.print(s);
 
     }
 
     protected void debugPrintln(String s) {
-        //mWriter.print(s);
+        mWriter.println(s);
 
     }
 

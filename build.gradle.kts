@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
     group = "org.pdgen"
-    version = "2.1.4-SNAPSHOT"
+    version = "2.1.5-SNAPSHOT"
 
     apply {
         plugin("java")
@@ -38,7 +38,7 @@ dependencies {
     api(project(":pdgenannotations"))
     implementation("net.sf.barcode4j:barcode4j:2.1")
     implementation("org.ow2.asm:asm:9.4")
-    implementation("joda-time:joda-time:2.12.2")
+    implementation("joda-time:joda-time:2.12.5")
 }
 
 publishing {

@@ -218,7 +218,7 @@ class JavaClassBuilder {
     private fun processMembersForClass(jc: JavaClass, genericMap: java.util.HashMap<String, String>?) {
         val memberList = ArrayList<JoriaAccess>()
         jc.myClass.methods.forEach {
-            if (it.parameterCount == 0 && it.returnType != Void.TYPE && Modifier.isPublic(it.modifiers) && !Modifier.isStatic(it.modifiers)) {
+            if (it.parameterCount == 0 && it.returnType != Void.TYPE && Modifier.isPublic(it.modifiers) && !Modifier.isStatic(it.modifiers) && it.name != "hashCode") {
                 try {
                     val buildReturnType = buildReturnType(it, genericMap)
                     if (buildReturnType != null)

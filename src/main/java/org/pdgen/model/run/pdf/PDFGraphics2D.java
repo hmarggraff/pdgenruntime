@@ -3,6 +3,7 @@ package org.pdgen.model.run.pdf;
 //MARKER The strings in this file shall not be translated
 
 import org.pdgen.data.JoriaAssertionError;
+import org.pdgen.util.Log;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -45,11 +46,12 @@ public class PDFGraphics2D extends Graphics2D {
     private Paint paintFill;
     private Paint paintStroke;
     private final RenderingHints rhints = new RenderingHints(null);
-    private final Rectangle bounds;
+    private final Rectangle2D bounds;
     private boolean ignoreFill;
     private boolean ignoreStroke;
+    Composite composite = AlphaComposite.getInstance(3,1f);
 
-    public PDFGraphics2D(PdfOutput output, float ph, Rectangle b) {
+    public PDFGraphics2D(PdfOutput output, float ph, Rectangle2D b) {
         myOutputter = output;
         pageHeight = ph;
         paint = Color.black;
@@ -289,16 +291,18 @@ public class PDFGraphics2D extends Graphics2D {
     }
 
     public Composite getComposite() {
-        return null;
+        return composite;
     }
 
     public void setComposite(Composite comp) {
+        if (comp == composite) return;
         if (comp instanceof AlphaComposite) {
+            composite = comp;
             int alpha = (int) (((AlphaComposite) comp).getAlpha() * 255);
             myOutputter.setStrokeAlpha(alpha);
             myOutputter.setFillAlpha(alpha);
         } else
-            throw new JoriaAssertionError("not implemented");
+            throw new JoriaAssertionError("not implemented for: " + comp.getClass());
     }
 
     public GraphicsConfiguration getDeviceConfiguration() {
@@ -383,6 +387,7 @@ public class PDFGraphics2D extends Graphics2D {
     public void drawString(String s, float x, float y) {
         if (setFillPaint())
             return;
+        Log.run.info("drawString=[\"" + s + "\"," + x + "," + y + "1]");
         AffineTransform at = getTransform();
         AffineTransform at2 = getTransform();
         at2.translate(x, y);
