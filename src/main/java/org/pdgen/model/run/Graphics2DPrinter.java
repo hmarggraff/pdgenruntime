@@ -44,7 +44,7 @@ public class Graphics2DPrinter implements JoriaPrinter {
     }
 
     public Graphics2D getGraphics2D() {
-        return g;
+        return graphics2D;
     }
 
     public void startPage() {
@@ -373,9 +373,5 @@ public class Graphics2DPrinter implements JoriaPrinter {
             }
         }
         graphics2D.setClip(oldClip);
-    }
-
-    public Graphics2D getGraphics2D() {
-        return graphics2D;
     }
 }

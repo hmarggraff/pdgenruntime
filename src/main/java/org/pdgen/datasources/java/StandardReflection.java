@@ -258,6 +258,8 @@ public class StandardReflection implements ReflectionDelegate {
         Method myMethod = m.getMethod();
         Object o = jv.getJavaObject();
         loadObject(o);
+        if (o == null)
+            return null;
         Object ret;
         try {
             ret = myMethod.invoke(o);

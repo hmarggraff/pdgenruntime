@@ -1082,7 +1082,16 @@ public class TemplateLayouter implements GridLayouter {
                 }
                 Rectangle2D.intersect(tclipRectScratch, frameRectScratch, tclipRectScratch);
                 g.setClip(tclipRectScratch);
-                cell.paint(g, bX, bY, bW, bH, Internationalisation.NOREPLACE);
+                try {
+                    cell.paint(g, bX, bY, bW, bH, Internationalisation.NOREPLACE);
+                } catch (Throwable t) {
+                    Log.run.error(t, "Cannot paint cell at " + r + ", " + c);
+                    final Color oldColor = g.getColor();
+                    g.setPaint(Color.red);
+                    g.fill(new Rectangle2D.Float(bX, bY, bW, bH));
+                    g.setPaint(oldColor);
+                    throw t;
+                }
                 if (cell.getVisibilityCondition() != null) {
                     g.setClip(tcellRectScratch);
 
