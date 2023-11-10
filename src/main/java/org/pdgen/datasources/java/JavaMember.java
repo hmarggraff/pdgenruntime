@@ -13,12 +13,13 @@ import org.pdgen.oql.OQLParseException;
 import java.io.ObjectStreamException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.util.*;
 
 public abstract class JavaMember extends AbstractTypedJoriaMember implements JoriaAccessTyped {
     private static final long serialVersionUID = 7L;
+
+    private static  ZoneOffset localZoneOffset = ZoneId.systemDefault().getRules().getOffset(java.time.Instant.now());
 
     public JavaMember(JavaClass definingClass, String name, JoriaType type) {
         super(definingClass, name, type);
@@ -310,7 +311,13 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
         } else if (o instanceof DateTime) {
             return new DBDateTime(axs, ((DateTime) o).toDate());
         } else if (o instanceof LocalDateTime) {
-            return new DBDateTime(axs, ((LocalDateTime) o).toEpochSecond(ZoneOffset.UTC));
+            return new DBDateTime(axs, ((LocalDateTime) o).toEpochSecond(localZoneOffset));
+        } else if (o instanceof LocalDate) {
+            LocalTime midnight = LocalTime.MIDNIGHT;
+            long epochSecond = ((LocalDate) o).toEpochSecond(midnight, localZoneOffset);
+            return new DBDateTime(axs, epochSecond*1000);
+        } else if (o instanceof LocalTime) {
+            return new DBDateTime(axs, ((LocalTime) o).toEpochSecond(LocalDate.EPOCH , localZoneOffset));
         }
 		/*
         JoriaType matchType = t;   // determine matchtype from AsView
@@ -330,7 +337,6 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
     public static DBData makeValue(DBData definingClass, Object o, JoriaAccess axs, JoriaType type, RunEnv env) throws JoriaDataException {
         if (o == null)
             return null;
-        JoriaType t = axs.getType();
         if (type.isLiteral())
             return makeLiteralValue(o, axs);
         else if (type.isCollection()) {
@@ -352,10 +358,10 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
             return new DBDateTime(axs, (Date) o);
         } else if (o instanceof Calendar) {
             return new DBDateTime(axs, (Calendar) o);
-        } else if (t.isClass())
-            return makeObjectValue(o, axs, t);
+        } else if (type.isClass())
+            return makeObjectValue(o, axs, type);
         else {
-            throw new NotYetImplementedError("cannot make value for " + axs.getType());
+            throw new NotYetImplementedError("cannot make value for " + type);
         }
     }
 

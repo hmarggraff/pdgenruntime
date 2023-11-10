@@ -27,17 +27,22 @@ public class ColorSeriesConditional implements ColorSeries, VariableProvider {
         this.scope = scope;
     }
 
-    public Color getColorAt(DBData val, RunEnv env) throws JoriaDataException {
+    public Color getColorAt(int index, DBData val, RunEnv env)  {
         for (int ix = 0; ix < conditions.length - 1; ix++) {
             JoriaQuery q = getParsedCondition(ix);
-            final boolean bool = q.getBooleanValue(env, val);
+            final boolean bool;
+            try {
+                bool = q.getBooleanValue(env, val);
+            } catch (JoriaDataException e) {
+                throw new RuntimeException(e);
+            }
             if (bool)
                 return colors[ix];
         }
         return colors[colors.length - 1];
     }
 
-    public void paintComponent(Graphics g) {
+    public void paintDesignerComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         final Rectangle bounds = g2.getClipBounds();
         final float width = bounds.width;
@@ -50,19 +55,6 @@ public class ColorSeriesConditional implements ColorSeries, VariableProvider {
             g2.fill(new Rectangle2D.Float(at, 0, step, height));
             at += step;
         }
-    }
-
-    public Color getColorAt(int i, Color[] computedColors, int count) {
-        if (computedColors != null)
-            return computedColors[i];
-        else {
-            i = Math.min(i, colors.length - 1);
-            return colors[i];
-        }
-    }
-
-    public Color getDefaultColor() {
-        return colors[colors.length - 1];
     }
 
     public JoriaQuery getParsedCondition(int i) {

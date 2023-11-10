@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm")  // version "1.9.0" // no version when running in ide with designer.
     java
     `maven-publish`
     signing
@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
     group = "org.pdgen"
-    version = "2.1.5-SNAPSHOT"
+    version = "2.1.6"
 
     apply {
         plugin("java")
@@ -94,9 +94,11 @@ publishing {
         }
 
     }
+    /*
     signing {
         sign(publishing.publications["maven"])
     }
+    */
 
 }
 

@@ -94,6 +94,7 @@ public class BuiltIns {
             RuntimeParameter runtimeParameter = Env.instance().repo().variables.find(cName);
             if (runtimeParameter == null) {
                 runtimeParameter = new RuntimeParameterLiteral(cName, DefaultIntLiteral.instance());
+                Env.instance().repo().variables.add(runtimeParameter);
             }
 
             DBData counter = env.getRuntimeParameterValue(runtimeParameter);
@@ -105,8 +106,9 @@ public class BuiltIns {
                 throw new JoriaInternalError("Value of Counter " + cName + " is not mutable.");
 
             DBIntImplMutable mCounter = (DBIntImplMutable) counter;
-            mCounter.setValuet(mCounter.getIntValue() + 1);
-            return mCounter.getIntValue();
+            mCounter.setValue(mCounter.getIntValue() + 1);
+            long intValue = mCounter.getIntValue();
+            return intValue;
         }
 
         public JoriaType getType(NodeInterface[] a) {
@@ -147,7 +149,7 @@ public class BuiltIns {
                 throw new JoriaInternalError("Value of Counter " + cName + " is not mutable.");
 
             DBIntImplMutable mCounter = (DBIntImplMutable) counter;
-            mCounter.setValuet(newVal);
+            mCounter.setValue(newVal);
             return mCounter.getIntValue();
         }
 

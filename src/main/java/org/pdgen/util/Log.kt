@@ -9,25 +9,26 @@ enum class Log(var level: Int = 1) {
     ui(level("Log.ui")),
     run(level("Log.run")),
     migrate(level("Log.migrate")),
-    action(level("Log.action"));
+    action(level("Log.action")),
+    dnd(level("Log.dnd"));
 
     fun warn(msg: String): Unit {
-        if (level >= levelWarn)
+        if (level <= levelWarn)
             out.println("$blanks${this.name} $msg")
     }
 
     fun info(msg: String): Unit {
-        if (level >= levelInfo)
+        if (level <= levelInfo)
             out.println("$blanks${this.name} $msg")
     }
 
     fun debug(msg: String): Unit {
-        if (level >= levelDebug)
+        if (level <= levelDebug)
             out.println("$blanks${this.name} $msg")
     }
 
     fun debug(condition: Boolean, msg: String): Unit {
-        if (condition && level >= levelDebug)
+        if (condition && level <= levelDebug)
             out.println("$blanks${this.name} $msg")
     }
 
@@ -57,7 +58,7 @@ enum class Log(var level: Int = 1) {
     }
 
     fun warnWitchStack(msg: String) {
-        if (level < levelWarn) return
+        if (level <= levelWarn) return
 
         val t = Throwable()
         val el = t.stackTrace.first()
@@ -65,7 +66,7 @@ enum class Log(var level: Int = 1) {
     }
 
     fun debugMemory(msg: String): Unit {
-        if (level >= levelDebug)
+        if (level <= levelDebug)
             out.println("$blanks${this.name} $msg ${(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024}/${Runtime.getRuntime().totalMemory() / 1024}")
     }
 

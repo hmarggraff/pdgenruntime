@@ -387,7 +387,7 @@ public class PDFGraphics2D extends Graphics2D {
     public void drawString(String s, float x, float y) {
         if (setFillPaint())
             return;
-        Log.run.info("drawString=[\"" + s + "\"," + x + "," + y + "1]");
+        //Log.run.info("drawString=[\"" + s + "\"," + x + "," + y + "1]");
         AffineTransform at = getTransform();
         AffineTransform at2 = getTransform();
         at2.translate(x, y);

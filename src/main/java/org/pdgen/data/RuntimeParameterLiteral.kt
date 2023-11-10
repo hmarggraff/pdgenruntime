@@ -62,7 +62,7 @@ open class RuntimeParameterLiteral(name: String, typ: JoriaType?) : AbstractType
         runtimeParameterSet.add(this)
     }
 
-    override fun getOqlEvaluator(): Any? = null
+    override fun getOqlEvaluator(): Any? = this
     override fun collectI18nKeys2(localizables: HashMap<String, MutableList<I18nKeyHolder>>?) {/* nothing to do */
     }
 

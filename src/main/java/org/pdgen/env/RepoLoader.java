@@ -36,23 +36,20 @@ public class RepoLoader {
         }
     }
 
-    public RepoLoader(String pathname, InputStream in, boolean forDesigner){
+    public RepoLoader(String pathname, InputStream in, boolean forDesigner) {
         Log.ini.info("RepoLoader " + pathname);
 
-        doLoad(pathname,in, forDesigner);
+        doLoad(pathname, in, forDesigner);
     }
 
     private void doLoad(String pathname, InputStream ins, boolean forDesigner) {
+        System.setProperty("PDGENTEMPLATEFILE", pathname);
         try {
             ObjectInputStream oin = new ObjectInputStream(ins);
             Object saved = oin.readObject();
-            if (saved instanceof JavaSchema) { // Backwards compatibility: phase out after 2022
-                Env.schemaInstance = (JavaSchema) saved;
-            } else {
-                SavedSchema fromFile = (SavedSchema) saved;
+            SavedSchema fromFile = (SavedSchema) saved;
 
-                Env.schemaInstance = fromFile.buildSchema(forDesigner);
-            }
+            Env.schemaInstance = fromFile.buildSchema(forDesigner, pathname);
             Repository repository = (Repository) oin.readObject();
             new Env(repository, pathname);
             postLoad();

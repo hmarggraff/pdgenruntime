@@ -2,12 +2,15 @@ package org.pdgen.datasources.java
 
 import org.objectweb.asm.*
 import org.pdgen.util.Log
+import java.io.File
 import java.util.jar.JarFile
 
 class FindReportAnnotations(jarFile: String) {
     val roots = ArrayList<TestDataRootDef>()
 
     init {
+        val f = File(jarFile)
+        val absolutePath = f.absolutePath
         val jf = JarFile(jarFile)
         try {
             val entries = jf.entries()

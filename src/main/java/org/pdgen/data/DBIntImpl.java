@@ -3,7 +3,7 @@ package org.pdgen.data;
 
 public class DBIntImpl extends AbstractDBData implements DBInt {
     private static final long serialVersionUID = 7L;
-    private final long myInt;
+    protected long myInt;
 
     public DBIntImpl(JoriaAccess axs, long value) {
         super(axs);

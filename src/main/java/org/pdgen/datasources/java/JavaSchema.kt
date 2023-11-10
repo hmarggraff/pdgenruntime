@@ -53,5 +53,5 @@ class JavaSchema(val jarFileName: String, val types: HashMap<String, JoriaType>,
         return objectType
     }
 
-    override fun getSchemaForSave() = JavaSavedSchema(this)
+    override fun getSchemaForSave(absolutePath: String) = JavaSavedSchema(this, absolutePath)
 }

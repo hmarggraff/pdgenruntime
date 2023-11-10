@@ -1,6 +1,7 @@
 // This software may be used as allowed by the Gnu Affero General Public License. Details are in the file LICENSE, that must be included in the distribution of ths software.
 package org.pdgen.data;
 
+import org.pdgen.data.view.CastAccess;
 import org.pdgen.data.view.RuntimeParameter;
 import org.pdgen.env.Env;
 import org.pdgen.model.run.RunEnv;
@@ -52,7 +53,8 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
     }
 
     public DBData getValue(DBData a, JoriaAccess asView, RunEnv env) throws JoriaDataException {
-        throw new JoriaDataException("getValue not possible for JoriaModifiedAccess." + getReasonString() + " in " + getName());
+        Log.run.warn("getValue on modified access: " + getReasonString() + " in " + getName());
+        return null;
     }
 
     public boolean isRoot() {
@@ -74,6 +76,13 @@ public class JoriaModifiedAccess extends AbstractTypedJoriaMember implements Var
                 if (replace.getType() == type)
                     return replace;
             }
+        }
+        else {
+            JoriaSchema schemaInstance = Env.schemaInstance;
+            JoriaAccess root = schemaInstance.getRoots().find(name);
+            if (root != null)
+                return root;
+
         }
         Log.ini.warn("Found a JoriaModifiedAccess in save file. This is a remainder of an incomplete schema evolution. If problem persists then contact support@pdgen.org");
         return this;

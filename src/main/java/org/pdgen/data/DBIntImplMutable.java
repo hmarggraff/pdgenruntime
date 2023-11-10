@@ -3,13 +3,12 @@ package org.pdgen.data;
 
 public class DBIntImplMutable extends DBIntImpl {
     private static final long serialVersionUID = 7L;
-    long myInt;
 
     public DBIntImplMutable(JoriaAccess axs, long value) {
         super(axs, value);
     }
 
-    public void setValuet(long newInt) {
+    public void setValue(long newInt) {
         myInt = newInt;
     }
 }

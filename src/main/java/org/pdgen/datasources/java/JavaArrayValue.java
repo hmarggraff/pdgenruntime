@@ -7,7 +7,7 @@ import org.pdgen.env.Env;
 
 public class JavaArrayValue extends JavaValue implements DBCollection {
     protected CollectionValueAccess elax;
-    protected int index;
+    protected int index = -1;
 
     public JavaArrayValue(Object[] o, JoriaAccess a) {
         super(o, a);
