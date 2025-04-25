@@ -42,7 +42,11 @@ enum class Log(var level: Int = 1) {
     }
 
     fun error(ex: Throwable, msg: String): Unit {
-        out.println("$blanks${this.name} ${ex.message}: $msg")
+        if (ex.message != null)
+            out.println("$blanks${this.name} error: ${ex.message}: $msg")
+        else
+            out.println("$blanks${this.name} error: $msg")
+
         ex.printStackTrace(out)
     }
 

@@ -310,6 +310,7 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
             return new DBDateTime(axs, (Calendar) o);
         } else if (o instanceof DateTime) {
             return new DBDateTime(axs, ((DateTime) o).toDate());
+            /*
         } else if (o instanceof LocalDateTime) {
             return new DBDateTime(axs, ((LocalDateTime) o).toEpochSecond(localZoneOffset));
         } else if (o instanceof LocalDate) {
@@ -318,6 +319,8 @@ public abstract class JavaMember extends AbstractTypedJoriaMember implements Jor
             return new DBDateTime(axs, epochSecond*1000);
         } else if (o instanceof LocalTime) {
             return new DBDateTime(axs, ((LocalTime) o).toEpochSecond(LocalDate.EPOCH , localZoneOffset));
+
+             */
         }
 		/*
         JoriaType matchType = t;   // determine matchtype from AsView

@@ -23,7 +23,7 @@ class JavaSavedSchema(base: JavaSchema, absolutePath: String) : SavedSchema {
             Log.ini.info("adapterjar=$jarFileName")
             val jarFilePath = Path(jarFileName)
             if (!jarFilePath.isAbsolute) {
-                val templatePath = Path(templateFilePath).parent
+                val templatePath = Path(templateFilePath).toAbsolutePath().parent
                 val f = File(templatePath.toFile(), jarFileName).absolutePath
                 jarFileName = f
             }
