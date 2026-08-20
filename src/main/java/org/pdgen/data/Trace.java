@@ -155,7 +155,7 @@ public class Trace {
     }
 
     private static void printWithSource(String message) {
-        StackTraceElement stackTraceElement = new Throwable().getStackTrace()[1];
+        StackTraceElement stackTraceElement = new Throwable().getStackTrace()[2];
         String className = stackTraceElement.getClassName();
         String methodName = stackTraceElement.getMethodName();
         int lineNumber = stackTraceElement.getLineNumber();

@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm")  // version "1.9.0" // no version when running in ide with designer.
+    kotlin("jvm") version "2.4.20-RC"
     java
     `maven-publish`
     signing
@@ -30,7 +30,9 @@ allprojects {
         withSourcesJar()
     }
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "11"
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+        }
     }
 }
 

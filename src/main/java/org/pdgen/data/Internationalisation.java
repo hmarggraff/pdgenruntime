@@ -186,6 +186,8 @@ public class Internationalisation implements Serializable {
     }
 
     public static String localizeFileName(String name, Locale loc) {
+        if (name == null)
+            return null;
         try {
             if (name.startsWith(Res.asis("file:/")))
                 name = name.substring(6);
