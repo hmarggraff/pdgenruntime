@@ -46,9 +46,6 @@ open class RuntimeParameterLiteral(name: String, typ: JoriaType?) : AbstractType
 
          */
     }
-
-    constructor(name: String) : this(name, null)
-
     override fun setName(newName: String?) {
         name = newName
         makeLongName()
