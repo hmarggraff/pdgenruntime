@@ -45,11 +45,12 @@ public class Env {
         currentFile = absolutePath;
         repositoryInstance = repository;
         TrueTypeFont.readAllFontFileHeaders();
-        /*
-        for (JoriaClass c: schemaInstance.getClasses()) {
-            viewsFor(c);
-        }
-         */
+        final RenderingHints rendering = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //rendering.put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
+        rendering.put(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        rendering.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        defaultGraphics2D.addRenderingHints(rendering);
+
 
     }
 

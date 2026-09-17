@@ -36,7 +36,6 @@ import java.util.Hashtable;
  * Time: 2:21:59 PM
  */
 public class PDFPrinter implements JoriaPrinter {
-    private static final FontRenderContext frc = new FontRenderContext(null, false, true);
     private final Rectangle2D.Float clipRectangle = new Rectangle2D.Float();
 
     public PdfOutput getWriter() {
@@ -47,15 +46,16 @@ public class PDFPrinter implements JoriaPrinter {
         return pageHeight;
     }
 
-    PdfOutput writer;
-    int[] pages = new int[1024];
-    Color color;
-    Color background;
+    private PdfOutput writer;
+    protected int[] pages = new int[1024];
+    protected Color color;
+    protected Color background;
 
     private Template lastTemplate;
-    float pageHeight;
+    private float pageHeight;
     private final Graphics2D g2d;
 
+    private static final FontRenderContext frc = new FontRenderContext(null, false, true);
     PDFPrinter(OutputStream file, PageFormat pap, String title, Template template, Graphics2D g2d, final String userName) throws IOException {
         this.g2d = g2d;
         pageHeight = (float) pap.getPaper().getHeight();
